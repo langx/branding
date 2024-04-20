@@ -1,0 +1,22 @@
+El registro de procesamiento de Adobe After Effects v24.3 Windows 64 para el procesamiento del proyecto "languageXchange Animation Project.aep"
+
+ se inició en 20/4/2024 a las 14:42:56
+
+  20/4/2024 14:42:56: Iniciando composición "Main LangX Version".
+
+  Salida a: E:\languageXchange Animation\Exports\LangX Version (16.9).mp4    20/4/2024 14:44:48: Composición finalizada "Main LangX Version".
+
+
+  20/4/2024 14:44:49: Iniciando composición "Main 9.16 LangX Version".
+
+  Salida a: E:\languageXchange Animation\Exports\LangX Version (9.16).mp4    20/4/2024 14:47:06: Composición finalizada "Main 9.16 LangX Version".
+
+
+  20/4/2024 14:47:06: Iniciando composición "Main 1.1 LangX Version".
+
+  Salida a: E:\languageXchange Animation\Exports\LangX Version (1.1).mp4    20/4/2024 14:48:24: Composición finalizada "Main 1.1 LangX Version".
+
+
+  Tiempo total transc.: 5 min, 28 s
+Registro cerrado en 20/4/2024 a las 14:48:24
+
