@@ -20,7 +20,7 @@ per screen, no card layer.
 | [`BRAND.md`](BRAND.md)      | the v3 identity, written down                                    |
 | `app-resources/v2/`         | the icons and splash badges the app ships today, byte-identical  |
 | `app-resources/v2/brand/`   | the rounded mark and the horizontal lockup, light and dark       |
-| `2.0.x/`                    | store screenshots — the v3 template is there, the captures are not yet |
+| `2.0.x/`                    | store artwork for 2.0 — six shots at every App Store and Play size, the feature graphic and the icons |
 | `marketing/2.0/`            | seven v3 app screens, light and dark, rendered from the site's phone components |
 | `assets/rounded/logo.png`   | the same file as `app-resources/v2/brand/logo-rounded.png`, kept at its old path so existing links hold |
 | `assets/icon/`              | the favicon set — exported for v1's web build, still correct because the mark did not change |

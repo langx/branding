@@ -12,9 +12,10 @@ sizes. That is what makes them press-safe and what limits them:
   and numbers are demonstration data, and the six faces are AI-generated
   portraits — none of those people exist (`static/images/people/README.md` in
   that repo says where they came from).
-- **Not store screenshots.** Both stores ask for pictures of the app in use.
-  Use these for press, social, the site and decks; shoot
-  [`../../2.0.x/`](../../2.0.x/) from a real build.
+- **Not captures.** Both stores ask for pictures of the app in use, and a
+  recreation is not that. [`../../2.0.x/`](../../2.0.x/) composes these same
+  screens into the store sizes and says so on its own first page; replace them
+  shot for shot as real captures are taken.
 
 They also drift the same way everything else in this repo does: the site's
 components are maintained, these PNGs are not. Re-render them when the app's
