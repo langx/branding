@@ -7,11 +7,18 @@ a grey ground.
 **Nothing here is the source of truth.** Every value below is copied by hand
 from the app, and the app is where it is decided:
 
-| Here                    | Decided in                                          |
-| ----------------------- | --------------------------------------------------- |
-| Colour, type, spacing   | `langx/apps/mobile/src/lib/theme/tokens.ts`         |
-| Which asset goes where  | `langx/apps/mobile/app.config.ts`                   |
-| Token iconography rules | `langx/docs/token-messaging-brief.md`               |
+| Here                    | Decided in                                  |
+| ----------------------- | ------------------------------------------- |
+| Colour, type, spacing   | `langx/apps/mobile/src/lib/theme/tokens.ts` |
+| Which asset goes where  | `langx/apps/mobile/app.config.ts`           |
+| Token iconography rules | `langx/docs/token-messaging-brief.md`       |
+
+The identity has a second written form, for the web: `DESIGN.md` in
+`langx/website`, which carries the same palette under its own names plus what
+only a site needs — hover and pressed states, a wider type ramp, component
+specs. Where the two overlap they agree; where this guide and that file
+disagree, the app's `tokens.ts` is the one that decides, and both copies are
+wrong until someone fixes them.
 
 Change one of those and this file is wrong until someone edits it too. That is
 the same arrangement `langx/docs/repo-map.md` records for the website's plan

@@ -21,6 +21,7 @@ per screen, no card layer.
 | `app-resources/v2/`         | the icons and splash badges the app ships today, byte-identical  |
 | `app-resources/v2/brand/`   | the rounded mark and the horizontal lockup, light and dark       |
 | `2.0.x/`                    | store screenshots — the v3 template is there, the captures are not yet |
+| `marketing/2.0/`            | seven v3 app screens, light and dark, rendered from the site's phone components |
 | `assets/rounded/logo.png`   | the same file as `app-resources/v2/brand/logo-rounded.png`, kept at its old path so existing links hold |
 | `assets/icon/`              | the favicon set — exported for v1's web build, still correct because the mark did not change |
 | `assets/animated-logo.*`    | the mark, animated; the mark did not change, so it still fits    |
@@ -44,7 +45,7 @@ are Comfortaa, yellow chrome and cards, and they are shots of v1's Ionic app.
 | `assets/icons/`                 | v1's PWA icon set, webp — note the `s`, `assets/icon/` is the favicons |
 | `assets/image/how-it-works-*.png` | the three explainer images from the v1 site                 |
 | `assets/logo-horizontal.png`    | the Comfortaa wordmark                                        |
-| `marketing/`                    | 0.3.x promo images, the featured graphics and the preview gif |
+| `marketing/` (root)             | 0.3.x promo images, the featured graphics and the preview gif |
 | `video/`, `animations/`         | the 2024 brand film and the projects behind it — the mark holds, but the type and the UI in it are v1's |
 | `copilot/`                      | the AI Language Copilot deck and the Discord instruction cards |
 

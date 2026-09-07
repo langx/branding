@@ -53,6 +53,14 @@ Two things must not be in shot:
 And nothing shot from a real account: names, photos and message text in these
 files are published to two stores and a public repo. Use seeded content.
 
+## Until the captures exist
+
+[`../marketing/2.0/`](../marketing/2.0/) holds the same seven screens rendered
+from the site's phone components — v3, light and dark, demonstration data. They
+are the nearest thing that exists today and they are right for press, social
+and decks. They are not right here: both stores ask for pictures of the app in
+use, and a faithful recreation is not that.
+
 ## The composition
 
 `template/` is the layout, rendered at each size. It is white ground, ink
