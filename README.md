@@ -64,8 +64,8 @@ than country and every shot's headline is translated:
   <locale>/                    en · tr · es · ru · ar · fr · de · pt-BR
     ios/6.9/     1..8.png      1320 × 2868, and Apple derives 6.5" / 6.3" / 6.1"
     ios/5.5/     1..8.png      1242 × 2208, and 4.7" / 4" / 3.5"
-    ios/13/      1..8.png      2064 × 2752, and 11"
-    ios/12.9/    1..8.png      2048 × 2732, and 10.5" / 9.7"
+    ios/13/      1..8.png      2064 × 2752, and every other iPad size
+    ios/12.9/    1..8.png      2048 × 2732, kept, not uploaded — see below
     android/phone/     1..8.png
     android/7tablet/   1..8.png
     android/10tablet/  1..8.png
@@ -73,9 +73,13 @@ than country and every shot's headline is translated:
   icon-512.png
 ```
 
-Four iOS folders, not eleven: App Store Connect takes an upload for two iPhone
-sizes and two iPad sizes and derives the rest. Play derives nothing, which is
-why all three of its sizes are there.
+Three of those four go up. App Store Connect derives every size it can from
+the largest of each kind — 6.5" down to 3.5" come from `ios/6.9/`, and *all*
+the iPad sizes come from `ios/13/`, 12.9" included. The `ios/12.9/` files are
+kept because Play derives nothing and a later App Store Connect may split the
+slots again, but uploading them is worse than not: its 13" slot accepts both
+2064 × 2752 and 2048 × 2732, so sending both fills one ten-image slot with
+sixteen images and silently drops six. Play takes all three of its sizes.
 
 The shots are compositions, not raw captures: a headline over the screen, on
 the brand ground. [`2.0.x/README.md`](2.0.x/README.md) carries the composition

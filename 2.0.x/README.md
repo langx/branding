@@ -14,23 +14,28 @@ composition does not change when they are.
 Nothing came from an account: the content is demonstration data and the faces
 are AI-generated portraits (`../marketing/2.0/README.md`).
 
-## The four Apple slots, and only four
+## Three Apple slots, out of eleven
 
-App Store Connect takes uploads for two iPhone sizes and two iPad sizes and
+App Store Connect takes an upload for two iPhone sizes and one iPad size and
 derives every other one. In Media Manager the rest read "Using 6.9" Display",
-"Using 5.5" Display", "Using 13" Display" or "Using 12.9" Display" — there is
-nothing to upload there.
+"Using 5.5" Display" or "Using 13" Display" — there is nothing to upload
+there.
 
 | Folder      | Size        | Covers                              |
 | ----------- | ----------- | ----------------------------------- |
 | `ios/6.9/`  | 1320 × 2868 | iPhone 6.9", and 6.5" / 6.3" / 6.1" |
 | `ios/5.5/`  | 1242 × 2208 | iPhone 5.5", and 4.7" / 4" / 3.5"   |
-| `ios/13/`   | 2064 × 2752 | iPad 13", and 11"                   |
-| `ios/12.9/` | 2048 × 2732 | iPad 12.9", and 10.5" / 9.7"        |
+| `ios/13/`   | 2064 × 2752 | every iPad size, 12.9" included      |
+| `ios/12.9/` | 2048 × 2732 | kept, but do not upload it — below   |
 
-The iPad sets are not optional: `apps/mobile/app.config.ts` sets
-`ios.supportsTablet`, so the listing has an iPad tab to fill. The 1024 × 1024
-app icon is `../app-resources/v2/icons/default.png`.
+The iPad set is not optional: `apps/mobile/app.config.ts` sets
+`ios.supportsTablet`, so the listing has an iPad tab to fill. One set fills it.
+App Store Connect's 13" slot accepts 2064 × 2752 **and** 2048 × 2732, so
+`ios/13/` and `ios/12.9/` both resolve to it — send both and sixteen images
+arrive at a slot that holds ten, six of them silently dropped, in every
+language. Send `ios/13/` and 12.9", 10.5" and 9.7" are derived from it.
+
+The 1024 × 1024 app icon is `../app-resources/v2/icons/default.png`.
 
 ## Play
 
