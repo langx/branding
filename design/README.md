@@ -10,7 +10,7 @@ prototype is a drawing of one, and where the two disagree, `BRAND.md` wins.
 
 | Path                | What                                                        |
 | ------------------- | ----------------------------------------------------------- |
-| `mobile-app/`       | every screen of the 2.0 Expo app, drawn in the v3 language   |
+| `mobile-app/`       | every screen of the 2.x Expo app, drawn in the v3 language   |
 
 ## `mobile-app/`
 
@@ -29,11 +29,14 @@ A handoff bundle exported from [Claude Design](https://claude.ai/design) on
 - **`HANDOFF.md`** — the export's own note to whoever implements it.
 - **`support.js`** — the Claude Design runtime the two `.dc.html` files need.
   Generated; do not edit.
-- **`assets/`** — copies of `assets/rounded/logo.png`,
-  `assets/icon/safari-pinned-tab.svg` and two more from this repo, at the
-  paths the prototype resolves them from. Byte-identical to the originals
-  except the pinned-tab SVG, which is the same artwork with its whitespace
-  stripped. The repo root is the source; these are the copies.
+- **`assets/`** — the prototype's own copies of four files from this repo, at
+  the paths it resolves them from. They were taken before the repo was
+  reorganised, so the names inside are the old ones: `assets/rounded/logo.png`
+  is now [`../brand/logo/logo-rounded.png`](../brand/logo/logo-rounded.png)
+  and `assets/icon/` is now [`../brand/favicon/`](../brand/favicon/).
+  Byte-identical to the originals except the pinned-tab SVG, which is the same
+  artwork with its whitespace stripped. `brand/` is the source; these are
+  copies, and the prototype needs them at these paths to render.
 - **`_ds/`** — two stock design systems (Modernist, Organic) that Claude
   Design ships with every export. Neither is ours — one is red Archivo, the
   other tan Caprasimo — and neither prototype links them. Kept so the bundle

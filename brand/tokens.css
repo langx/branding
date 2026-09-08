@@ -1,0 +1,143 @@
+/* LangX v3 tokens, as CSS custom properties.
+ *
+ * The same values as tokens.json and the tables in ../BRAND.md, in the form a
+ * web page or a design tool can link straight into. Not the source of truth:
+ * langx/apps/mobile/src/lib/theme/tokens.ts is, and this file is stale the
+ * moment that one changes.
+ *
+ * Light is defined on bare :root so a page with no theme handling still gets a
+ * complete palette. Dark is redefined twice — once for the system preference,
+ * once for an explicit data-theme="dark" — so a toggle wins in both directions.
+ */
+
+:root {
+  --bg: #ffffff;
+  --feed-bg: #ffffff;
+  --surface: #ffffff;
+  --fill: #f4f5f7;
+  --border: #e8eaec;
+
+  --text: #17191c;
+  --text-muted: #62676d;
+  --text-faint: #9aa1a7;
+  --text-inverse: #fefefe;
+  --ink: #17191c;
+  --on-ink-muted: rgba(128, 128, 128, 0.45);
+
+  /* The committing action. Once per screen, and it does not change in dark. */
+  --primary: #ffc409;
+  --primary-shade: #e0ac08;
+  --primary-text: #201900;
+  --primary-text-muted: rgba(32, 25, 0, 0.55);
+
+  --secondary: #3b6cf6;
+  --accent: #3b6cf6;
+  --accent-bg: #e9f0fe;
+
+  --streak: #f79009;
+  --pro: #7a5af8;
+  --pro-plus: #5b21b6;
+
+  --success: #009f70;   /* corrections, always */
+  --success-bg: #e2f6ee;
+  --info: #3b6cf6;      /* Copilot, always */
+  --info-bg: #e9f0fe;
+  --warning: #c87820;
+  --warning-bg: #fff6b6;
+  --danger: #e5484d;
+  --danger-bg: #fdecec;
+  --danger-shade: #b83236;
+
+  --knob: #ffffff;
+  --scrim: rgba(0, 0, 0, 0.45);
+  --scrim-strong: rgba(0, 0, 0, 0.94);
+  --on-scrim: #ffffff;
+
+  --shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+
+  --font-display: Nunito, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-12: 48px;
+
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-sheet: 28px;
+  --radius-pill: 999px;
+
+  --content-max-width: 720px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #1c1f24;
+    --feed-bg: #1c1f24;
+    --surface: #1c1f24;
+    --fill: #23272d;
+    --border: #2c3036;
+
+    --text: #f2f3f5;
+    --text-muted: #9aa1a9;
+    --text-faint: #70767e;
+    --ink: #f2f3f5;
+
+    --secondary: #7c9cf9;
+    --accent: #7c9cf9;
+    --accent-bg: #202b45;
+
+    --streak: #ffa93d;
+    --pro: #9b83ff;
+    --pro-plus: #c9b8ff;
+
+    --success: #34c796;
+    --success-bg: #16332a;
+    --info: #7c9cf9;
+    --info-bg: #202b45;
+    --warning: #ffca39;
+    --warning-bg: #724413;
+    --danger: #ef6b6f;
+    --danger-bg: #3a2023;
+
+    --shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+  }
+}
+
+:root[data-theme="dark"] {
+  --bg: #1c1f24;
+  --feed-bg: #1c1f24;
+  --surface: #1c1f24;
+  --fill: #23272d;
+  --border: #2c3036;
+
+  --text: #f2f3f5;
+  --text-muted: #9aa1a9;
+  --text-faint: #70767e;
+  --ink: #f2f3f5;
+
+  --secondary: #7c9cf9;
+  --accent: #7c9cf9;
+  --accent-bg: #202b45;
+
+  --streak: #ffa93d;
+  --pro: #9b83ff;
+  --pro-plus: #c9b8ff;
+
+  --success: #34c796;
+  --success-bg: #16332a;
+  --info: #7c9cf9;
+  --info-bg: #202b45;
+  --warning: #ffca39;
+  --warning-bg: #724413;
+  --danger: #ef6b6f;
+  --danger-bg: #3a2023;
+
+  --shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
