@@ -20,7 +20,7 @@ per screen, no card layer.
 | [`BRAND.md`](BRAND.md)      | the v3 identity, written down                                    |
 | `app-resources/v2/`         | the icons and splash badges the app ships today, byte-identical  |
 | `app-resources/v2/brand/`   | the rounded mark and the horizontal lockup, light and dark       |
-| `2.0.x/`                    | store artwork for 2.0 — six shots at every App Store and Play size, the feature graphic and the icons |
+| `2.0.x/`                    | store artwork for 2.0 — eight shots in eight languages, at the four App Store sizes Apple takes an upload for and all three Play sizes, plus the feature graphic and the icon |
 | `marketing/2.0/`            | seven v3 app screens, light and dark, rendered from the site's phone components |
 | `assets/rounded/logo.png`   | the same file as `app-resources/v2/brand/logo-rounded.png`, kept at its old path so existing links hold |
 | `assets/icon/`              | the favicon set — exported for v1's web build, still correct because the mark did not change |
@@ -55,21 +55,32 @@ icon and the two splash badges.
 
 ## Adding a release's store screenshots
 
-One folder per marketing version, named the way `0.1.x/` and `0.3.x/` are, and
-inside it the shape the stores ask for:
+One folder per marketing version, named the way `0.1.x/` and `0.3.x/` are. The
+language comes first, because both stores key screenshots off language rather
+than country and every shot's headline is translated:
 
 ```
 <version>/
-  ios/6.7/       1..n.png    iPhone
-  ios/12.9/      1..n.jpg    iPad
-  android/phone/ 1..n.png
-  android/10tablet/
+  <locale>/                    en · tr · es · ru · ar · fr · de · pt-BR
+    ios/6.9/     1..8.png      1320 × 2868, and Apple derives 6.5" / 6.3" / 6.1"
+    ios/5.5/     1..8.png      1242 × 2208, and 4.7" / 4" / 3.5"
+    ios/13/      1..8.png      2064 × 2752, and 11"
+    ios/12.9/    1..8.png      2048 × 2732, and 10.5" / 9.7"
+    android/phone/     1..8.png
+    android/7tablet/   1..8.png
+    android/10tablet/  1..8.png
+    android/feature-graphic.png
+  icon-512.png
 ```
+
+Four iOS folders, not eleven: App Store Connect takes an upload for two iPhone
+sizes and two iPad sizes and derives the rest. Play derives nothing, which is
+why all three of its sizes are there.
 
 The shots are compositions, not raw captures: a headline over the screen, on
 the brand ground. [`2.0.x/README.md`](2.0.x/README.md) carries the composition
-in numbers, the shot list and the two things that must not appear in a
-screenshot; `2.0.x/template/` is that composition rendered empty at each size.
+in numbers, the shot list, and the two things that must not appear in a
+screenshot.
 
 ## Rules
 

@@ -129,5 +129,36 @@ Arabic sets in Noto Sans Arabic at the same weights, right to left; Nunito has
 no Arabic. Everything else is Nunito, which covers Latin, Latin Extended and
 Cyrillic.
 
+## Uploading the set
+
+Two scripts in `langx/langx` lay this folder out the way `fastlane deliver`
+reads it, and deliver puts it up in one pass:
+
+```
+node apps/mobile/scripts/collect-store-metadata.mjs      # docs/store/listing.md → metadata
+node apps/mobile/scripts/collect-store-screenshots.mjs   # this folder → screenshots
+cd apps/mobile && fastlane deliver
+```
+
+Authentication is an App Store Connect API key (`.p8`), not an Apple ID, so
+there is no password and no 2FA prompt.
+
+Two things about App Store Connect are worth knowing before doing this by hand
+instead, because both cost a set:
+
+**A locale will not take a screenshot before it exists.** A localization is
+created by giving it a description and keywords, and nothing else will do it —
+so the metadata has to go up first or with the images, never after. Seven of
+these eight languages did not exist on the listing when the screenshots were
+drawn.
+
+**A bulk upload does not keep its order.** Dropping eight files into a slot
+puts them up in whatever sequence App Store Connect finished processing them,
+not the order they were sent — the first attempt at the English 6.9" slot came
+out 4, 1, 7, 2, 6, 3, 8, 5. Order is the argument here, and only the first
+three are shown on the app installation sheet, so it matters. deliver sends
+files one at a time in filename order, which is what the numeric prefix its
+script writes is for. By hand, upload one file at a time.
+
 Press images, social cards and the preview video are in
 [`../marketing/2.0/`](../marketing/2.0/).
