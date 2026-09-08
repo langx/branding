@@ -36,10 +36,41 @@ byte-identical to what the app ships:
 | File                       | Size  | Ground             | Used as                                    |
 | -------------------------- | ----- | ------------------ | ------------------------------------------ |
 | `icons/default.png`        | 1024² | `#ffc409`, opaque  | the home-screen icon, both platforms       |
-| `icons/dark.png`           | 1024² | `#121318`, opaque  | the alternate icon, Pro only, native only  |
+| `icons/dark.png`           | 1024² | `#121318`, opaque  | alternate, Pro only, native only           |
+| `icons/split.png`          | 1024² | yellow and ink     | alternate, Pro only, native only           |
+| `icons/pro.png`            | 1024² | `#7a5af8`, opaque  | alternate, Pro only, native only           |
+| `icons/new-year.png`       | 1024² | `#ffc409`, opaque  | alternate, Pro only, native only           |
 | `splash/badge.png`         | 512²  | yellow disc        | the launch badge, light                    |
 | `splash/badge-dark.png`    | 512²  | ink disc           | the launch badge, dark                     |
 | `brand/logo-rounded.png`   | 512²  | yellow squircle    | in-app and web use, avatars, README marks  |
+
+### The construction
+
+The four icons after `default.png` are the same drawing on a different ground,
+and the drawing is two half-annuli, not a letter. On the 1024² canvas: outer
+radius 235.3, inner 151.5, stroke 83.8. The black one is centred at (591,
+463.5) and runs 147° → 327°; the white one is that shape turned 180° about the
+canvas centre, so it is centred at (433.5, 563) and runs 327° → 147°. Both are
+cut on **one line** — the two flat edges are collinear to within 2px, which is
+what makes the pair read as an S rather than as two arcs. The drop shadow is
+each shape again, 20px along 57°, in the ground's own shade.
+
+That shared cut line is also the seam in `split.png`: it is the only division
+of the ground that leaves the black arc wholly on yellow and the white arc
+wholly on ink, which is the whole point of that icon. It is not a free choice.
+
+Two constraints bind any further icon in this set:
+
+- **Everything must fit a circle of radius 341.** Android takes the whole
+  square as the *foreground* layer of an adaptive icon and the launcher keeps
+  only the middle of it, so a badge along the bottom edge is simply thrown
+  away and the icon becomes indistinguishable from the plain yellow one. That
+  is why `new-year.png` sets the year on the ground instead of on a ribbon at
+  the foot of the icon, and why its mark is at 0.78.
+- **The arcs stay black and white.** Only the ground changes. `pro.png` is the
+  one icon that puts the mark on a colour rather than on yellow or ink, and it
+  is deliberate: it is sold as the Pro icon and `#7a5af8` is the Pro token, in
+  the same way `frame.gold` reads as a rank.
 
 The mark also comes as a lockup with the wordmark, drawn for v3 and not shipped
 by the app:
@@ -68,12 +99,16 @@ Two things about these files are load-bearing rather than stylistic:
 The dark icon's own ground is `#121318`, while `app.config.ts` declares
 `#141519` as the Android adaptive-icon background behind it. Both are ink and
 the seam is only ever visible in the mask bleed, but if the artwork is ever
-redrawn, redraw it against the declared value.
+redrawn, redraw it against the declared value. The three icons added after it
+declare their own ground and have no such seam.
 
 ### Don'ts
 
-- Do not put the mark on a coloured ground of its own. It carries one.
-- Do not recolour the arcs. The black/white pair is the whole idea.
+- Do not put the mark on a coloured ground of its own. It carries one. The
+  alternate home-screen icons above are the exception and the only one: there
+  the ground *is* what the person is choosing between.
+- Do not recolour the arcs. The black/white pair is the whole idea, and it
+  holds across all five icons.
 - Do not use the v1 lockup (`assets/logo-horizontal.png`). Its wordmark is
   Comfortaa and it sits on a white square; `brand/lockup-horizontal.png` is the
   v3 replacement.
