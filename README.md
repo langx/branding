@@ -22,6 +22,7 @@ per screen, no card layer.
 | `app-resources/v2/brand/`   | the rounded mark and the horizontal lockup, light and dark       |
 | `2.0.x/`                    | store artwork for 2.0 — eight shots in eight languages, at the three App Store sizes that are uploaded and all three Play sizes, plus the feature graphic and the icon |
 | `marketing/2.0/`            | seven v3 app screens, light and dark, rendered from the site's phone components |
+| [`design/`](design/)        | the mockups, before anyone built them — `design/mobile-app/` is every screen of the 2.0 app as a clickable prototype |
 | `assets/rounded/logo.png`   | the same file as `app-resources/v2/brand/logo-rounded.png`, kept at its old path so existing links hold |
 | `assets/icon/`              | the favicon set — exported for v1's web build, still correct because the mark did not change |
 | `assets/animated-logo.*`    | the mark, animated; the mark did not change, so it still fits    |

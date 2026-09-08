@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#eef0f3;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;color:#17191c}
+a{color:#3b6cf6}a:hover{color:#2f56c4}
+button{border:0;background:none;padding:0;font:inherit;color:inherit;cursor:pointer}
+</style>
+</helmet>
+<div style="padding:40px 44px 80px;display:flex;flex-direction:column;gap:48px">
+  <div style="display:flex;align-items:flex-end;gap:24px;flex-wrap:wrap">
+    <div style="display:flex;flex-direction:column;gap:8px;flex:1;min-width:280px">
+      <div style="font:800 34px/1.1 Nunito,sans-serif;color:#17191c">LangX · every screen</div>
+      <div style="font:400 15px/1.5 system-ui,sans-serif;color:#62676d;max-width:640px">All routes in <code style="font:13px ui-monospace,monospace">apps/mobile/app</code>, rebuilt in the v3 language from langx.io: white ground, hairline rows, Nunito 800, one yellow action per screen, blue for anything you can touch. Every screen here is the live prototype — tap into any of them, or open <a href="LangX App.dc.html">the full prototype</a>.</div>
+    </div>
+    <div style="display:flex;background:#e3e5e9;border-radius:999px;padding:3px;gap:2px">
+      <button onClick="{{ setLight }}" style="padding:8px 16px;border-radius:999px;font:600 13px system-ui;color:{{ segLight.color }};background:{{ segLight.bg }};box-shadow:{{ segLight.shadow }}">Light</button>
+      <button onClick="{{ setDark }}" style="padding:8px 16px;border-radius:999px;font:600 13px system-ui;color:{{ segDark.color }};background:{{ segDark.bg }};box-shadow:{{ segDark.shadow }}">Dark</button>
+    </div>
+  </div>
+  <sc-for list="{{ groups }}" as="g" hint-placeholder-count="2">
+    <section style="display:flex;flex-direction:column;gap:20px;padding-top:32px;border-top:1px solid rgba(0,0,0,.08)">
+      <div style="display:flex;align-items:baseline;gap:12px"><span style="font:800 22px Nunito,sans-serif;color:#17191c">{{ g.title }}</span><span style="font:400 13px system-ui;color:#62676d">{{ g.path }}</span></div>
+      <div style="display:flex;flex-wrap:wrap;gap:28px;align-items:flex-start">
+        <sc-for list="{{ g.screens }}" as="sc" hint-placeholder-count="4">
+          <div id="{{ sc.id }}" style="display:flex;flex-direction:column;gap:10px;width:390px;scroll-margin-top:16px">
+            <div style="display:flex;align-items:baseline;gap:8px"><a href="#{{ sc.id }}" style="font:600 10.5px ui-monospace,Menlo,monospace;padding:3px 7px;background:rgba(0,0,0,.08);color:#1a1a1a;border-radius:5px;text-decoration:none">{{ sc.file }}</a><span style="font:400 12px system-ui;color:#62676d">{{ sc.note }}</span></div>
+            <div style="width:390px;height:844px;border-radius:8px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.06),0 0 0 1px rgba(0,0,0,.06)">
+              <dc-import name="LangX App" route="{{ sc.route }}" chrome="{{ false }}" theme-override="{{ theme }}" hint-size="390px,844px"></dc-import>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+  </sc-for>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { theme: 'light' }
+  renderVals() {
+    const t = this.state.theme
+    const seg = (v) => ({ color: t === v ? '#17191c' : '#62676d', bg: t === v ? '#fff' : 'transparent', shadow: t === v ? '0 1px 3px rgba(0,0,0,.08)' : 'none' })
+    const G = (title, path, screens) => ({ title, path, screens: screens.map(([route, file, note]) => ({ id: route, route, file, note: note || '' })) })
+    return {
+      theme: t, setLight: () => this.setState({ theme: 'light' }), setDark: () => this.setState({ theme: 'dark' }), segLight: seg('light'), segDark: seg('dark'),
+      groups: [
+        G('Auth', 'app/(auth)', [['intro', 'intro', 'three slides'], ['welcome', 'welcome', 'first screen after the splash'], ['signIn', 'sign-in'], ['signUp', 'sign-up'], ['forgotPassword', 'forgot-password'], ['resetPassword', 'reset-password'], ['checkEmail', 'check-email'], ['signInLink', 'sign-in-link'], ['verifyEmail', 'verify-email-success'], ['qr', 'qr', 'sign in from another device'], ['magicLink', 'magic-link', 'app/magic-link']]),
+        G('Onboarding', 'app/(onboarding)', [['obLanguages', 'languages', 'step 1 of 5'], ['obLevels', 'levels', 'step 2'], ['obAbout', 'about-you', 'step 3'], ['obHandle', 'handle', 'step 4'], ['obPhoto', 'photo', 'step 5'], ['obDone', 'done'], ['welcomeBack', 'welcome-back', 'v1 users']]),
+        G('Tabs', 'app/(app)/(tabs)', [['discover', 'discover', 'For you · Active · Nearby'], ['chats', 'chats', 'All · Unreplied · Archived'], ['feed', 'feed', 'Corrections · Pronunciation'], ['me', 'me']]),
+        G('Core flows', 'app/(app)', [['chat', 'chat/[id]', 'hold a message for actions'], ['post', 'post/[id]'], ['profile', 'profile/[handle]', 'also app/[username]'], ['compose', 'compose', '+ Ask'], ['filters', 'filters'], ['editProfile', 'edit-profile'], ['paywall', 'paywall', 'Fluent · Polyglot']]),
+        G('Lists & tools', 'app/(app)', [['corrections', 'corrections', 'Your writing'], ['badges', 'badges'], ['follows', 'follows'], ['likes', 'likes'], ['viewers', 'viewers', 'locked on Free'], ['starred', 'starred'], ['blocked', 'blocked'], ['shareProfile', 'share-profile'], ['invite', 'invite'], ['gift', 'gift', 'hourly gift'], ['scan', 'scan'], ['linkDevice', 'link-device'], ['kitchen', 'kitchen'], ['legal', 'legal'], ['appLanguage', 'app-language'], ['translateLanguage', 'translate-language']]),
+        G('Settings', 'app/(app)/settings', [['settings', 'index', 'categories + search'], ['sPlan', 'plan'], ['sShare', 'share'], ['sPrivacy', 'privacy'], ['sNotifications', 'notifications'], ['sAppearance', 'appearance'], ['sAccount', 'account'], ['sSignInMethods', 'sign-in-methods'], ['sPassword', 'password'], ['sDelete', 'delete-account'], ['sAbout', 'about']]),
+        G('Streak', 'app/(app)/streak', [['streak', 'index', 'activity map · tap a missed day'], ['streakHistory', 'history'], ['streakLeaderboard', 'leaderboard']]),
+        G('Wallet', 'app/(app)/wallet', [['wallet', 'index'], ['walletHistory', 'history'], ['walletLeaderboard', 'leaderboard'], ['walletPool', 'pool'], ['walletStore', 'store', 'frames & titles']]),
+      ],
+    }
+  }
+}
+</script>
+</body>
+</html>
