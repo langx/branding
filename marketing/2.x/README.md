@@ -13,7 +13,7 @@ data, and the six faces are AI-generated portraits — none of those people exis
 
 The seven screens on their own, light and dark, 1170 × 2532 (390 × 844 at 3×):
 Discover, Chat, Feed, Me, Paywall, Tokens, Welcome back. This is the source
-every other file here and in [`../../2.0.x/`](../../2.0.x/) is cut from.
+every other file here and in [`../../2.x/`](../../2.x/) is cut from.
 
 The Me screen is rendered with its "Badges — coming back soon" row hidden.
 Badges are not in 2.0's first release and a picture is not the place to promise

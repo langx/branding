@@ -1,4 +1,4 @@
-# 2.0.x — store artwork
+# 2.x — store artwork
 
 Eight shots, every slot both stores actually take an upload for, in the eight
 languages the app speaks. One template throughout: the same card, at the same
@@ -12,7 +12,7 @@ set to ship now and replace shot for shot as real captures are taken; the
 composition does not change when they are.
 
 Nothing came from an account: the content is demonstration data and the faces
-are AI-generated portraits (`../marketing/2.0/README.md`).
+are AI-generated portraits (`../marketing/2.x/README.md`).
 
 ## Three Apple slots, out of eleven
 
@@ -35,7 +35,7 @@ App Store Connect's 13" slot accepts 2064 × 2752 **and** 2048 × 2732, so
 arrive at a slot that holds ten, six of them silently dropped, in every
 language. Send `ios/13/` and 12.9", 10.5" and 9.7" are derived from it.
 
-The 1024 × 1024 app icon is `../app-resources/v2/icons/default.png`.
+The 1024 × 1024 app icon is `../brand/icon/default.png`.
 
 ## Play
 
@@ -166,4 +166,4 @@ files one at a time in filename order, which is what the numeric prefix its
 script writes is for. By hand, upload one file at a time.
 
 Press images, social cards and the preview video are in
-[`../marketing/2.0/`](../marketing/2.0/).
+[`../marketing/2.x/`](../marketing/2.x/).

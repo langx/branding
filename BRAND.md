@@ -1,8 +1,12 @@
 # Brand guide — v3 identity
 
-What LangX looks like as of app version 2.0. It replaces the identity the
-`0.1.x/` and `0.3.x/` folders were shot in: Comfortaa, yellow chrome, cards on
-a grey ground.
+What LangX looks like across the 2.x line. It replaces the identity that
+`archive/0.1.x/` and `archive/0.3.x/` were shot in: Comfortaa, yellow chrome,
+cards on a grey ground.
+
+The files themselves are in [`brand/`](brand/) — logos as vector, the palette as
+JSON and CSS, and [`brand/print.md`](brand/print.md) for anything that ends up
+on paper.
 
 **Nothing here is the source of truth.** Every value below is copied by hand
 from the app, and the app is where it is decided:
@@ -30,19 +34,24 @@ Two arcs, one black and one white, turning around each other — an exchange, no
 a letter. The pair sits on the brand yellow and carries a hard yellow-shade
 drop shadow down and to the right.
 
-The artwork lives in [`app-resources/v2/`](app-resources/v2/) and is
+The artwork lives in [`brand/`](brand/), and the icons and badges are
 byte-identical to what the app ships:
 
 | File                       | Size  | Ground             | Used as                                    |
 | -------------------------- | ----- | ------------------ | ------------------------------------------ |
-| `icons/default.png`        | 1024² | `#ffc409`, opaque  | the home-screen icon, both platforms       |
-| `icons/dark.png`           | 1024² | `#121318`, opaque  | alternate, Pro only, native only           |
-| `icons/split.png`          | 1024² | yellow and ink     | alternate, Pro only, native only           |
-| `icons/pro.png`            | 1024² | `#7a5af8`, opaque  | alternate, Pro only, native only           |
-| `icons/new-year.png`       | 1024² | `#ffc409`, opaque  | alternate, Pro only, native only           |
+| `icon/default.png`         | 1024² | `#ffc409`, opaque  | the home-screen icon, both platforms       |
+| `icon/dark.png`            | 1024² | `#121318`, opaque  | alternate, Pro only, native only           |
+| `icon/split.png`           | 1024² | yellow and ink     | alternate, Pro only, native only           |
+| `icon/pro.png`             | 1024² | `#7a5af8`, opaque  | alternate, Pro only, native only           |
+| `icon/new-year.png`        | 1024² | `#ffc409`, opaque  | alternate, Pro only, native only           |
 | `splash/badge.png`         | 512²  | yellow disc        | the launch badge, light                    |
 | `splash/badge-dark.png`    | 512²  | ink disc           | the launch badge, dark                     |
-| `brand/logo-rounded.png`   | 512²  | yellow squircle    | in-app and web use, avatars, README marks  |
+| `logo/logo-rounded.png`    | 512²  | yellow squircle    | in-app and web use, avatars, README marks  |
+
+The mark is also drawn as vector, from the construction below rather than traced
+from these: `logo/mark.svg` on yellow, `logo/mark-ink.svg` on ink,
+`logo/mark-arcs.svg` bare, and `logo/mark-mono.svg` in one colour. Use those for
+anything that scales or prints.
 
 ### The construction
 
@@ -50,7 +59,7 @@ The four icons after `default.png` are the same drawing on a different ground,
 and the drawing is two half-annuli, not a letter. On the 1024² canvas: outer
 radius 235.3, inner 151.5, stroke 83.8. The black one is centred at (591,
 463.5) and runs 147° → 327°; the white one is that shape turned 180° about the
-canvas centre, so it is centred at (433.5, 563) and runs 327° → 147°. Both are
+canvas centre, so it is centred at (433, 560.5) and runs 327° → 147°. Both are
 cut on **one line** — the two flat edges are collinear to within 2px, which is
 what makes the pair read as an S rather than as two arcs. The drop shadow is
 each shape again, 20px along 57°, in the ground's own shade.
@@ -75,15 +84,22 @@ Two constraints bind any further icon in this set:
 The mark also comes as a lockup with the wordmark, drawn for v3 and not shipped
 by the app:
 
-| File                              | Size     | Wordmark  |
-| --------------------------------- | -------- | --------- |
-| `brand/lockup-horizontal.png`     | 3190×1024 | `#17191c` |
-| `brand/lockup-horizontal-dark.png`| 3190×1024 | `#f2f3f5` |
+| File                               | Size      | Wordmark  |
+| ---------------------------------- | --------- | --------- |
+| `logo/lockup-horizontal.png`       | 3190×1024 | `#17191c` |
+| `logo/lockup-horizontal-dark.png`  | 3190×1024 | `#f2f3f5` |
+| `logo/lockup-horizontal.svg`       | 3190×1024 | `#17191c` |
+| `logo/lockup-horizontal-dark.svg`  | 3190×1024 | `#f2f3f5` |
 
-Both are transparent. The construction, if it has to be redrawn: the rounded
-mark at height *H*, a gap of 0.24·*H*, then "LangX" in Nunito ExtraBold at
-0.64·*H* with `-0.02em` tracking, nudged up 0.045em so the wordmark sits on the
-mark's optical centre rather than its geometric one.
+All four are transparent, and the wordmark in the two SVGs is outlined, so they
+need no font installed.
+
+The construction, if it has to be redrawn: the rounded mark at height *H*, a gap
+of 0.24·*H* to the wordmark's pen — not to its first ink — then "LangX" in
+Nunito ExtraBold at 0.64·*H* with `-0.02em` tracking after every letter, sitting
+on the mark's optical centre rather than its geometric one. Measured back off
+the shipped PNG, that baseline lands at 0.681·*H* from the top, which is what
+`brand/logo/build.py` draws to.
 
 Two things about these files are load-bearing rather than stylistic:
 
@@ -95,6 +111,10 @@ Two things about these files are load-bearing rather than stylistic:
 - **The badge is drawn at 160px wide** on `#ffffff` (light) and `#1c1f24`
   (dark). The static splash the OS shows and the app's own first frame have to
   be indistinguishable, or hiding one is a blink.
+
+The dark icon's drop shadow is `#deab06` — the yellow shade, not a shade of its
+own ink ground, so it is the one icon in the set that does not follow the rule
+above. That is what is on disk; it has not been treated as a bug.
 
 The dark icon's own ground is `#121318`, while `app.config.ts` declares
 `#141519` as the Android adaptive-icon background behind it. Both are ink and
@@ -109,9 +129,9 @@ declare their own ground and have no such seam.
   the ground *is* what the person is choosing between.
 - Do not recolour the arcs. The black/white pair is the whole idea, and it
   holds across all five icons.
-- Do not use the v1 lockup (`assets/logo-horizontal.png`). Its wordmark is
-  Comfortaa and it sits on a white square; `brand/lockup-horizontal.png` is the
-  v3 replacement.
+- Do not use the v1 lockup (`archive/assets/logo-horizontal.png`). Its wordmark
+  is Comfortaa and it sits on a white square; `brand/logo/lockup-horizontal.svg`
+  is the v3 replacement.
 
 ## Colour
 
