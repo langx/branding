@@ -1,7 +1,8 @@
 # 2.0.x — store artwork
 
 Eight shots, every slot both stores actually take an upload for, in the eight
-languages the app speaks.
+languages the app speaks. One template throughout: the same card, at the same
+width and the same height, on every shot.
 
 **Read this before you upload.** The screen inside every shot is rendered from
 the phone components on langx.io, not captured from a build on a device. It is
@@ -66,39 +67,37 @@ each one checked; a headline is the most-read sentence in a listing.
 
 ## The eight shots
 
-| #   | Screen        | Ground | Treatment       | English headline                |
-| --- | ------------- | ------ | --------------- | ------------------------------- |
-| 1   | Discover      | yellow | cropped, zoomed | They need your language         |
-| 2   | Chat          | white  | cropped, zoomed | Say it wrong. Get it fixed.     |
-| 3   | Feed          | white  | cropped, zoomed | Corrections are always free     |
-| 4   | Me            | white  | whole device    | A streak worth keeping          |
-| 5   | Tokens        | ink    | whole device    | Earned by teaching              |
-| 6   | Chat, dark    | ink    | cropped, zoomed | It has a night side             |
-| 7   | Discover, dark| ink    | cropped, zoomed | Or whoever is online now        |
-| 8   | Paywall       | yellow | whole device    | Free to use, always             |
+| #   | Screen         | Ground | English headline            |
+| --- | -------------- | ------ | --------------------------- |
+| 1   | Discover       | yellow | They need your language     |
+| 2   | Chat           | white  | Say it wrong. Get it fixed. |
+| 3   | Feed           | white  | Corrections are always free |
+| 4   | Tokens, dark   | ink    | Earned by teaching          |
+| 5   | Chat, dark     | ink    | It has a night side         |
+| 6   | Feed, dark     | ink    | Ask when you're stuck       |
+| 7   | Discover, dark | ink    | Or whoever is online now    |
+| 8   | Me             | yellow | A streak worth keeping      |
 
-Yellow opens and closes, the middle is white, and 5–7 are an ink block: the
-dark side of the app, shown deliberately rather than as filler. Every headline
-is a claim `langx/docs/store/listing.md` also makes.
+Three acts: yellow opens, three light screens carry the loop, four dark ones
+are the app after hours, yellow closes. Every headline is a claim
+`langx/docs/store/listing.md` also makes.
 
-Five things are decided here rather than only drawn:
+Four things are decided here rather than only drawn:
 
-- **The four cropped shots are zoomed.** A store thumbnail is barely 120px
-  wide. A whole 844pt screen shrunk to that is a grey smudge; a cropped one
-  still reads. The crop is fitted after the headline wraps, so the cut lands
-  above the tab bar at every canvas size and in every language.
-- **No badges.** The Me screen carries a "Badges — coming back soon" row on the
+- **The plans screen is not in the set.** A headline saying the app is free
+  should not sit over a list of paid tiers, and that is what the shot was. What
+  is free is stated where it is true: corrections, in shot 3.
+- **No badges.** The Me screen carries a "Badges - coming back soon" row on the
   site. Badges are not in 2.0's first release, and App Review 2.3.1 rules out
   "coming soon" content, so the row is hidden in the render.
-- **The Welcome back screen is not in the set**, although it exists and reads
-  well. It draws a coin beside the token balance and explains a carry-over
-  rate, and `langx/docs/token-messaging-brief.md` rules out coin iconography —
-  that is Guideline 3.1.5(b), not taste.
-- **No prices.** The paywall shot shows what each plan includes, never a
-  number: prices are per storefront and a number baked into a PNG is wrong in
-  most of them.
+- **The Welcome back screen is out**, although it reads well and speaks to the
+  v1 users this release is an update for. It draws a coin beside the token
+  balance and explains a carry-over rate, and
+  `langx/docs/token-messaging-brief.md` rules out coin iconography - Guideline
+  3.1.5(b), not taste.
 - **The token screen stays legible.** It states on its own face that tokens
-  cannot be bought, traded or withdrawn, which is the answer to 3.1.5(b).
+  cannot be bought, traded or withdrawn, which is the answer to 3.1.5(b). The
+  crop window on that screen is offset so the line survives.
 
 Apple's own note in Media Manager is worth keeping in mind: only the **first
 three** are used on the app installation sheets. Shots 1–3 have to carry the
@@ -111,17 +110,20 @@ Everything scales from the canvas height, `u = height / 2796`:
 | Element      | Value                                                        |
 | ------------ | ------------------------------------------------------------ |
 | Ground       | `#ffc409`, `#ffffff` or `#17191c`                            |
-| Headline     | Nunito ExtraBold 118·u / 1.03, `-0.03em`, 172·u down         |
+| Headline     | Nunito ExtraBold 118·u / 1.03, `-0.03em`                     |
 | Support line | Nunito Bold 47·u / 1.35, 34·u below                          |
-| Cropped shot | the top 79% of the screen, in a card at its own aspect        |
-| Whole device | 920·u wide, 78·u below the text, 22·u/56·u drop shadow       |
+| Card         | 84% of the canvas wide, 1170 × 2000, radius 54·u, 76·u below |
 
 The column is centred rather than pinned to the top, so a one-line headline and
-a two-line one both sit balanced. The crop is a card at the source's own
-aspect: filling the leftover height instead would mean cropping the sides,
-which cuts the status bar and the message bubbles. The three cropped screens
-are cut once, above every bottom bar, so no canvas size or language can push
-the tab bar or the chat composer into shot.
+a two-line one both sit balanced.
+
+**Every shot is the same card.** Each screen is cut once to a 1170 × 2000
+window, so the card is identical everywhere and only its contents change; a set
+where some shots are a whole device and others a wider crop reads as two
+templates rather than one. The window sits at the top of every screen except
+the token screen, which is offset 330px so its balance and its disclaimer are
+both in frame. Cutting the source once is also what keeps a tab bar or a chat
+composer out of shot at every canvas size and in every language.
 
 Arabic sets in Noto Sans Arabic at the same weights, right to left; Nunito has
 no Arabic. Everything else is Nunito, which covers Latin, Latin Extended and
