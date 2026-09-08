@@ -14,23 +14,28 @@ composition does not change when they are.
 Nothing came from an account: the content is demonstration data and the faces
 are AI-generated portraits (`../marketing/2.0/README.md`).
 
-## The four Apple slots, and only four
+## Three Apple slots, out of eleven
 
-App Store Connect takes uploads for two iPhone sizes and two iPad sizes and
+App Store Connect takes an upload for two iPhone sizes and one iPad size and
 derives every other one. In Media Manager the rest read "Using 6.9" Display",
-"Using 5.5" Display", "Using 13" Display" or "Using 12.9" Display" — there is
-nothing to upload there.
+"Using 5.5" Display" or "Using 13" Display" — there is nothing to upload
+there.
 
 | Folder      | Size        | Covers                              |
 | ----------- | ----------- | ----------------------------------- |
 | `ios/6.9/`  | 1320 × 2868 | iPhone 6.9", and 6.5" / 6.3" / 6.1" |
 | `ios/5.5/`  | 1242 × 2208 | iPhone 5.5", and 4.7" / 4" / 3.5"   |
-| `ios/13/`   | 2064 × 2752 | iPad 13", and 11"                   |
-| `ios/12.9/` | 2048 × 2732 | iPad 12.9", and 10.5" / 9.7"        |
+| `ios/13/`   | 2064 × 2752 | every iPad size, 12.9" included      |
+| `ios/12.9/` | 2048 × 2732 | kept, but do not upload it — below   |
 
-The iPad sets are not optional: `apps/mobile/app.config.ts` sets
-`ios.supportsTablet`, so the listing has an iPad tab to fill. The 1024 × 1024
-app icon is `../app-resources/v2/icons/default.png`.
+The iPad set is not optional: `apps/mobile/app.config.ts` sets
+`ios.supportsTablet`, so the listing has an iPad tab to fill. One set fills it.
+App Store Connect's 13" slot accepts 2064 × 2752 **and** 2048 × 2732, so
+`ios/13/` and `ios/12.9/` both resolve to it — send both and sixteen images
+arrive at a slot that holds ten, six of them silently dropped, in every
+language. Send `ios/13/` and 12.9", 10.5" and 9.7" are derived from it.
+
+The 1024 × 1024 app icon is `../app-resources/v2/icons/default.png`.
 
 ## Play
 
@@ -128,6 +133,37 @@ composer out of shot at every canvas size and in every language.
 Arabic sets in Noto Sans Arabic at the same weights, right to left; Nunito has
 no Arabic. Everything else is Nunito, which covers Latin, Latin Extended and
 Cyrillic.
+
+## Uploading the set
+
+Two scripts in `langx/langx` lay this folder out the way `fastlane deliver`
+reads it, and deliver puts it up in one pass:
+
+```
+node apps/mobile/scripts/collect-store-metadata.mjs      # docs/store/listing.md → metadata
+node apps/mobile/scripts/collect-store-screenshots.mjs   # this folder → screenshots
+cd apps/mobile && fastlane deliver
+```
+
+Authentication is an App Store Connect API key (`.p8`), not an Apple ID, so
+there is no password and no 2FA prompt.
+
+Two things about App Store Connect are worth knowing before doing this by hand
+instead, because both cost a set:
+
+**A locale will not take a screenshot before it exists.** A localization is
+created by giving it a description and keywords, and nothing else will do it —
+so the metadata has to go up first or with the images, never after. Seven of
+these eight languages did not exist on the listing when the screenshots were
+drawn.
+
+**A bulk upload does not keep its order.** Dropping eight files into a slot
+puts them up in whatever sequence App Store Connect finished processing them,
+not the order they were sent — the first attempt at the English 6.9" slot came
+out 4, 1, 7, 2, 6, 3, 8, 5. Order is the argument here, and only the first
+three are shown on the app installation sheet, so it matters. deliver sends
+files one at a time in filename order, which is what the numeric prefix its
+script writes is for. By hand, upload one file at a time.
 
 Press images, social cards and the preview video are in
 [`../marketing/2.0/`](../marketing/2.0/).
