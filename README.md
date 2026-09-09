@@ -27,7 +27,7 @@ per screen, no card layer.
 | [`brand/logo/`](brand/logo/) | the mark and the lockup, **as SVG**, plus the rasters |
 | [`brand/tokens.json`](brand/tokens.json), [`brand/tokens.css`](brand/tokens.css) | the palette, type and spacing, machine-readable |
 | [`brand/print.md`](brand/print.md) | ink builds, clear space, minimum sizes, cards and stickers |
-| [`design/`](design/) | the mockups — every screen of the app as a clickable prototype |
+| [`design/`](design/) | the mockups — every screen of the app as a clickable prototype, and the print pieces as export-ready files |
 | [`2.x/`](2.x/) | store artwork — eight shots in eight languages, at every size both stores take an upload for |
 | [`marketing/2.x/`](marketing/2.x/) | app screens, social posts and the preview video |
 | [`archive/`](archive/) | v1. Kept because a press kit is also a record |

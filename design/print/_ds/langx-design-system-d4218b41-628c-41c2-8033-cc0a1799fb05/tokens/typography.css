@@ -1,0 +1,24 @@
+/* Nunito ExtraBold carries titles, buttons, names, big numerals; Bold is the in-between weight.
+   Body text keeps the platform stack — often someone's second language, so no display face at 13px. */
+:root{
+  --font-display:Nunito,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  --font-body:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --font-mono:ui-monospace,Menlo,monospace;
+  --weight-extrabold:800;--weight-bold:700;--weight-semibold:600;--weight-regular:400;
+  /* roles (size/line-height) */
+  --text-tab-title:34px;--text-title:30px;--text-heading:20px;--text-row-title:17px;--text-body:15px;--text-body-lg:16px;--text-label:13px;--text-caption:12px;--text-micro:11px;
+  --leading-tight:1.1;--leading-title:1.2;--leading-body:1.45;--leading-relaxed:1.55;
+  --tracking-title:-0.3px;--tracking-button:0.8px;--tracking-eyebrow:0.04em;--tracking-wordmark:-0.02em;
+  /* composite shorthands */
+  --type-tab-title:800 34px/1.1 var(--font-display);
+  --type-title:800 30px/1.2 var(--font-display);
+  --type-heading:800 20px/1.2 var(--font-display);
+  --type-row-title:800 17px/1.3 var(--font-display);
+  --type-name:800 15px/1.3 var(--font-display);
+  --type-button:800 15px/1 var(--font-display);
+  --type-body:400 15px/1.45 var(--font-body);
+  --type-body-lg:400 16px/1.5 var(--font-body);
+  --type-label:600 13px/1.3 var(--font-body);
+  --type-caption:400 12px/1.4 var(--font-body);
+  --type-eyebrow:700 12px/1.2 var(--font-body);
+}

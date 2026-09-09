@@ -1,0 +1,3 @@
+/* Nunito 700/800 is the only webfont. It is SIL OFL and not vendored in langx/branding;
+   loaded from Google Fonts. Body text uses the platform stack on purpose (BRAND.md § Type). */
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@700;800&display=swap");
