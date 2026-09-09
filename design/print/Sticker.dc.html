@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<!-- @template name="Sticker — Jukebox 3×3 die cut" description="LangX mark sticker for Jukebox Print's 3×3 in custom-shape die cut, Super Matte. One 3.25×3.25 in page with 0.125 in bleed; rounded-square (app icon) or circle. Export as PDF." -->
+<helmet><meta name="omelette-owns-print"><script src="./ds-base.js"></script>
+<style>:root{color-scheme:light}body{margin:0;background:#eef0f3 !important}
+@page{size:3.25in 3.25in;margin:0}
+@media print{body{background:#fff !important}.lx-chrome{display:none !important}.lx-page{box-shadow:none !important}.lx-wrap{padding:0 !important;gap:0 !important;min-height:0 !important;background:#fff !important}}</style></helmet>
+<div data-theme="light" class="lx-wrap" style="display:flex;flex-direction:column;gap:28px;padding:32px 24px 72px;min-height:100vh;background:#eef0f3;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;color:#17191c;align-items:center">
+<div class="lx-chrome" style="width:3.25in;display:flex;flex-direction:column;gap:6px"><div style="font:800 18px Nunito,sans-serif">LangX sticker · Jukebox 3" × 3" die cut</div><div style="font:400 13px/1.5 system-ui;color:#62676d;text-wrap:pretty">Super Matte, custom shape. The page is 3.25" × 3.25" (0.125" bleed): the yellow runs to the page edge, the cut follows the {{ shapeName }} at 3". The mark sits at 0.78 of the cut so it clears Jukebox's 0.125" safety and the brand's 0.24·H clear space. {{ guideNote }}</div></div>
+
+<div class="lx-page" data-screen-label="Sticker" style="position:relative;width:3.25in;height:3.25in;overflow:hidden;box-shadow:0 24px 60px -24px rgba(23,25,28,.35);flex:none;background:#fff">
+  <sc-if value="{{ isSquare }}" hint-placeholder-val="{{ true }}"><div style="position:absolute;inset:0;background:#ffc409;border-radius:0.78in"></div></sc-if>
+  <sc-if value="{{ isCircle }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;inset:0;background:#ffc409;border-radius:999px"></div></sc-if>
+  <sc-if value="{{ markOnly }}" hint-placeholder-val="{{ false }}"><img src="assets/logo/mark-arcs.svg" alt="LangX" style="position:absolute;left:50%;top:50%;width:2.34in;height:2.34in;transform:translate(-50%,-50%);display:block"></sc-if>
+  <sc-if value="{{ withQr }}" hint-placeholder-val="{{ true }}">
+    <div style="position:absolute;inset:0.22in;display:flex;flex-direction:column;align-items:center;justify-content:space-between">
+      <div style="font:800 16pt/1 Nunito,sans-serif;letter-spacing:-0.03em;color:#201900;text-align:center;white-space:nowrap">Swap languages?</div>
+      <div style="background:#fff;border-radius:0.16in;padding:0.06in"><img src="assets/qr/get-langx-io.svg" alt="QR — get.langx.io" style="width:2.17in;height:2.17in;display:block"></div>
+      <span style="font:800 16pt/1 Nunito,sans-serif;letter-spacing:-0.03em;color:#201900">langx.io</span>
+    </div>
+  </sc-if>
+  <sc-if value="{{ guides }}" hint-placeholder-val="{{ false }}">
+    <sc-if value="{{ isSquare }}" hint-placeholder-val="{{ true }}"><div style="position:absolute;inset:0.125in;border:1px dashed #e5484d;border-radius:0.66in;pointer-events:none"></div><div style="position:absolute;inset:0.25in;border:1px dashed rgba(59,108,246,.9);border-radius:0.54in;pointer-events:none"></div></sc-if>
+    <sc-if value="{{ isCircle }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;inset:0.125in;border:1px dashed #e5484d;border-radius:999px;pointer-events:none"></div><div style="position:absolute;inset:0.25in;border:1px dashed rgba(59,108,246,.9);border-radius:999px;pointer-events:none"></div></sc-if>
+  </sc-if>
+</div>
+
+<div class="lx-chrome" style="width:3.25in;font:400 12px/1.5 system-ui;color:#62676d;text-wrap:pretty">Red dashes = cut line (3" {{ shapeName }}), blue = safety. Jukebox draws the die from your artwork's outer shape, so in Special Instructions write: "Die cut to the yellow {{ shapeName }} at 3 × 3 in; 0.125 in bleed included." Yellow #ffc409 — ask them to match a physical chip; Super Matte will dull it slightly, which is fine.</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;content&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;qr&quot;,&quot;options&quot;:[&quot;qr&quot;,&quot;mark&quot;],&quot;tsType&quot;:&quot;'qr'|'mark'&quot;,&quot;section&quot;:&quot;Sticker&quot;},&quot;shape&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;square&quot;,&quot;options&quot;:[&quot;square&quot;,&quot;circle&quot;],&quot;tsType&quot;:&quot;'square'|'circle'&quot;,&quot;section&quot;:&quot;Sticker&quot;},&quot;showGuides&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Sticker&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    const shape = this.props.shape ?? 'square', guides = this.props.showGuides ?? false
+    const content = this.props.content ?? 'qr'
+    return { withQr: content === 'qr', markOnly: content === 'mark', isSquare: shape === 'square', isCircle: shape === 'circle', shapeName: shape === 'square' ? 'rounded square' : 'circle', guides, guideNote: guides ? 'Guides are on — turn them off before export.' : 'Guides are off — export-ready.' }
+  }
+}
+</script>
+</body>
+</html>

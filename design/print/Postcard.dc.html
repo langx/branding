@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<!-- @template name="Postcard — Jukebox Classic 4×6" description="LangX postcard for Jukebox Print 4×6 in Classic (coated front, writable back), landscape. Two pages at 6.25×4.25 in (0.125 in bleed): yellow front with headline and app screen; light writable back with note space, address lines and QR to get.langx.io. Export as PDF." -->
+<helmet><meta name="omelette-owns-print"><script src="./ds-base.js"></script>
+<style>:root{color-scheme:light}body{margin:0;background:#eef0f3 !important}
+@page{size:6.25in 4.25in;margin:0}
+@media print{body{background:#fff !important}.lx-chrome{display:none !important}.lx-page{box-shadow:none !important;break-after:page;page-break-after:always}.lx-page:last-child{break-after:auto;page-break-after:auto}.lx-wrap{padding:0 !important;gap:0 !important;min-height:0 !important;background:#fff !important}}</style></helmet>
+<div data-theme="light" class="lx-wrap" style="display:flex;flex-direction:column;gap:28px;padding:32px 24px 72px;min-height:100vh;background:#eef0f3;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;color:#17191c;align-items:center">
+<div class="lx-chrome" style="width:6.25in;display:flex;flex-direction:column;gap:6px"><div style="font:800 18px Nunito,sans-serif">LangX postcard · Jukebox Classic 4" × 6"</div><div style="font:400 13px/1.5 system-ui;color:#62676d;text-wrap:pretty">Landscape. Each side is a 6.25" × 4.25" page (0.125" bleed on every edge). Export → PDF gives a two-page file: page 1 front (coated), page 2 back (uncoated, writable — kept mostly white so a pen works; no solid ink fields there). {{ guideNote }}</div></div>
+
+<div class="lx-page" data-screen-label="Front" style="position:relative;width:6.25in;height:4.25in;background:#ffc409;color:#201900;overflow:hidden;box-shadow:0 24px 60px -24px rgba(23,25,28,.35);flex:none">
+  <div style="position:absolute;left:0.4in;top:0.4in;bottom:0.4in;width:2.9in;display:flex;flex-direction:column;justify-content:space-between">
+    <div style="display:flex;flex-direction:column;gap:0.14in"><div style="font:800 34pt/0.98 Nunito,sans-serif;letter-spacing:-0.035em">Help someone speak yours.</div><div style="font:700 13pt/1.25 Nunito,sans-serif;letter-spacing:-0.02em;color:rgba(32,25,0,.7)">They'll do the same.</div></div>
+    <div style="display:flex;align-items:center;gap:0.12in"><img src="assets/logo/mark-arcs.svg" alt="" style="width:0.36in;height:0.36in;display:block"><span style="font:800 16pt/1 Nunito,sans-serif;letter-spacing:-0.02em">LangX</span></div>
+  </div>
+  <img src="assets/screens/discover.png" alt="LangX Discover screen" style="position:absolute;right:0.4in;top:0.4in;width:2.3in;height:4.2in;object-fit:cover;object-position:top;border-radius:0.24in 0.24in 0 0;display:block;box-shadow:0 0.12in 0.3in rgba(32,25,0,.18)">
+  <sc-if value="{{ guides }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;inset:0.125in;border:1px dashed rgba(32,25,0,.5);pointer-events:none"></div><div style="position:absolute;inset:0.25in;border:1px dashed rgba(59,108,246,.9);pointer-events:none"></div></sc-if>
+</div>
+
+<div class="lx-page" data-screen-label="Back" style="position:relative;width:6.25in;height:4.25in;background:#ffffff;color:#17191c;overflow:hidden;box-shadow:0 24px 60px -24px rgba(23,25,28,.35);flex:none">
+  <div style="position:absolute;inset:0.4in;display:flex;gap:0.3in">
+    <div style="flex:1;display:flex;flex-direction:column;justify-content:space-between;min-width:0">
+      <div style="display:flex;flex-direction:column;gap:0.1in"><div style="font:800 15pt/1.1 Nunito,sans-serif;letter-spacing:-0.02em">Swap languages?</div><div style="font:400 9pt/1.5 system-ui;color:#62676d;text-wrap:pretty">LangX pairs you with someone who speaks the language you're learning and is learning yours. Chat, get corrected, correct back. Half teacher, half student — everyone here is both.</div></div>
+      <div style="display:flex;align-items:flex-end;gap:0.16in"><img src="assets/qr/get-langx-io.svg" alt="QR — get.langx.io" style="width:1.1in;height:1.1in;display:block;border-radius:0.08in;border:1px solid #e8eaec"><div style="display:flex;flex-direction:column;gap:0.04in"><span style="font:800 15pt/1 Nunito,sans-serif;letter-spacing:-0.02em">langx.io</span><span style="font:400 8pt/1.4 system-ui;color:#62676d">Scan to get the app.<br>hi@langx.io</span></div></div>
+    </div>
+    <div style="width:1px;background:#e8eaec;flex:none"></div>
+    <div style="flex:1;display:flex;flex-direction:column;align-items:center;min-width:0;position:relative">
+      <img src="assets/screens/feed.png" alt="LangX feed screen" style="width:2.1in;height:3.9in;object-fit:cover;object-position:top;border-radius:0.22in 0.22in 0 0;display:block;box-shadow:0 0.1in 0.3in rgba(23,25,28,.14);position:absolute;top:0.1in">
+    </div>
+  </div>
+  <sc-if value="{{ guides }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;inset:0.125in;border:1px dashed rgba(23,25,28,.35);pointer-events:none"></div><div style="position:absolute;inset:0.25in;border:1px dashed rgba(59,108,246,.9);pointer-events:none"></div></sc-if>
+</div>
+
+<div class="lx-chrome" style="width:6.25in;font:400 12px/1.5 system-ui;color:#62676d;text-wrap:pretty">The screen is the marketing render from langx/branding (demonstration data, AI-generated faces). Yellow #ffc409 on the coated front — ask Jukebox to match a physical chip. Keep guides off when exporting.</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;showGuides&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Print&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    const guides = this.props.showGuides ?? false
+    return { guides, guideNote: guides ? 'Guides are on (grey trim, blue safety) — turn them off before export.' : 'Guides are off — export-ready.' }
+  }
+}
+</script>
+</body>
+</html>

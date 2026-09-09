@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<!-- @template name="Business card — Jukebox print file" description="LangX card, Jukebox Print Standard 3.5×2 in Soft Touch. Two pages at 3.75×2.25 in (0.125 in bleed): yellow headline front, ink back with QR to get.langx.io. Export as PDF." -->
+<helmet><meta name="omelette-owns-print"><script src="./ds-base.js"></script>
+<style>:root{color-scheme:light}body{margin:0;background:#eef0f3 !important}
+@page{size:3.75in 2.25in;margin:0}
+@media print{body{background:#fff !important}.lx-chrome{display:none !important}.lx-page{box-shadow:none !important;break-after:page;page-break-after:always}.lx-page:last-child{break-after:auto;page-break-after:auto}.lx-wrap{padding:0 !important;gap:0 !important;min-height:0 !important;background:#fff !important}}</style></helmet>
+<div data-theme="light" class="lx-wrap" style="display:flex;flex-direction:column;gap:28px;padding:32px 24px 72px;min-height:100vh;background:#eef0f3;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;color:#17191c;align-items:center">
+<div class="lx-chrome" style="width:3.75in;display:flex;flex-direction:column;gap:6px"><div style="font:800 18px Nunito,sans-serif">LangX business card · print file</div><div style="font:400 13px/1.5 system-ui;color:#62676d;text-wrap:pretty">Jukebox Print · Soft Touch · Standard 3.5" × 2". Each side is a 3.75" × 2.25" page (0.125" bleed on every edge). Export → PDF gives a two-page file: page 1 front, page 2 back. {{ guideNote }}</div></div>
+
+<div class="lx-page" data-screen-label="Front" style="position:relative;width:3.75in;height:2.25in;background:#ffc409;color:#201900;overflow:hidden;box-shadow:0 24px 60px -24px rgba(23,25,28,.35);flex:none">
+  <div style="position:absolute;inset:0.25in;display:flex;flex-direction:column;justify-content:space-between"><div style="font:800 30pt/0.98 Nunito,sans-serif;letter-spacing:-0.035em">Help<br>someone<br>speak yours.</div><div style="display:flex;justify-content:space-between;align-items:flex-end"><span style="font:800 10pt/1 Nunito,sans-serif;letter-spacing:-0.02em">LangX</span><span style="font:600 10pt/1 system-ui;color:rgba(32,25,0,.75)">hi@langx.io</span></div></div>
+  <sc-if value="{{ guides }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;inset:0.125in;border:1px dashed rgba(32,25,0,.5);pointer-events:none"></div><div style="position:absolute;inset:0.25in;border:1px dashed rgba(59,108,246,.9);pointer-events:none"></div></sc-if>
+</div>
+
+<div class="lx-page" data-screen-label="Back" style="position:relative;width:3.75in;height:2.25in;background:#17191c;color:#f2f3f5;overflow:hidden;box-shadow:0 24px 60px -24px rgba(23,25,28,.35);flex:none">
+  <div style="position:absolute;inset:0.25in;display:flex;align-items:center;justify-content:space-between;gap:0.2in"><div style="font:800 13pt/1.15 Nunito,sans-serif;letter-spacing:-0.02em;max-width:1.4in;color:#9aa1a9">They'll do the same.</div><div style="display:flex;flex-direction:column;align-items:center;gap:0.05in"><img src="assets/qr/get-langx-io.svg" alt="QR — get.langx.io" style="width:1.3in;height:1.3in;display:block;border-radius:0.08in"><span style="font:800 12pt/1 Nunito,sans-serif;letter-spacing:-0.02em">langx.io</span></div></div>
+  <sc-if value="{{ guides }}" hint-placeholder-val="{{ false }}"><div style="position:absolute;inset:0.125in;border:1px dashed rgba(242,243,245,.4);pointer-events:none"></div><div style="position:absolute;inset:0.25in;border:1px dashed rgba(59,108,246,.9);pointer-events:none"></div></sc-if>
+</div>
+
+<div class="lx-chrome" style="width:3.75in;font:400 12px/1.5 system-ui;color:#62676d;text-wrap:pretty">Yellow #ffc409 is a spot-colour candidate: ask Jukebox to match a physical chip rather than the CMYK build (0·23·96·0). The QR scans to https://get.langx.io. Keep guides off when exporting.</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;showGuides&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Print&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    const guides = this.props.showGuides ?? false
+    return { guides, guideNote: guides ? 'Guides are on (grey trim, blue safety) — turn them off before export.' : 'Guides are off — export-ready.' }
+  }
+}
+</script>
+</body>
+</html>

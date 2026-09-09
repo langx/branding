@@ -1,0 +1,53 @@
+/* LangX v3 palette. Values copied from langx/branding brand/tokens.css (source of truth is
+   langx/apps/mobile/src/lib/theme/tokens.ts). Light on :root; dark via prefers-color-scheme
+   or data-theme="dark". Tokens absent from the dark block are identical in both schemes. */
+:root{
+  --bg:#ffffff;--feed-bg:#ffffff;--surface:#ffffff;--fill:#f4f5f7;--border:#e8eaec;
+  --text:#17191c;--text-muted:#62676d;--text-faint:#9aa1a7;--text-inverse:#fefefe;
+  --ink:#17191c;--on-ink:#ffffff;--on-ink-muted:rgba(128,128,128,0.45);
+  --primary:#ffc409;--primary-shade:#e0ac08;--primary-press:#d9a504;--primary-hover:#ffcf33;--primary-text:#201900;--primary-text-muted:rgba(32,25,0,0.55);
+  --secondary:#3b6cf6;--accent:#3b6cf6;--accent-bg:#e9f0fe;--accent-hover:#2f56c4;
+  --streak:#f79009;--pro:#7a5af8;--pro-plus:#5b21b6;
+  --success:#009f70;--success-bg:#e2f6ee;--info:#3b6cf6;--info-bg:#e9f0fe;
+  --warning:#c87820;--warning-bg:#fff6b6;--danger:#e5484d;--danger-bg:#fdecec;--danger-shade:#b83236;
+  --knob:#ffffff;--scrim:rgba(0,0,0,0.45);--scrim-strong:rgba(0,0,0,0.94);--on-scrim:#ffffff;
+  --shadow:0 4px 10px rgba(0,0,0,0.06);--shadow-sheet:0 -8px 38px rgba(0,0,0,0.14);--shadow-thumb:0 1px 3px rgba(0,0,0,0.08);
+  --selection:rgba(255,196,9,0.4);
+  /* semantic aliases */
+  --surface-page:var(--bg);--surface-sheet:var(--surface);--surface-box:var(--fill);
+  --text-body:var(--text);--text-secondary:var(--text-muted);--text-placeholder:var(--text-faint);
+  --action-commit:var(--primary);--action-commit-text:var(--primary-text);--action-commit-shade:var(--primary-shade);
+  --action-link:var(--accent);--bubble-mine:var(--accent-bg);--bubble-theirs:var(--fill);
+  --correction:var(--success);--correction-bg:var(--success-bg);--copilot:var(--info);--copilot-bg:var(--info-bg);
+  --divider:var(--border);
+  --mark-ground:#ffc409;--mark-ground-ink:#121318;--mark-ground-pro:#7a5af8;--mark-shadow:#e0ac08;--mark-shadow-ink:#deab06;--mark-shadow-pro:#6b4fda;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --bg:#1c1f24;--feed-bg:#1c1f24;--surface:#1c1f24;--fill:#23272d;--border:#2c3036;
+    --text:#f2f3f5;--text-muted:#9aa1a9;--text-faint:#70767e;--ink:#f2f3f5;--on-ink:#1c1f24;
+    --secondary:#7c9cf9;--accent:#7c9cf9;--accent-bg:#202b45;--accent-hover:#a3b8fb;
+    --streak:#ffa93d;--pro:#9b83ff;--pro-plus:#c9b8ff;
+    --success:#34c796;--success-bg:#16332a;--info:#7c9cf9;--info-bg:#202b45;
+    --warning:#ffca39;--warning-bg:#724413;--danger:#ef6b6f;--danger-bg:#3a2023;
+    --shadow:0 4px 10px rgba(0,0,0,0.4);--shadow-sheet:0 -8px 38px rgba(0,0,0,0.5);
+  }
+}
+:root[data-theme="dark"],[data-theme="dark"]{
+  --bg:#1c1f24;--feed-bg:#1c1f24;--surface:#1c1f24;--fill:#23272d;--border:#2c3036;
+  --text:#f2f3f5;--text-muted:#9aa1a9;--text-faint:#70767e;--ink:#f2f3f5;--on-ink:#1c1f24;
+  --secondary:#7c9cf9;--accent:#7c9cf9;--accent-bg:#202b45;--accent-hover:#a3b8fb;
+  --streak:#ffa93d;--pro:#9b83ff;--pro-plus:#c9b8ff;
+  --success:#34c796;--success-bg:#16332a;--info:#7c9cf9;--info-bg:#202b45;
+  --warning:#ffca39;--warning-bg:#724413;--danger:#ef6b6f;--danger-bg:#3a2023;
+  --shadow:0 4px 10px rgba(0,0,0,0.4);--shadow-sheet:0 -8px 38px rgba(0,0,0,0.5);
+}
+[data-theme="light"]{
+  --bg:#ffffff;--feed-bg:#ffffff;--surface:#ffffff;--fill:#f4f5f7;--border:#e8eaec;
+  --text:#17191c;--text-muted:#62676d;--text-faint:#9aa1a7;--ink:#17191c;--on-ink:#ffffff;
+  --secondary:#3b6cf6;--accent:#3b6cf6;--accent-bg:#e9f0fe;--accent-hover:#2f56c4;
+  --streak:#f79009;--pro:#7a5af8;--pro-plus:#5b21b6;
+  --success:#009f70;--success-bg:#e2f6ee;--info:#3b6cf6;--info-bg:#e9f0fe;
+  --warning:#c87820;--warning-bg:#fff6b6;--danger:#e5484d;--danger-bg:#fdecec;
+  --shadow:0 4px 10px rgba(0,0,0,0.06);--shadow-sheet:0 -8px 38px rgba(0,0,0,0.14);
+}

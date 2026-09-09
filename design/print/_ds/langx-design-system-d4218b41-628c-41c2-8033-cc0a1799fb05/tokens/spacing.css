@@ -1,0 +1,17 @@
+/* 4 · 8 · 12 · 16 · 24 · 32 · 48 and radii 8 · 12 · 16 · 24 · 28 · pill. 28 is the sheet's top
+   corners; nothing smaller than a sheet is that round. Content capped at 720px. */
+:root{
+  --space-1:4px;--space-2:8px;--space-3:12px;--space-4:16px;--space-6:24px;--space-8:32px;--space-12:48px;
+  --screen-gutter:20px;--auth-gutter:24px;--row-pad-y:18px;
+  --radius-sm:8px;--radius-md:12px;--radius-lg:16px;--radius-xl:24px;--radius-sheet:28px;--radius-pill:999px;
+  --radius-button:16px;--radius-bubble:20px;--radius-bubble-tail:6px;--radius-tip:16px;
+  --content-max-width:720px;
+  --control-h:56px;--control-h-sm:54px;--control-h-xs:48px;--icon-tap:40px;--toggle-w:50px;--toggle-h:30px;
+  --button-lift:4px;
+  --ease-out:cubic-bezier(0,0,.2,1); /* @kind other */
+  --ease-sheet:cubic-bezier(.32,.72,0,1); /* @kind other */
+  --dur-fast:160ms; /* @kind other */
+  --dur-base:200ms; /* @kind other */
+  --dur-rise:400ms; /* @kind other */
+  --dur-sheet:360ms; /* @kind other */
+}
