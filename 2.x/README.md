@@ -87,6 +87,13 @@ Three acts: yellow opens, three light screens carry the loop, four dark ones
 are the app after hours, yellow closes. Every headline is a claim
 `langx/docs/store/listing.md` also makes.
 
+Shots 1 and 7 were re-cut on 2026-09-10. Discover now carries the **boosted
+strip** — the paying members above the list, which the app has shown since
+`langx/langx` #1274 and the site's phone screen had not caught up to. Only the
+card changed: the ground, the headline and the line under it are the same
+pixels they were, in all eight languages, so the set still reads as one
+template. The other six shots are untouched.
+
 Four things are decided here rather than only drawn:
 
 - **The plans screen is not in the set.** A headline saying the app is free
