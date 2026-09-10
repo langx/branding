@@ -17,7 +17,9 @@ prototype is a drawing of one, and where the two disagree, `BRAND.md` wins.
 
 A handoff bundle exported from [Claude Design](https://claude.ai/design) on
 2026-09-06, covering all 64 routes under `apps/mobile/app` in
-[`langx/langx`](https://github.com/langx/langx).
+[`langx/langx`](https://github.com/langx/langx). Updated 2026-09-10 with a
+Discover redesign: a horizontally-scrolling "Boosted profiles" row above the
+list, shown on the For You sort when there's no search query.
 
 - **`LangX App.dc.html`** — the interactive prototype. Every route, light /
   dark / auto, with enough state simulated to walk a flow end to end.

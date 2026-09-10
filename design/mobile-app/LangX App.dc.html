@@ -307,6 +307,20 @@ input:focus,textarea:focus,button:focus-visible{outline:2px solid var(--accent,#
     <sc-if value="{{ isNearby }}" hint-placeholder-val="{{ false }}"><div style="margin-top:14px">{{ radiusChips }}</div></sc-if>
     <sc-if value="{{ tipDiscover }}" hint-placeholder-val="{{ false }}"><div style="display:flex;align-items:center;gap:12px;margin-top:16px;padding:12px 16px;border-radius:16px;background:var(--accentbg);font:400 14px/1.4 var(--fb);color:var(--text)"><span style="flex:1">Use the filters to narrow by level, age or country.</span><button onClick="{{ dismissDiscoverTip }}" style="color:var(--accent);font-size:16px;display:flex">{{ ic.x }}</button></div></sc-if>
   </sc-if>
+  <sc-if value="{{ showBoosted }}" hint-placeholder-val="{{ true }}">
+  <div style="margin:24px -20px 0;display:flex;flex-direction:column;gap:14px">
+    <div style="display:flex;align-items:baseline;justify-content:space-between;padding:0 20px"><span style="display:flex;align-items:center;gap:6px;font:800 17px var(--fh);color:var(--text)"><span style="font-size:15px;display:flex;color:var(--pro)">{{ ic.zap }}</span>Boosted</span><button onClick="{{ explainBoost }}" style="font:600 13px var(--fb);color:var(--muted)">What is this?</button></div>
+    <div style="display:flex;gap:12px;overflow-x:auto;padding:0 20px 4px;scrollbar-width:none">
+      <sc-for list="{{ boosted }}" as="b" hint-placeholder-count="4">
+        <button onClick="{{ b.open }}" style="flex:none;width:132px;display:flex;flex-direction:column;align-items:center;gap:10px;padding:16px 12px 14px;border-radius:20px;background:var(--fill);text-align:center" style-active="opacity:.7">
+          {{ b.av }}
+          <div style="display:flex;flex-direction:column;gap:3px;width:100%"><span style="font:800 15px var(--fh);color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ b.first }}</span><span style="font:600 12px var(--fb);color:var(--accent);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ b.pair }}</span></div>
+          <span style="padding:4px 10px;border-radius:999px;background:var(--accentbg);color:var(--pro);font:700 10px var(--fb);letter-spacing:.06em">{{ b.plan }}</span>
+        </button>
+      </sc-for>
+    </div>
+  </div>
+  </sc-if>
   <div style="margin-top:8px;padding-bottom:24px">
     <sc-if value="{{ discoverEmpty }}" hint-placeholder-val="{{ false }}"><div style="display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px;padding:64px 24px"><span style="width:56px;height:56px;border-radius:999px;background:var(--fill);color:var(--faint);display:flex;align-items:center;justify-content:center;font-size:24px">{{ ic.search }}</span><div style="font:800 20px var(--fh);color:var(--text)">Nobody here yet</div><div style="font:400 15px/1.5 var(--fb);color:var(--muted)">People whose languages match yours in both directions show up here. Try loosening the filters.</div></div></sc-if>
     <sc-for list="{{ discoverPeople }}" as="p" hint-placeholder-count="5">
@@ -1356,7 +1370,9 @@ class Component extends DCLogic {
       welcomeBackRows: [{ t: '@alex', b: 'Your username is yours again — nobody else could claim it.', icon: this.icon('user', 22) }, { t: '3 conversations restored', b: 'Threads where the other person came back too. The rest arrive if and when they do.', icon: this.icon('message', 22) }, { t: '1,240 tokens', b: '990 carried over from your old balance, plus 250 for coming back.', icon: this.icon('wallet', 22) }, { t: '41 day best streak', b: 'Kept as your record. Your live streak starts fresh from today.', icon: this.icon('zap', 22) }, { t: 'Fluent, for life', b: 'For what you built in v1. It never expires and there is nothing to pay — thank you for being here first.', icon: this.icon('award', 22) }],
       scanClose: () => this.back(), qrConfirm: () => { this.toast('Signed in on your laptop.'); this.back() },
       // derived flags / extras
-      notSearching: !s.discover.searching, feedIsPron: s.feedTab === 'pronunciation', meLearnBars1: this.levelBars(3), meLearnBars2: this.levelBars(2), meAvSmall: this.avatar(me, 40, { noDot: true }),
+      notSearching: !s.discover.searching, showBoosted: !s.discover.searching && s.discover.sort === 'recommended' && !s.discover.q,
+      boosted: ['lucia', 'valentina', 'sakura', 'yuki'].map(id => { const p = this.person(id); return { id, first: p.name.split(' ')[0], pair: `${p.native[0]} → ${p.learning[0][0]}`, plan: id === 'sakura' ? 'FLUENT' : 'POLYGLOT', av: this.avatar(p, 64, { frame: 'var(--pro)' }), open: () => { this.setState({ openProfile: id }); this.go('profile') } } }),
+      explainBoost: () => this.sheet('Boosted profiles', [{ label: 'See the plans', icon: 'zap', run: () => { this.setState({ sheet: null }); this.go('paywall') } }], 'People on a paid plan get shown here first for a while after they post or reply. They are still matched to your languages — nothing about the pairing changes.'), feedIsPron: s.feedTab === 'pronunciation', meLearnBars1: this.levelBars(3), meLearnBars2: this.levelBars(2), meAvSmall: this.avatar(me, 40, { noDot: true }),
       cannotSend: s.draft.trim().length === 0, notCorrected: !alreadyCorrected, writingIsPosts: s.writingTab === 'posts', viewersOpen: this.hasFeature('viewers'), giftWaiting: !giftReady && s.giftOpened === null, giftBg: giftReady ? 'var(--y)' : 'var(--fill)', giftFg: giftReady ? 'var(--yt)' : 'var(--text)',
       canSignUpOp: opac(s.auth.email.includes('@') && s.auth.pw.length >= 8 && s.settings.terms), obCanContinueOp: opac(obOnNative ? ob.native.length > 0 : ob.learning.length > 0), obLevelsOkOp: opac(ob.learning.every(l => ob.levels[l])), obAboutOkOp: opac(ob.name.trim().length > 0 && /^\d{4}$/.test(ob.year) && (2026 - +ob.year) >= 18), obHandleOkOp: opac(ob.handle.length >= 3 && !['yuki_t', 'mateo', 'admin'].includes(ob.handle)), canSendCorrOp: opac(s.corrDraft.trim().length > 0), canPostOp: opac(s.composeText.trim().length > 0), pwOkOp: opac(s.pw.cur.length > 0 && s.pw.next.length >= 8 && s.pw.next === s.pw.confirm), canDeleteOp: opac(s.deleteTyped.trim() === 'alex'),
       toggleShowPw: () => this.setState(st => ({ settings: { ...st.settings, showPw: !st.settings.showPw } })), shareLocationOn: !!s.settings.shareLocation, updateLocation: () => this.toast('Location updated.'),
