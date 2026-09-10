@@ -15,6 +15,12 @@ The seven screens on their own, light and dark, 1170 × 2532 (390 × 844 at 3×)
 Discover, Chat, Feed, Me, Paywall, Tokens, Welcome back. This is the source
 every other file here and in [`../../2.x/`](../../2.x/) is cut from.
 
+The four Discover files were re-shot on 2026-09-10, after the site's phone
+screen gained the **boosted strip** the app has had since `langx/langx` #1274.
+The same render also picks up what the screen had drifted to since the first
+shoot — the search button, the filter count, the language pair under the title
+— so these four differ from their neighbours by more than the strip.
+
 The Me screen is rendered with its "Badges — coming back soon" row hidden.
 Badges are not in 2.0's first release and a picture is not the place to promise
 one.
