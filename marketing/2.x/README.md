@@ -38,6 +38,15 @@ English and Turkish, six posts each:
 Same six messages as the store set, same grounds, laid out for each shape. The
 other six languages are one render away if a campaign needs them.
 
+## `print/`
+
+The postcard from [`../../design/print/Postcard.dc.html`](../../design/print/Postcard.dc.html),
+rendered as pictures: `postcard-front.png` and `postcard-back.png`, 1728 × 1152
+(4" × 6" at 288 dpi, bleed cropped off, so this is the card as it is cut). They
+are screenshots of the design file, not a second drawing of it — when the
+design changes, re-shoot rather than edit. The front is the hero image of the
+`langx/langx` README.
+
 ## `video/`
 
 `preview-1080x1920.webm` — 23 seconds, the six screens in order with the lockup
