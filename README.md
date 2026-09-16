@@ -29,6 +29,7 @@ per screen, no card layer.
 | [`brand/print.md`](brand/print.md) | ink builds, clear space, minimum sizes, cards and stickers |
 | [`design/`](design/) | the mockups — every screen of the app as a clickable prototype, and the print pieces as export-ready files |
 | [`2.x/`](2.x/) | store artwork — eight shots in eight languages, at every size both stores take an upload for |
+| [`goldie/`](goldie/) | the same eight shots framed in a device bezel by goldie, iPhone 6.9" and Play phone, and the config that renders them |
 | [`marketing/2.x/`](marketing/2.x/) | app screens, social posts and the preview video |
 | [`archive/`](archive/) | v1. Kept because a press kit is also a record |
 
