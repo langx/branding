@@ -13,7 +13,7 @@ import { mkdir, readdir, rename, rm } from "node:fs/promises";
 import { basename, dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { GlobalFonts } from "@napi-rs/canvas";
-import { loadConfig, renderScreenshots, verify } from "goldie";
+import { LAYOUTS, loadConfig, renderScreenshots, verify } from "goldie";
 
 const here = dirname(fileURLToPath(import.meta.url));
 
@@ -32,6 +32,22 @@ const COPY = {
   "#ffffff": { headlineColor: "#17191c", subheadColor: "#62676d" },
   "#17191c": { headlineColor: "#f2f3f5", subheadColor: "#9aa1a9" },
 };
+
+// goldie reserves the top 24% of the tile for copy whatever the copy's
+// length, and hangs each layout's device below that band. Ours is a headline
+// and one line under it, which fills about half of it, so the device sat
+// under a strip of empty ground. Raise each device until its top sits just
+// under the tallest copy in the set (a two-line headline over a two-line
+// support line ends near 20% of the tile). The tilted ones rise a little
+// less, since rotation lifts a corner above the frame's top edge. The
+// classic layout takes its band from theme.copyHeightRatio instead, set in
+// the config. The wide Play tile keeps goldie's own clamp and is unaffected.
+const DEVICE_Y = { hero: [0.67], tilt: [0.67], "tilt-right": [0.68], duo: [0.51, 0.59] };
+for (const [key, ys] of Object.entries(DEVICE_Y)) {
+  ys.forEach((y, i) => {
+    LAYOUTS[key].devices[i].y = y;
+  });
+}
 
 const cfg = await loadConfig(join(here, "goldie.config.ts"));
 const shots = cfg.scenes.filter((s) => s.kind === "screenshot");

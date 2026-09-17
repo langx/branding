@@ -40,7 +40,10 @@ const config = {
     // Registered from ./fonts by frame.mjs. Nunito has no Arabic; the
     // canvas falls through to Noto Sans Arabic per glyph.
     fontFamily: '"Nunito", "Noto Sans Arabic", sans-serif',
-    copyHeightRatio: 0.24,
+    // The classic layout's copy band. goldie's default is 0.24; the tallest
+    // copy in this set ends near 0.20, so the band is trimmed to sit the
+    // device just under it. The other layouts are raised in frame.mjs.
+    copyHeightRatio: 0.215,
     deviceWidthRatio: 0.84,
   },
 
