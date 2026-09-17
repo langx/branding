@@ -1,0 +1,16 @@
+{
+  "name": "langx-store-shots",
+  "private": true,
+  "type": "module",
+  "description": "Frames the 2.x app screens as store screenshots with goldie",
+  "scripts": {
+    "manifest": "node manifest.mjs",
+    "frame": "node frame.mjs",
+    "all": "node manifest.mjs && node frame.mjs",
+    "studio": "goldie studio"
+  },
+  "devDependencies": {
+    "@napi-rs/canvas": "^1.0.8",
+    "goldie": "^0.3.1"
+  }
+}

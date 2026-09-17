@@ -1,0 +1,7 @@
+node_modules/
+# Written by manifest.mjs and goldie studio; carry absolute paths of this machine.
+out/raw/
+out/web/
+out/previews/
+out/.staging/
+out/store.json
