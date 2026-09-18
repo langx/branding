@@ -24,7 +24,18 @@ const config = {
   appPath: "",
   bundleId: "",
 
-  devices: ["iphone-6.9", "pixel-10-pro"],
+  // Every slot both stores take an upload for, at the sizes ../2.x/README.md
+  // lists. goldie ships the first and the fifth; devices.mjs registers the
+  // other five, and publish.mjs files each render under ../2.x/<locale>/.
+  devices: [
+    "iphone-6.9",
+    "iphone-5.5",
+    "ipad-13",
+    "ipad-12.9",
+    "pixel-10-pro",
+    "android-7tablet",
+    "android-10tablet",
+  ],
   locales: ["en", "tr", "es", "ru", "ar", "fr", "de", "pt-BR"],
   appearance: "light",
 

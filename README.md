@@ -29,7 +29,7 @@ per screen, no card layer.
 | [`brand/print.md`](brand/print.md) | ink builds, clear space, minimum sizes, cards and stickers |
 | [`design/`](design/) | the mockups — every screen of the app as a clickable prototype, and the print pieces as export-ready files |
 | [`2.x/`](2.x/) | store artwork — eight shots in eight languages, at every size both stores take an upload for |
-| [`goldie/`](goldie/) | the same eight shots framed in a device bezel by goldie, iPhone 6.9" and Play phone, and the config that renders them |
+| [`goldie/`](goldie/) | how that set is made: the goldie config, the slot sizes and the scripts that render them |
 | [`marketing/2.x/`](marketing/2.x/) | app screens, social posts and the preview video |
 | [`archive/`](archive/) | v1. Kept because a press kit is also a record |
 
@@ -76,9 +76,10 @@ again, but uploading them is worse than not: its 13" slot accepts both
 2064 × 2752 and 2048 × 2732, so sending both fills one ten-image slot with
 sixteen images and silently drops six. Play takes all three of its sizes.
 
-The shots are compositions, not raw captures: a headline over the screen, on the
-brand ground. [`2.x/README.md`](2.x/README.md) carries the composition in
-numbers, the shot list, and the two things that must not appear in a screenshot.
+The shots are compositions, not raw captures: the screen in a device bezel, on
+the brand ground, under a headline. [`2.x/README.md`](2.x/README.md) carries the
+composition in numbers, the shot list, and the two things that must not appear
+in a screenshot; [`goldie/`](goldie/) renders them, one pass per slot.
 
 `apps/mobile/scripts/collect-store-screenshots.mjs` in `langx/langx` reads this
 folder directly and lays it out for `fastlane deliver`, so the folder names above

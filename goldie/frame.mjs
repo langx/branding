@@ -13,7 +13,8 @@ import { mkdir, readdir, rename, rm } from "node:fs/promises";
 import { basename, dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { GlobalFonts } from "@napi-rs/canvas";
-import { LAYOUTS, loadConfig, renderScreenshots, verify } from "goldie";
+import { DEVICES, LAYOUTS, loadConfig, renderScreenshots, verify } from "goldie";
+import "./devices.mjs";
 
 const here = dirname(fileURLToPath(import.meta.url));
 
@@ -49,6 +50,27 @@ for (const [key, ys] of Object.entries(DEVICE_Y)) {
   });
 }
 
+// goldie clamps a tile wider than the 6.9" aspect back to that aspect for the
+// copy column, but sizes each layout's device against the tile's full width -
+// right for a panorama, wrong for a squat slot. On the 5.5" iPhone, both iPads
+// and both Play tablets that draws a device wider than the column it stands
+// in, and the bezel runs off both sides. Scale the device by the same clamp
+// the copy gets, so every slot is the one composition at its own size. The
+// classic layout is already sized against the clamped tile and is left alone.
+const REF_ASPECT = 1320 / 2868;
+const BASE_WIDTH = new Map(
+  Object.entries(LAYOUTS).map(([key, layout]) => [key, layout.devices.map((d) => d.widthRatio)]),
+);
+const fitToTile = (device) => {
+  const { width, height } = DEVICES[device].screenshot;
+  const fit = Math.min(1, (height * REF_ASPECT) / width);
+  for (const [key, widths] of BASE_WIDTH) {
+    LAYOUTS[key].devices.forEach((d, i) => {
+      if (!d.fitBelowCopy) d.widthRatio = widths[i] * fit;
+    });
+  }
+};
+
 const cfg = await loadConfig(join(here, "goldie.config.ts"));
 const shots = cfg.scenes.filter((s) => s.kind === "screenshot");
 const order = shots.map((s) => s.id);
@@ -72,6 +94,7 @@ let ok = true;
 for (const device of devices) {
   for (const locale of locales) {
     console.log(`> ${device} ${locale}`);
+    fitToTile(device);
     const outDir = join(cfg.outDir, "screenshots", device, locale);
     const staging = join(cfg.outDir, ".staging", device, locale);
     await rm(staging, { recursive: true, force: true });

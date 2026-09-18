@@ -6,7 +6,8 @@
   "scripts": {
     "manifest": "node manifest.mjs",
     "frame": "node frame.mjs",
-    "all": "node manifest.mjs && node frame.mjs",
+    "store": "node publish.mjs",
+    "all": "node manifest.mjs && node frame.mjs && node publish.mjs",
     "studio": "goldie studio"
   },
   "devDependencies": {
