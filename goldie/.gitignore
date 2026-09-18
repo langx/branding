@@ -1,7 +1,5 @@
 node_modules/
-# Written by manifest.mjs and goldie studio; carry absolute paths of this machine.
-out/raw/
-out/web/
-out/previews/
-out/.staging/
-out/store.json
+# out/ is working state: the cut screens and the manifests carry absolute paths
+# of this machine, and the framed strips are published to ../2.x/, which is the
+# committed artwork. Nothing here is the set.
+out/

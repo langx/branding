@@ -1,8 +1,9 @@
 # 2.x — store artwork
 
 Eight shots, every slot both stores actually take an upload for, in the eight
-languages the app speaks. One template throughout: the same card, at the same
-width and the same height, on every shot.
+languages the app speaks. One template throughout: each screen in a device
+bezel — an iPhone 17 Pro on the App Store slots, a Pixel 10 Pro on Play's — on
+the brand ground, under a headline and one line of support copy.
 
 **Read this before you upload.** The screen inside every shot is rendered from
 the phone components on langx.io, not captured from a build on a device. It is
@@ -72,27 +73,26 @@ each one checked; a headline is the most-read sentence in a listing.
 
 ## The eight shots
 
-| #   | Screen         | Ground | English headline            |
-| --- | -------------- | ------ | --------------------------- |
-| 1   | Discover       | yellow | They need your language     |
-| 2   | Chat           | white  | Say it wrong. Get it fixed. |
-| 3   | Feed           | white  | Corrections are always free |
-| 4   | Tokens, dark   | ink    | Earned by teaching          |
-| 5   | Chat, dark     | ink    | It has a night side         |
-| 6   | Feed, dark     | ink    | Ask when you're stuck       |
-| 7   | Discover, dark | ink    | Or whoever is online now    |
-| 8   | Me             | yellow | A streak worth keeping      |
+| #   | Screen         | Ground | Layout                         | English headline            |
+| --- | -------------- | ------ | ------------------------------ | --------------------------- |
+| 1   | Discover       | yellow | hero                           | They need your language     |
+| 2   | Chat           | white  | tilt                           | Say it wrong. Get it fixed. |
+| 3   | Feed           | white  | classic                        | Corrections are always free |
+| 4   | Tokens, dark   | ink    | classic                        | Earned by teaching          |
+| 5   | Chat, dark     | ink    | duo, the dark Feed behind      | It has a night side         |
+| 6   | Feed, dark     | ink    | tilt-right                     | Ask when you're stuck       |
+| 7   | Discover, dark | ink    | hero                           | Or whoever is online now    |
+| 8   | Me             | yellow | hero                           | A streak worth keeping      |
 
 Three acts: yellow opens, three light screens carry the loop, four dark ones
 are the app after hours, yellow closes. Every headline is a claim
 `langx/docs/store/listing.md` also makes.
 
-Shots 1 and 7 were re-cut on 2026-09-10. Discover now carries the **boosted
-strip** — the paying members above the list, which the app has shown since
-`langx/langx` #1274 and the site's phone screen had not caught up to. Only the
-card changed: the ground, the headline and the line under it are the same
-pixels they were, in all eight languages, so the set still reads as one
-template. The other six shots are untouched.
+The whole set was re-shot on 2026-09-17, in the device bezel. The screens, the
+order, the grounds and the copy are the ones the flat-card set carried; what
+changed is the composition around them, and that it is now one render per slot
+rather than one card cut to seven canvases. The strip that had been framed for
+two of the seven slots on 2026-09-16 is where it started.
 
 Four things are decided here rather than only drawn:
 
@@ -108,8 +108,9 @@ Four things are decided here rather than only drawn:
   `langx/docs/token-messaging-brief.md` rules out coin iconography - Guideline
   3.1.5(b), not taste.
 - **The token screen stays legible.** It states on its own face that tokens
-  cannot be bought, traded or withdrawn, which is the answer to 3.1.5(b). The
-  crop window on that screen is offset so the line survives.
+  cannot be bought, traded or withdrawn, which is the answer to 3.1.5(b). Its
+  shot is the one layout that keeps a whole screen in frame, so the line
+  survives in every slot and every language.
 
 Apple's own note in Media Manager is worth keeping in mind: only the **first
 three** are used on the app installation sheets. Shots 1–3 have to carry the
@@ -117,43 +118,59 @@ listing on their own.
 
 ## The composition
 
-Everything scales from the canvas height, `u = height / 2796`:
+Every shot is [goldie](https://github.com/kacperkapusciak/goldie)'s: the bezel,
+the layouts, the type setting and the wrapping are its renderer, and
+[`../goldie/`](../goldie/) is the config that chooses what it draws and the
+scripts that run it. `../goldie/README.md` is the how; this is the what.
 
-| Element      | Value                                                        |
-| ------------ | ------------------------------------------------------------ |
-| Ground       | `#ffc409`, `#ffffff` or `#17191c`                            |
-| Headline     | Nunito ExtraBold 118·u / 1.03, `-0.03em`                     |
-| Support line | Nunito Bold 47·u / 1.35, 34·u below                          |
-| Card         | 84% of the canvas wide, 1170 × 2000, radius 54·u, 76·u below |
+| Element      | Value                                                      |
+| ------------ | ---------------------------------------------------------- |
+| Ground       | `#ffc409`, `#ffffff` or `#17191c`                          |
+| Headline     | Nunito ExtraBold, 8.2% of the tile width, `-0.0016em`      |
+| Support line | Nunito Regular, 3.8% of the tile width                     |
+| Copy colours | ink on white and on yellow, `#f2f3f5` on ink               |
+| Bezel        | goldie's `17-pro-silver`, and its Pixel 10 Pro on Play      |
+| Device       | 84–95% of the column wide, by layout                        |
 
-The column is centred rather than pinned to the top, so a one-line headline and
-a two-line one both sit balanced.
+Everything is a ratio of the tile, so one composition fills seven differently
+shaped slots. A slot wider than the 6.9" aspect — the 5.5" iPhone, both iPads,
+both Play tablets — keeps the copy column and the device at that aspect,
+centred, which is how a phone ends up on an iPad canvas: there is no tablet
+layout to shoot, and the set has never pretended otherwise.
 
-**Every shot is the same card.** Each screen is cut once to a 1170 × 2000
-window, so the card is identical everywhere and only its contents change; a set
-where some shots are a whole device and others a wider crop reads as two
-templates rather than one. The window sits at the top of every screen except
-the token screen, which is offset 330px so its balance and its disclaimer are
-both in frame. Cutting the source once is also what keeps a tab bar or a chat
-composer out of shot at every canvas size and in every language.
+**The screen in each shot is cut once**, from the 1170 × 2532 render, 6px in on
+every side so the site's own drawn device edge does not show as a hairline
+inside a real bezel. It is the same cut in every slot and every language; only
+the tile around it changes.
 
-Arabic sets in Noto Sans Arabic at the same weights, right to left; Nunito has
-no Arabic. Everything else is Nunito, which covers Latin, Latin Extended and
-Cyrillic.
+Arabic sets in Noto Sans Arabic at the same weights; Nunito has no Arabic.
+Everything else is Nunito, which covers Latin, Latin Extended and Cyrillic.
+
+The feature graphic is the one asset that is not a screenshot — a landscape
+banner with the lockup on it, which goldie's renderer does not compose — so it
+is drawn by `../goldie/feature.mjs` from the same parts: the yellow ground, the
+lockup, shot 1's copy, and the Discover screen in the same bezel. Arabic
+mirrors the whole banner.
 
 ## Uploading the set
 
-Two scripts in `langx/langx` lay this folder out the way `fastlane deliver`
-reads it, and deliver puts it up in one pass:
+Each store has a lane in `apps/mobile/fastlane/Fastfile` in `langx/langx`, and
+a script that lays this folder out the way the lane reads it:
 
 ```
 node apps/mobile/scripts/collect-store-metadata.mjs      # docs/store/listing.md → metadata
-node apps/mobile/scripts/collect-store-screenshots.mjs   # this folder → screenshots
-cd apps/mobile && fastlane deliver
+node apps/mobile/scripts/collect-store-screenshots.mjs   # this folder → App Store
+cd apps/mobile && fastlane store
+
+node apps/mobile/scripts/collect-play-screenshots.mjs    # this folder → Play
+cd apps/mobile && fastlane android play
 ```
 
-Authentication is an App Store Connect API key (`.p8`), not an Apple ID, so
-there is no password and no 2FA prompt.
+Neither lane submits anything for review on its own. Authentication on the App
+Store is an API key (`.p8`), not an Apple ID, so there is no password and no
+2FA prompt; Play uses a service account. Play's own locale list is shorter than
+this folder's — it has no Russian and no Arabic — so that lane covers six of
+the eight and the rest of its listing falls back to `en-GB`.
 
 Two things about App Store Connect are worth knowing before doing this by hand
 instead, because both cost a set:
