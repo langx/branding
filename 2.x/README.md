@@ -75,11 +75,14 @@ listing shows one set of people. Nothing came from a real account: they are
 fixture accounts on a development database (`seed-test-users.ts`), renamed for
 the shoot.
 
-**Arabic has one shot, not two.** In right-to-left the navigation bar's back
-chevron moves to the trailing edge, which on watchOS is where the system clock
-is drawn, and the two overlap. It is the thread screen only — the list is clean,
-which is why `ar/ios/watch/1.png` ships and `2.png` does not. A screenshot has
-to be the build, so the second Arabic shot waits for the build that fixes it.
+**Arabic has two shots now, and the second one needs a build that carries the
+fix.** In right-to-left the navigation bar's back chevron moved to the trailing
+edge, which on watchOS is where the system clock is drawn, and the two
+overlapped. The watch app now pins the bar left-to-right while giving the
+screens back their real direction, so the chevron is clear of the clock and the
+names and bubbles stay right-to-left. `ar/ios/watch/2.png` is that build. If a
+binary was cut before it, upload `1.png` alone for Arabic — a screenshot has to
+be the build it is sold beside.
 
 The clock in these reads whatever the simulator's was: `simctl status_bar
 override` answers "Operation not supported" on watchOS, so there is no 9:41
