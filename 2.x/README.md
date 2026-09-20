@@ -98,10 +98,45 @@ here and no way to make one.
 | `android/10tablet/1..8.png`     | 1600 × 2560 | 10" tablet      |
 | `android/feature-graphic.png`   | 1024 × 500  | Feature graphic |
 | `icon-512.png`                  | 512 × 512   | App icon        |
+| `android/wear/1..2.png`         | 384 × 384   | Wear OS — see below |
 
 The tablet folders are what stops Play marking the listing phone-only. Both
 carry the same phone screens on a tablet canvas, because there is no tablet
 layout to shoot.
+
+## The Wear OS slot
+
+`android/wear/` — **1 to 8 shots, square, at least 384 x 384**. Play requires
+at least one before it will distribute to watches at all, and it only asks once
+the app is opted into the **Wear OS form factor** in Play Console (Advanced
+settings → Form factors). Until somebody ticks that box these files are
+waiting, not late.
+
+Google's rules here are stricter than Apple's about what may be in the frame:
+the app interface only, **no device frame**, no added text, graphics or
+background, and no transparency. That suits the set, because the emulator
+writes exactly 384 x 384 — the minimum, and 1:1 — so again nothing is scaled
+and nothing is composed around it.
+
+| #   | Screen                     | Note                                        |
+| --- | -------------------------- | ------------------------------------------- |
+| 1   | Unread, at rest            | the round bezel clips the list, as it does on a watch |
+| 2   | One thread, with **Reply** | scrolled 50px, see below                    |
+
+**The second shot is scrolled on purpose.** The thread's three items — name,
+bubble, Reply — sit just past the bottom of the circle when the screen opens,
+so the yellow pill is sliced by the bezel. Fifty pixels brings the whole pill
+inside without pushing the name into the top arc. It is a scroll position, not
+a layout fix: the screen is not broken, it simply starts one nudge above where
+it photographs best.
+
+Captured from a Wear OS 5 emulator (`android-34`, arm64, 384 x 384, round)
+paired to a Pixel 9 running the app signed in as a fixture account, with the
+payload arriving over the **Data Layer** exactly as it does on a watch. Same
+cast as everywhere else.
+
+All eight languages are here; Play's own locale list is shorter and its lane
+takes six of them, the same way it does for the phone shots.
 
 ## Languages
 
