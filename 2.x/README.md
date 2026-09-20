@@ -5,6 +5,9 @@ languages the app speaks. One template throughout: each screen in a device
 bezel — an iPhone 17 Pro on the App Store slots, a Pixel 10 Pro on Play's — on
 the brand ground, under a headline and one line of support copy.
 
+The watch is the exception to all of that and has its own section below: real
+captures, no bezel, no headline, because its canvas is the size of the display.
+
 **Read this before you upload.** The screen inside every shot is rendered from
 the phone components on langx.io, not captured from a build on a device. It is
 the app's own markup at the app's own sizes, so it matches what a person sees —
@@ -37,6 +40,51 @@ arrive at a slot that holds ten, six of them silently dropped, in every
 language. Send `ios/13/` and 12.9", 10.5" and 9.7" are derived from it.
 
 The 1024 × 1024 app icon is `../brand/icon/default.png`.
+
+## The Apple Watch slot
+
+`ios/watch/` — **1 to 10 shots at 416 × 496**, the Series 12 / 11 / 10 display.
+The listing grows this tab the moment a build carries a watchOS app, which is
+the build the watch app first ships in.
+
+Apple sizes this slot by watch series and takes one of them only: 422 × 514 is
+Ultra 4 and 3, 410 × 502 the older Ultra, 416 × 496 the current Series, 396 ×
+484 the Series 9 and back, 368 × 448 the SE. **One size has to serve every
+localization** — Apple says so outright — so mixing an Ultra shot into this set
+costs the set. 416 × 496 is the mainstream size and it is what the Series 11
+46mm simulator writes, which is why these files needed no scaling at all.
+
+**These are captures, not renders, and that is the difference from everything
+above.** The phone set is the site's own markup handed to goldie; this set is
+`xcrun simctl io … screenshot` against the watch app running on a paired
+simulator, fed a real payload by a real phone over WatchConnectivity. Two
+things follow. There is no bezel and no headline — the canvas *is* the display,
+so a frame around it would mean shrinking the app below its own size — and the
+screen inside is localized for real: the watch app reads
+`targets/_shared/Localizable.xcstrings`, which carries all eight languages, so
+"Unread" is "Okunmamış" and "غير المقروءة" rather than English under a
+translated headline.
+
+| #   | Screen                          | What it has to show                    |
+| --- | ------------------------------- | -------------------------------------- |
+| 1   | Unread, three threads           | the app's whole reason: who is waiting |
+| 2   | One thread, with **Reply**      | that the wrist answers, not just reads |
+
+The cast is the phone set's — **Sofia R.**, **Mateo P.**, **Daniel K.** — so one
+listing shows one set of people. Nothing came from a real account: they are
+fixture accounts on a development database (`seed-test-users.ts`), renamed for
+the shoot.
+
+**Arabic has one shot, not two.** In right-to-left the navigation bar's back
+chevron moves to the trailing edge, which on watchOS is where the system clock
+is drawn, and the two overlap. It is the thread screen only — the list is clean,
+which is why `ar/ios/watch/1.png` ships and `2.png` does not. A screenshot has
+to be the build, so the second Arabic shot waits for the build that fixes it.
+
+The clock in these reads whatever the simulator's was: `simctl status_bar
+override` answers "Operation not supported" on watchOS, so there is no 9:41
+here and no way to make one.
+
 
 ## Play
 
