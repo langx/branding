@@ -65,7 +65,13 @@ two arcs and lock into the lockup. The vertical cut is recomposed for a phone
 held upright, with its words kept clear of the platforms' own chrome — not the
 wide one letterboxed.
 
-Both are rendered, not edited: `tools/showreel/` in `langx/langx` builds them
+`launch-1080x1920.mp4` is the app's launch animation on its own: 2.7 s, no
+sound, the finale's greetings bending into the mark on the brand yellow and
+locking, no wordmark. It is the file the app ships as
+`apps/mobile/assets/splash/intro.mp4`; this copy is for using it elsewhere, not
+the source.
+
+Both reels are rendered, not edited: `tools/showreel/` in `langx/langx` builds them
 frame by frame from one page (`render.mjs --format wide|vertical`), and the
 score is synthesised there too, so there is no licensed music in them. Re-cut
 them from that tool rather than editing these files. The app's launch
