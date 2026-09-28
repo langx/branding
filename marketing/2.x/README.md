@@ -69,13 +69,17 @@ wide one letterboxed.
 sound, the finale's greetings bending into the mark on the brand yellow and
 locking, no wordmark. It is the file the app ships as
 `apps/mobile/assets/splash/intro.mp4`; this copy is for using it elsewhere, not
-the source.
+the source. `launch-1080x1920-dark.mp4` is its night cut, which a phone in dark
+mode plays (`intro-dark.mp4` in the app): the same film on the app's dark ground
+`#1c1f24`, with the black arc and its greetings in yellow and a black hard
+shadow.
 
 Both reels are rendered, not edited: `tools/showreel/` in `langx/langx` builds them
 frame by frame from one page (`render.mjs --format wide|vertical`), and the
 score is synthesised there too, so there is no licensed music in them. Re-cut
 them from that tool rather than editing these files. The app's launch
-animation comes from the same finale (`render.mjs --page splash`).
+animation comes from the same finale (`render.mjs --page splash`, and
+`--theme dark` for the night cut).
 
 `preview-1080x1920.webm`, the earlier draft — 23 seconds, the six screens in order with the lockup
 at the end. Use it on the site and in social posts.
