@@ -49,7 +49,29 @@ design changes, re-shoot rather than edit. The front is the hero image of the
 
 ## `video/`
 
-`preview-1080x1920.webm` — 23 seconds, the six screens in order with the lockup
+**Say it back**, the motion reel — 44 seconds, 60 fps, H.264 with an AAC
+soundtrack, in two frames:
+
+| File                          | Size        | For                                   |
+| ----------------------------- | ----------- | ------------------------------------- |
+| `say-it-back-1920x1080.mp4`   | 1920 × 1080 | the site, YouTube, talks, a Play promo |
+| `say-it-back-1080x1920.mp4`   | 1080 × 1920 | Reels, TikTok, Shorts, Stories        |
+
+A caret edits *Hello* through three languages and becomes the line the mark is
+cut on; sixteen scripts move the way they are read; a chat gets its green
+correction and climbs the Echo ladder; *No ads. Real people. Open source.*;
+*thank you* in the app's eight languages; and rivers of greetings bend into the
+two arcs and lock into the lockup. The vertical cut is recomposed for a phone
+held upright, with its words kept clear of the platforms' own chrome — not the
+wide one letterboxed.
+
+Both are rendered, not edited: `tools/showreel/` in `langx/langx` builds them
+frame by frame from one page (`render.mjs --format wide|vertical`), and the
+score is synthesised there too, so there is no licensed music in them. Re-cut
+them from that tool rather than editing these files. The app's launch
+animation comes from the same finale (`render.mjs --page splash`).
+
+`preview-1080x1920.webm`, the earlier draft — 23 seconds, the six screens in order with the lockup
 at the end. Use it on the site and in social posts.
 
 **It is not a store upload.** The two stores want different things and neither
