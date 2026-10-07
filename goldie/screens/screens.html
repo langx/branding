@@ -1,0 +1,845 @@
+<!doctype html>
+<!--
+  The four 2.9 screens, drawn the way the site's phone components draw the
+  other eight: real HTML at the app's own sizes (390 x 844, rendered at 3x),
+  in the app's own colours, type and glyphs.
+
+  Unlike those, these are localized. render.mjs reads every word below out of
+  the app's locale files and hands it in as window.SHOT; nothing a person reads
+  on these screens is written here. The Spanish in the threads is the
+  conversation itself — demonstration data, like the names and the clock.
+
+  The values are the app's, from apps/mobile in langx/langx:
+  - calls        src/components/calls/CallHost.tsx, an incoming video call
+  - calls-chat   src/screens/ChatScreen.tsx with a call row (MessageBubble.tsx)
+  - camera       app/(app)/chat-camera.tsx, the preview after a photo is taken
+  - camera-chat  ChatScreen.tsx with two view-once rows from the other side
+  - chat-correction  ChatScreen.tsx with a correction card, for the Play feature graphic
+  Colours are src/lib/theme/tokens.ts; icons are Feather, the app's icon font.
+-->
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <style>
+      @font-face {
+        font-family: 'Nunito';
+        font-weight: 400;
+        src: url('../fonts/Nunito-Regular.ttf');
+      }
+      @font-face {
+        font-family: 'Nunito';
+        font-weight: 800;
+        src: url('../fonts/Nunito-ExtraBold.ttf');
+      }
+      @font-face {
+        font-family: 'Feather';
+        src: url('../fonts/Feather.ttf');
+      }
+
+      :root {
+        --bg: #ffffff;
+        --fill: #f4f5f7;
+        --border: #e8eaec;
+        --text: #17191c;
+        --text-muted: #62676d;
+        --text-faint: #9aa1a7;
+        --text-inverse: #fefefe;
+        --primary: #ffc409;
+        --primary-shade: #e0ac08;
+        --primary-text: #201900;
+        --accent: #3b6cf6;
+        --accent-bg: #e9f0fe;
+        --success: #009f70;
+        --danger: #e5484d;
+        --on-ink-muted: rgba(128, 128, 128, 0.45);
+        --stage: #0d0f12;
+        --display: 'Nunito', -apple-system, sans-serif;
+        --body: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html,
+      body {
+        width: 390px;
+        height: 844px;
+        overflow: hidden;
+        background: var(--bg);
+      }
+
+      body {
+        font-family: var(--body);
+        color: var(--text);
+        -webkit-font-smoothing: antialiased;
+      }
+
+      .screen {
+        width: 390px;
+        height: 844px;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .icon {
+        font-family: 'Feather';
+        font-style: normal;
+        line-height: 1;
+        display: inline-block;
+      }
+
+      /* The status bar of the site's PhoneFrame: 50 tall, clock and glyphs on its bottom edge. */
+      .status {
+        height: 50px;
+        flex: 0 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        padding: 0 28px 6px;
+        font-family: var(--display);
+        font-size: 15px;
+        font-weight: 800;
+        position: relative;
+        z-index: 2;
+      }
+      .glyphs {
+        display: flex;
+        gap: 6px;
+        align-items: center;
+      }
+      .signal {
+        width: 16px;
+        height: 9px;
+        background: currentColor;
+        border-radius: 2px;
+      }
+      .battery {
+        width: 24px;
+        height: 11px;
+        border: 1.5px solid currentColor;
+        border-radius: 3px;
+      }
+      .on-dark {
+        color: #ffffff;
+      }
+
+      /* ---- Chat (ChatScreen.tsx) ---- */
+      .header {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 6px 16px 12px;
+        border-bottom: 1px solid var(--border);
+        flex: 0 0 auto;
+      }
+      .back,
+      .more {
+        width: 34px;
+        height: 34px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex: 0 0 auto;
+      }
+      .more {
+        width: 36px;
+        height: 36px;
+      }
+      .header-user {
+        flex: 1;
+        min-width: 0;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .avatar {
+        position: relative;
+        flex: 0 0 auto;
+      }
+      .avatar img {
+        display: block;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+      .dot {
+        position: absolute;
+        bottom: 0;
+        inset-inline-end: 0;
+        width: 12px;
+        height: 12px;
+        border-radius: 999px;
+        background: var(--success);
+        border: 2px solid var(--bg);
+      }
+      .header-name {
+        font-family: var(--display);
+        font-weight: 800;
+        font-size: 17px;
+        line-height: 1.3;
+        white-space: nowrap;
+      }
+      .presence {
+        font-size: 13px;
+        color: var(--accent);
+      }
+      .actions {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+      }
+
+      /* The list is inverted in the app, so a short thread sits on the composer. */
+      .thread {
+        flex: 1;
+        min-height: 0;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        gap: 10px;
+        padding: 8px 16px 16px;
+      }
+      .day {
+        align-self: center;
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--text-faint);
+        padding: 4px 0 10px;
+      }
+      .column {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        max-width: 78%;
+      }
+      .column.mine {
+        align-self: flex-end;
+        align-items: flex-end;
+      }
+      .column.theirs {
+        align-self: flex-start;
+        align-items: flex-start;
+      }
+      .bubble {
+        border-radius: 20px;
+        padding: 13px 16px;
+        font-size: 16px;
+        line-height: 23px;
+      }
+      .mine .bubble {
+        background: var(--accent-bg);
+      }
+      .theirs .bubble {
+        background: var(--fill);
+      }
+      .mine .bubble.tail {
+        border-end-end-radius: 6px;
+      }
+      .theirs .bubble.tail {
+        border-end-start-radius: 6px;
+      }
+      .meta {
+        display: flex;
+        gap: 4px;
+        font-size: 11px;
+        color: var(--text-faint);
+      }
+      .column .meta-wrap {
+        margin-top: -2px;
+      }
+
+      /* A call's row and a view-once row: the same card. */
+      .card {
+        background: var(--fill);
+        border-radius: 16px;
+        padding: 12px;
+        max-width: 300px;
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+      }
+      .call-icon {
+        width: 36px;
+        height: 36px;
+        border-radius: 999px;
+        background: var(--bg);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex: 0 0 auto;
+      }
+      .call-icon.live {
+        background: var(--accent);
+        color: var(--text-inverse);
+      }
+      .call-icon.used {
+        border: 1.5px dashed var(--border);
+        color: var(--text-muted);
+      }
+      .call-text {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        min-width: 0;
+      }
+      .call-title {
+        font-size: 15px;
+        font-weight: 700;
+        line-height: 20px;
+      }
+      .call-title.used {
+        color: var(--text-muted);
+      }
+      .call-detail {
+        font-size: 13px;
+        line-height: 17px;
+        color: var(--text-muted);
+      }
+      .call-action {
+        margin-top: 6px;
+        font-size: 13px;
+        font-weight: 700;
+        color: var(--accent);
+      }
+      .view-action {
+        font-size: 13px;
+        font-weight: 700;
+        line-height: 17px;
+        color: var(--accent);
+      }
+
+      /* A correction (MessageBubble.tsx): the success pair, a whole-width card. */
+      .correction {
+        align-self: stretch;
+        background: #e2f6ee;
+        border-radius: 16px;
+        padding: 14px 16px;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+      .correction-label {
+        color: var(--success);
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+      }
+      .correction-original {
+        color: var(--text-muted);
+        font-size: 15px;
+        line-height: 22px;
+      }
+      .correction-original del {
+        color: var(--danger);
+      }
+      .correction-text {
+        font-size: 16px;
+        font-weight: 600;
+        line-height: 23px;
+      }
+      .correction-text b {
+        color: var(--success);
+        font-weight: 800;
+      }
+      .correction-note {
+        border-top: 1px solid #009f7033;
+        color: var(--text-muted);
+        font-size: 14px;
+        line-height: 20px;
+        margin-top: 2px;
+        padding-top: 8px;
+      }
+      .correction .meta {
+        align-self: flex-end;
+      }
+
+      /* ChatComposer.tsx */
+      .composer {
+        border-top: 1px solid var(--border);
+        padding: 10px 16px 46px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        flex: 0 0 auto;
+        background: var(--bg);
+      }
+      .composer-row {
+        display: flex;
+        align-items: flex-end;
+        gap: 8px;
+      }
+      .attach {
+        width: 44px;
+        height: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--text-muted);
+      }
+      .input {
+        flex: 1;
+        min-width: 0;
+        min-height: 48px;
+        background: var(--fill);
+        border-radius: 24px;
+        padding: 13px 18px;
+        font-size: 16px;
+        line-height: 22px;
+        color: var(--text-faint);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .mic {
+        width: 48px;
+        height: 48px;
+        border-radius: 999px;
+        background: var(--fill);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex: 0 0 auto;
+      }
+      .hint {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 12px;
+      }
+      .hint-left {
+        color: var(--text-faint);
+      }
+      .hint-right {
+        color: var(--success);
+        font-weight: 600;
+      }
+
+      /* ---- The call (CallHost.tsx) ---- */
+      .call {
+        background: var(--stage);
+        color: #ffffff;
+      }
+      .chrome {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 12px 24px 62px;
+      }
+      .top-bar {
+        align-self: stretch;
+        min-height: 40px;
+      }
+      .identity {
+        margin-top: 48px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+      }
+      .avatar-box {
+        width: 120px;
+        height: 120px;
+        margin-bottom: 8px;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      /* The breathing ring, caught a third of the way through its 1.6 s loop. */
+      .ring {
+        position: absolute;
+        inset: 0;
+        border: 2px solid #ffffff;
+        border-radius: 50%;
+        transform: scale(1.15);
+        opacity: 0.3;
+      }
+      .call-name {
+        font-family: var(--display);
+        font-weight: 800;
+        font-size: 28px;
+        line-height: 36px;
+        text-align: center;
+      }
+      .call-status {
+        font-size: 16px;
+        line-height: 21px;
+        opacity: 0.72;
+        text-align: center;
+      }
+      .spacer {
+        flex: 1;
+      }
+      .controls {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 24px;
+      }
+      .disc-row {
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        gap: 24px;
+      }
+      .disc-box {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+      }
+      .disc {
+        width: 64px;
+        height: 64px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #ffffff;
+        font-size: 26px;
+      }
+      .disc.danger {
+        background: var(--danger);
+      }
+      .disc.success {
+        background: var(--success);
+      }
+      .disc-caption,
+      .link {
+        font-size: 13px;
+        font-weight: 600;
+        opacity: 0.85;
+      }
+      .link {
+        font-size: 15px;
+      }
+
+      /* ---- The chat camera (chat-camera.tsx) ---- */
+      .camera {
+        background: #000000;
+        color: #ffffff;
+      }
+      .frame {
+        position: absolute;
+        top: 50px;
+        left: 0;
+        width: 390px;
+        height: 693.33px;
+        border-radius: 16px;
+        overflow: hidden;
+        background: #000000;
+      }
+      .frame svg {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+      }
+      .cam-top {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        padding: 16px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .round {
+        width: 40px;
+        height: 40px;
+        border-radius: 999px;
+        background: rgba(0, 0, 0, 0.35);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 22px;
+      }
+      .cam-bottom {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        padding: 0 16px 24px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+      }
+      .modes {
+        align-self: stretch;
+        display: flex;
+        gap: 2px;
+        padding: 4px;
+        border-radius: 16px;
+        background: rgba(0, 0, 0, 0.55);
+      }
+      .mode {
+        flex: 1;
+        min-width: 0;
+        min-height: 40px;
+        border-radius: 12px;
+        padding: 6px 4px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        font-size: 13px;
+        font-weight: 600;
+        line-height: 16px;
+        color: rgba(255, 255, 255, 0.75);
+      }
+      .mode.on {
+        background: #ffffff;
+        color: #000000;
+      }
+      .send {
+        align-self: flex-end;
+        width: 56px;
+        height: 56px;
+        border-radius: 999px;
+        background: var(--primary);
+        color: var(--primary-text);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+      }
+      .send .icon {
+        margin-left: -2px;
+        margin-top: 2px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script>
+      const { screen, dir, s, avatar } = window.SHOT
+      document.documentElement.dir = dir
+      const glyph = (code, size, extra = '') =>
+        `<i class="icon" style="font-size:${size}px;${extra}">${String.fromCodePoint(code)}</i>`
+      const ICON = {
+        phone: 61878,
+        video: 61963,
+        phoneOff: 61883,
+        x: 61974,
+        send: 61905,
+        more: 61864,
+        back: 61712,
+        camera: 61736,
+        plus: 61888,
+        mic: 61855,
+      }
+      const esc = (text) =>
+        String(text).replace(/[&<>]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' })[c])
+
+      const status = (dark) => `
+        <div class="status ${dark ? 'on-dark' : ''}">
+          <span>9:41</span>
+          <span class="glyphs"><span class="signal"></span><span class="battery"></span></span>
+        </div>`
+
+      const header = () => `
+        <div class="header">
+          <span class="back">${glyph(ICON.back, 22)}</span>
+          <div class="header-user">
+            <span class="avatar"><img src="${avatar}" width="40" height="40" /><span class="dot"></span></span>
+            <div>
+              <div class="header-name" dir="auto">Lucía M.</div>
+              <div class="presence">${esc(s.online)}</div>
+            </div>
+          </div>
+          <div class="actions">
+            <span class="more">${glyph(ICON.phone, 20)}</span>
+            <span class="more">${glyph(ICON.more, 22)}</span>
+          </div>
+        </div>`
+
+      const composer = () => `
+        <div class="composer">
+          <div class="composer-row">
+            <span style="display:flex">
+              <span class="attach">${glyph(ICON.plus, 22)}</span>
+              <span class="attach">${glyph(ICON.camera, 21)}</span>
+            </span>
+            <span class="input">${esc(s.writeMessage)}</span>
+            <span class="mic">${glyph(ICON.mic, 20)}</span>
+          </div>
+          <div class="hint">
+            <span class="hint-left">${esc(s.composerCorrect)}</span>
+            <span class="hint-right">${esc(s.tokensPerMessage)}</span>
+          </div>
+        </div>`
+
+      const meta = (time, mine) =>
+        `<div class="meta">${time}${mine ? ` <span>·</span> <span>${esc(s.read)}</span>` : ''}</div>`
+
+      const text = (side, body, time, tail = true) => `
+        <div class="column ${side}">
+          <div class="bubble ${tail ? 'tail' : ''}" dir="ltr" style="text-align:start">${esc(body)}</div>
+          ${time ? meta(time, side === 'mine') : ''}
+        </div>`
+
+      const card = (side, inner, time) => `
+        <div class="column ${side}">
+          <div class="card">${inner}</div>
+          ${meta(time, false)}
+        </div>`
+
+      const screens = {
+        // An incoming video call, before it is answered.
+        calls: () => `
+          <div class="screen call">
+            ${status(true)}
+            <div class="chrome">
+              <div class="top-bar"></div>
+              <div class="identity">
+                <div class="avatar-box">
+                  <span class="ring"></span>
+                  <img src="${avatar}" width="120" height="120" style="border-radius:50%;object-fit:cover;display:block" />
+                </div>
+                <div class="call-name" dir="auto">Lucía M.</div>
+                <div class="call-status">${esc(s.incomingVideo)}</div>
+              </div>
+              <div class="spacer"></div>
+              <div class="controls">
+                <div class="disc-row">
+                  <div class="disc-box">
+                    <span class="disc danger">${glyph(ICON.phoneOff, 26)}</span>
+                    <span class="disc-caption">${esc(s.decline)}</span>
+                  </div>
+                  <div class="disc-box">
+                    <span class="disc success">${glyph(ICON.video, 26)}</span>
+                    <span class="disc-caption">${esc(s.answer)}</span>
+                  </div>
+                </div>
+                <span class="link">${esc(s.answerNoCamera)}</span>
+              </div>
+            </div>
+          </div>`,
+
+        // The thread the call came from: the row an earlier call left, and the call button.
+        'calls-chat': () => `
+          <div class="screen">
+            ${status(false)}
+            ${header()}
+            <div class="thread">
+              <div class="day">${esc(s.today)}</div>
+              ${text('theirs', '¿Hablamos un rato? Así practicas la pronunciación.', '17:58')}
+              ${text('mine', '¡Sí! Te llamo a las seis.', '17:59')}
+              ${card(
+                'theirs',
+                `<span class="call-icon">${glyph(ICON.video, 18)}</span>
+                 <span class="call-text">
+                   <span class="call-title">${esc(s.rowIncomingVideo)}</span>
+                   <span class="call-detail">14:32</span>
+                   <span class="call-action">${esc(s.callBack)}</span>
+                 </span>`,
+                '18:00',
+              )}
+              ${text('theirs', '¡Hablas mucho mejor que la semana pasada!', '18:15')}
+              ${text('mine', 'Gracias. ¿Mañana a la misma hora?', '18:16')}
+            </div>
+            ${composer()}
+          </div>`,
+
+        // A thread with a correction in it: the loop the app is built on.
+        'chat-correction': () => `
+          <div class="screen">
+            ${status(false)}
+            ${header()}
+            <div class="thread">
+              <div class="day">${esc(s.today)}</div>
+              ${text('theirs', '¿Qué hiciste ayer?', '09:12')}
+              ${text('mine', 'Ayer voy a la playa con mi hermana.', '09:14')}
+              <div class="correction" dir="ltr">
+                <span class="correction-label" dir="auto">${esc(s.correctionFrom.replace('{name}', 'Lucía'))}</span>
+                <span class="correction-original">Ayer <del>voy</del> a la playa con mi hermana.</span>
+                <span class="correction-text">Ayer <b>fui</b> a la playa con mi hermana.</span>
+                <span class="correction-note">«Ayer» pide el pasado: fui, no voy.</span>
+                ${meta('09:15', false)}
+              </div>
+              ${text('mine', '¡Gracias! Fui a la playa con mi hermana.', '09:16')}
+            </div>
+            ${composer()}
+          </div>`,
+
+        // The preview after a photo is taken: three ways to send it, and the plane.
+        camera: () => `
+          <div class="screen camera">
+            ${status(true)}
+            <div class="frame">
+              ${window.PHOTO}
+              <div class="cam-top"><span class="round">${glyph(ICON.x, 22)}</span><span></span></div>
+              <div class="cam-bottom">
+                <div class="modes">
+                  <span class="mode on"><span class="label">${esc(s.modeOnce)}</span></span>
+                  <span class="mode"><span class="label">${esc(s.modeReplay)}</span></span>
+                  <span class="mode"><span class="label">${esc(s.modeKeep)}</span></span>
+                </div>
+                <span class="send">${glyph(ICON.send, 24)}</span>
+              </div>
+            </div>
+          </div>`,
+
+        // The other side of it: one view-once photo opened, a newer one waiting.
+        'camera-chat': () => `
+          <div class="screen">
+            ${status(false)}
+            ${header()}
+            <div class="thread">
+              <div class="day">${esc(s.today)}</div>
+              ${text('theirs', '¡Hola! ¿Cómo estás?', null, false)}
+              ${text('theirs', '¿Qué tal el fin de semana?', '09:12')}
+              ${text('mine', 'Muy bien. Estoy en la playa con mi hermana.', '09:14')}
+              ${card(
+                'theirs',
+                `<span class="call-icon used">${glyph(ICON.camera, 17)}</span>
+                 <span class="call-text">
+                   <span class="call-title used">${esc(s.photo)}</span>
+                   <span class="call-detail">${esc(s.opened)}</span>
+                 </span>`,
+                '09:20',
+              )}
+              ${text('theirs', '¡Mi gato te saluda!', null, false)}
+              ${card(
+                'theirs',
+                `<span class="call-icon live">${glyph(ICON.camera, 17)}</span>
+                 <span class="call-text">
+                   <span class="call-title">${esc(s.photo)}</span>
+                   <span class="view-action">${esc(s.tapToView)}</span>
+                 </span>`,
+                '09:22',
+              )}
+            </div>
+            ${composer()}
+          </div>`,
+      }
+
+      document.getElementById('root').innerHTML = screens[screen]()
+
+      /*
+       * The mode labels are numberOfLines={2} with adjustsFontSizeToFit and a
+       * minimumFontScale of 0.85: a long label shrinks a little, then takes a
+       * second line. Shrink each until it fits two, as the app does.
+       */
+      for (const label of document.querySelectorAll('.mode .label')) {
+        let size = 13
+        const lines = () => Math.round(label.getBoundingClientRect().height / Math.ceil(size * 1.25))
+        label.style.lineHeight = `${Math.ceil(size * 1.25)}px`
+        while (lines() > 2 && size > 13 * 0.85) {
+          size = Math.max(13 * 0.85, size - 0.25)
+          label.style.fontSize = `${size}px`
+          label.style.lineHeight = `${Math.ceil(size * 1.25)}px`
+        }
+      }
+    </script>
+  </body>
+</html>

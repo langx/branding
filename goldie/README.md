@@ -19,13 +19,19 @@ langx.io, in `../marketing/2.x/screens/` — handed to goldie's frame step as if
 they were captures. Replace them with real captures when there are some and
 re-run; the composition does not change.
 
+2.9's screens (shots 9 and 10) are the exception in one way: the site has no
+call or camera screen, so `screens/` draws them from the app's own source and
+renders them **once per language**, every string read out of the app's locale
+files. See *The 2.9 screens* below.
+
 ## Output
 
 ```
 out/screenshots/<device>/<locale>/01-discover.png … 08-me.png
 ```
 
-then `publish.mjs` copies each strip to its slot:
+then `publish.mjs` copies each strip to its slot (on Play's slots, the first
+eight; the ninth and tenth go to `<slot>-extra/`, since Play takes eight):
 
 | Device key         | Slot under `../2.x/<locale>/` | Size        |
 | ------------------ | ----------------------------- | ----------- |
@@ -45,6 +51,9 @@ step run here; the bezel follows the platform.
 
 `feature.mjs` draws the one asset goldie cannot: Play's 1024 × 500 feature
 graphic, a landscape banner with the lockup on it, one per locale.
+`play-feature.mjs` draws its successor, one file with no words for every
+listing, and `creative.mjs` the App Store's two creative assets per locale —
+both described in `../2.x/README.md`.
 
 ## The tile, and the squat slots
 
@@ -56,7 +65,7 @@ which is right for a panorama and wrong here: on a squat tile the bezel ran off
 both sides. `frame.mjs` scales each layout's device by the same clamp the copy
 gets, so every slot is the one composition at its own size.
 
-## The eight shots
+## The ten shots
 
 | #   | Screen         | Ground | Layout       |
 | --- | -------------- | ------ | ------------ |
@@ -68,6 +77,8 @@ gets, so every slot is the one composition at its own size.
 | 6   | Feed, dark     | ink    | tilt-right   |
 | 7   | Discover, dark | ink    | hero         |
 | 8   | Me             | yellow | hero         |
+| 9   | Incoming call  | white  | duo, with the call's thread behind |
+| 10  | Chat camera    | yellow | duo, with two view-once rows behind |
 
 The layouts are goldie's, from its `src/layouts.ts`. Two are chosen for a
 reason rather than for rhythm: the token screen is `classic`, the one layout
@@ -81,6 +92,36 @@ grounds. The type is the brand's: Nunito ExtraBold for the headline, Nunito
 Regular for the line under it, Noto Sans Arabic for the Arabic. The fonts are
 in `fonts/`, with their OFL notices, so the render needs nothing installed.
 
+## The 2.9 screens
+
+`screens/screens.html` draws five screens at the app's own 390 × 844 —
+the incoming call, its thread, the chat camera's preview, the view-once thread,
+and a thread with a correction (for the Play feature graphic) — from the values
+in `apps/mobile` in `langx/langx`: `CallHost.tsx`, `chat-camera.tsx`,
+`ChatScreen.tsx`, `MessageBubble.tsx` and the theme's `tokens.ts`. Icons are
+Feather, the app's own icon font (`fonts/Feather.ttf`, MIT, notice beside it).
+The face is the site's AI-generated Lucía (`screens/lucia.webp`); the photo in
+the camera is drawn (`screens/photo.svg`), so no real picture is in a shot.
+
+`screens/render.mjs` renders them at 3× in headless Chromium, once per locale,
+into `../marketing/2.x/screens/<locale>/`. **No word on them is written
+here**: each is read at render time from `apps/mobile/src/i18n/messages/` in a
+`langx/langx` checkout — the sibling `../../langx` by default, or
+`LANGX_DIR` — and the run stops on a key the checkout lacks rather than fall
+back to English. Arabic is rendered right to left.
+
+Three things in the pipeline exist for them:
+
+- **Per-locale capture records.** `manifest.mjs` cuts a scene's
+  `screens/<locale>/<id>.png` when there is one, and writes each locale its own
+  record under `out/locales/<locale>/`, which `frame.mjs` points goldie at.
+  Scenes with one render for every language are unaffected.
+- **`behind: true`** marks a scene that is only ever the second screen of
+  another scene's duo. goldie needs it declared, but it is never a shot and
+  takes no number.
+- **`mirrorRtl: true`** turns a scene's layout left for right in Arabic, so a
+  duo whose screens are mirrored is mirrored with them.
+
 ## Running it
 
 Node 20+ and ffmpeg on the PATH (goldie strips the alpha channel with it —
@@ -89,8 +130,12 @@ the App Store rejects screenshots that carry one).
 ```
 cd goldie
 npm install
+npx playwright-core install chromium-headless-shell   # once, for screens/
+npm run screens    # the 2.9 screens, from the app's strings (LANGX_DIR)
 npm run all        # manifest.mjs, frame.mjs, then publish.mjs
-node feature.mjs   # the Play feature graphic, when the screen in it changes
+npm run creative   # the App Store creative assets (after manifest.mjs)
+npm run play-feature  # the language-free Play feature graphic
+node feature.mjs   # the per-language Play feature graphic, when its screen changes
 npm run studio     # goldie's studio at http://localhost:4321
 ```
 
@@ -120,9 +165,10 @@ other half, and it holds the slots and their sizes.
 
 ## What to know before uploading
 
-- **Screens are English in every language**: the site the renders come from is
-  English, so only the headline and the line under it are translated. Shooting
-  the app in each language is the fix, and it comes with real captures.
+- **Shots 1–8 are English in every language**: the site the renders come from
+  is English, so only the headline and the line under it are translated.
+  Shooting the app in each language is the fix, and it comes with real
+  captures. Shots 9 and 10 are localized.
 - **The Play set shows an iOS status bar** — 9:41, the Dynamic Island cutout —
   inside a Pixel bezel, because the screens are iPhone renders. The set it
   replaced had the same status bar on its Android canvases and Play has not

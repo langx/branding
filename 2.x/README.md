@@ -1,6 +1,6 @@
 # 2.x — store artwork
 
-Eight shots, every slot both stores actually take an upload for, in the eight
+Ten shots, every slot both stores actually take an upload for, in the eight
 languages the app speaks. One template throughout: each screen in a device
 bezel — an iPhone 17 Pro on the App Store slots, a Pixel 10 Pro on Play's — on
 the brand ground, under a headline and one line of support copy.
@@ -9,7 +9,8 @@ The watch is the exception to all of that and has its own section below: real
 captures, no bezel, no headline, because its canvas is the size of the display.
 
 **Read this before you upload.** The screen inside every shot is rendered from
-the phone components on langx.io, not captured from a build on a device. It is
+the phone components on langx.io (shots 1–8) or from the app's own values and
+strings (shots 9 and 10, below), not captured from a build on a device. It is
 the app's own markup at the app's own sizes, so it matches what a person sees —
 but it is a recreation, and both stores ask for the app in use. Treat it as the
 set to ship now and replace shot for shot as real captures are taken; the
@@ -35,8 +36,8 @@ there.
 The iPad set is not optional: `apps/mobile/app.config.ts` sets
 `ios.supportsTablet`, so the listing has an iPad tab to fill. One set fills it.
 App Store Connect's 13" slot accepts 2064 × 2752 **and** 2048 × 2732, so
-`ios/13/` and `ios/12.9/` both resolve to it — send both and sixteen images
-arrive at a slot that holds ten, six of them silently dropped, in every
+`ios/13/` and `ios/12.9/` both resolve to it — send both and twenty images
+arrive at a slot that holds ten, ten of them silently dropped, in every
 language. Send `ios/13/` and 12.9", 10.5" and 9.7" are derived from it.
 
 The 1024 × 1024 app icon is `../brand/icon/default.png`.
@@ -96,9 +97,44 @@ here and no way to make one.
 | `android/phone/1..8.png`        | 1440 × 3120 | Phone           |
 | `android/7tablet/1..8.png`      | 1200 × 1920 | 7" tablet       |
 | `android/10tablet/1..8.png`     | 1600 × 2560 | 10" tablet      |
-| `android/feature-graphic.png`   | 1024 × 500  | Feature graphic |
+| `android/<slot>-extra/9..10.png`| as its slot | not uploaded — see below |
+| `../android-feature-graphic.png`| 1024 × 500  | Feature graphic, every language — see below |
+| `android/feature-graphic.png`   | 1024 × 500  | the earlier, per-language one |
 | `icon-512.png`                  | 512 × 512   | App icon        |
 | `android/wear/1..2.png`         | 384 × 384   | Wear OS — see below |
+
+**Play takes eight a slot, and the set has ten.** Shots 9 and 10 are drawn
+for Play too, but they sit beside each slot in `<slot>-extra/` rather than in
+it: the Play lane uploads every file in a slot, and a ninth is refused. They
+are there to swap in for two of the eight when that is the choice, under
+their own numbers.
+
+### The feature graphic, one for every listing
+
+`android-feature-graphic.png`, at the root of this folder, is the banner at the
+top of the Play listing: 1024 × 500, opaque RGB, and **no words** except the
+lockup, so one file serves all thirteen of Play's listings, the ones with no
+artwork of their own included. It replaces the v1 "languageXchange" banner.
+
+It is drawn around how Play shows it, which is why it is not the per-language
+`android/feature-graphic.png` beside the shots:
+
+- On a desktop, Play lays the title, rating and Install button over the **left
+  ~45%** behind a dark gradient. The per-language banner puts its headline
+  exactly there. This one keeps that half bare yellow.
+- On a phone, with a promo video set (ours is), Play puts a round play button
+  over the **centre**. Nothing is under it: no face, no control.
+- Everything that matters is inside a 10% margin on every edge.
+
+What is in it: the lockup in the upper area, right of the half Play covers;
+then two phones in the **Pixel 10 Pro** bezel the Play shots use — a chat with
+a correction in it behind, and 2.9's incoming call in front. The screens are
+the English renders; at this size their text is texture, not reading.
+`../goldie/play-feature.mjs` draws it.
+
+`collect-play-screenshots.mjs` in `langx/langx` still sends the per-language
+`android/feature-graphic.png`. Until it is pointed at this file instead, upload
+this one by hand to each listing.
 
 The tablet folders are what stops Play marking the listing phone-only. Both
 carry the same phone screens on a tablet canvas, because there is no tablet
@@ -143,8 +179,9 @@ takes six of them, the same way it does for the phone shots.
 `en · tr · es · ru · ar · fr · de · pt-BR`, one folder each, same eight shots
 in the same order.
 
-**Only the headline and the line under it are translated.** The screen inside
-stays English, because the screens come from the site and the site is English.
+**In shots 1–8 only the headline and the line under it are translated.** The
+screen inside stays English, because those screens come from the site and the
+site is English.
 That is the normal shape of a localized listing and better than nothing, but a
 Turkish visitor still sees an English UI in the picture. Shooting the app in
 each language is the fix, and it comes with the real captures.
@@ -154,10 +191,13 @@ localization and it is shown to whoever reads the store in that language. Play
 also has *custom store listings*, which can be targeted by country — a separate
 feature, and these files work there too.
 
+Shots 9 and 10 are the exception: their screens are localized for real, every
+word on them read out of the app's own locale files (below).
+
 None of this copy has been read by a native speaker except the Turkish. Have
 each one checked; a headline is the most-read sentence in a listing.
 
-## The eight shots
+## The ten shots
 
 | #   | Screen         | Ground | Layout                         | English headline            |
 | --- | -------------- | ------ | ------------------------------ | --------------------------- |
@@ -169,6 +209,8 @@ each one checked; a headline is the most-read sentence in a listing.
 | 6   | Feed, dark     | ink    | tilt-right                     | Ask when you're stuck       |
 | 7   | Discover, dark | ink    | hero                           | Or whoever is online now    |
 | 8   | Me             | yellow | hero                           | A streak worth keeping      |
+| 9   | Incoming call  | white  | duo, the thread it came from behind | Call your partner      |
+| 10  | Chat camera    | yellow | duo, two view-once rows behind | Seen once, then gone        |
 
 Three acts: yellow opens, three light screens carry the loop, four dark ones
 are the app after hours, yellow closes. Every headline is a claim
@@ -201,6 +243,88 @@ Four things are decided here rather than only drawn:
 Apple's own note in Media Manager is worth keeping in mind: only the **first
 three** are used on the app installation sheets. Shots 1–3 have to carry the
 listing on their own.
+
+### Shots 9 and 10: 2.9's calls and chat camera
+
+Added on 2026-10-06 for 2.9, after the eight rather than among them, so the
+eight the stores already hold keep their numbers and order. Ten is what an App
+Store slot holds, so the iPhone and iPad slots are now full. If calls should
+reach the installation sheet, that is a reorder — moving 9 into the first
+three — and a decision about the set, not something these files assume.
+
+| #   | Front phone                                   | Behind it                                         |
+| --- | --------------------------------------------- | ------------------------------------------------- |
+| 9   | An incoming video call from Lucía, ringing: Decline, Answer, Answer without camera | Her thread, with the row an earlier call left (Incoming video call · 14:32 · Call back) and the call button in the header |
+| 10  | The chat camera's preview after a photo: View once, Allow replay, Keep in chat, and the send button | The other side: one view-once photo Opened, a newer one waiting with Tap to view |
+
+**These screens are not the site's.** langx.io has no call or camera screen to
+render, so `../goldie/screens/screens.html` draws them from the app's own
+source — `CallHost.tsx`, `chat-camera.tsx`, `ChatScreen.tsx` and
+`MessageBubble.tsx` in `langx/langx`: the same sizes, the theme's colours,
+Nunito where the app sets it and the platform face where it does not, and
+Feather, the app's icon font, for every glyph. And **every word on them comes
+from the app's locale files** for that language, read at render time — so the
+Turkish shot says "Gelen görüntülü arama" because the app does. The Spanish in
+the threads is the conversation itself, demonstration data like the names and
+the 9:41.
+
+Two things in them are drawn rather than captured: the photo in the camera is
+an illustrated sunset (`screens/photo.svg`), so no one's real picture is in a
+store shot, and the face is the same AI-generated Lucía as in shots 1–8.
+
+**Arabic is mirrored, screen and composition both.** The screens are right to
+left, as the app is in Arabic, so the two duos are turned round there as well —
+otherwise the half of each thread that matters would sit behind the front
+phone. Shot 5's duo is not turned: its screens are the English renders.
+Their Arabic copy ends in an invisible U+200F, because goldie sets type on a
+left-to-right canvas and would otherwise draw a closing full stop at the wrong
+end of the line. Shots 1–8 do not have it, and their Arabic support lines show
+that stray stop; they are left as they are here, and re-running them with the
+mark is the fix.
+
+The copy:
+
+| Locale | 9 headline / support line | 10 headline / support line |
+| ------ | ------------------------- | -------------------------- |
+| en     | Call your partner / Voice and video, right from the chat. Free for everyone. | Seen once, then gone / Tap for a photo, hold for a video. Send it as View once. |
+| tr     | Pratik arkadaşını ara / Sesli ve görüntülü, doğrudan sohbetten. Herkese ücretsiz. | Bir kez görülür, sonra kaybolur / Fotoğraf için dokun, video için basılı tut. Bir kez görüntüle olarak gönder. |
+| es     | Llama a quien practica contigo / Voz y vídeo desde el propio chat. Gratis para todos. | Se ve una vez y desaparece / Toca para foto, mantén para vídeo. Envíalo como Ver una vez. |
+| ru     | Позвоните партнёру / Аудио и видео прямо из чата. Бесплатно для всех. | Один раз — и всё / Нажмите — фото, удерживайте — видео. Отправьте как «Один просмотр». |
+| ar     | اتصل بشريكك / صوت وفيديو من داخل الدردشة مباشرةً. مجانًا للجميع. | يُشاهَد مرة ثم يختفي / اضغط لصورة، واضغط مطولًا لفيديو، وأرسلها بخيار عرض مرة واحدة. |
+| fr     | Appelle ton partenaire / Voix et vidéo, directement depuis la discussion. Gratuit pour tous. | Vue une fois, puis disparue / Touche pour une photo, maintiens pour une vidéo. Envoie-la en Voir une fois. |
+| de     | Ruf deine Übungspartner an / Sprach- und Videoanrufe direkt aus dem Chat. Kostenlos für alle. | Einmal gesehen, dann weg / Tippen für Foto, halten für Video. Als „Einmal ansehen“ senden. |
+| pt-BR  | Ligue para quem pratica com você / Voz e vídeo direto da conversa. Grátis para todo mundo. | Vista uma vez, depois some / Toque para foto, segure para vídeo. Envie como Ver uma vez. |
+
+"Free for everyone" is true on every plan — calls are not a plan limit
+(`CALL_LIMITS` in `packages/shared`) — and it is the claim 2.9's promotional
+text makes. The camera's support lines use the app's own words for the gesture
+and the mode, so the shot and the button under the reader's thumb say the same
+thing. As with the rest, only the Turkish has been read by a native speaker.
+
+## Creative assets (App Store, iOS 27)
+
+`<locale>/ios/creative/`, one pair per language:
+
+| File          | Size        | App Store Connect slot           |
+| ------------- | ----------- | -------------------------------- |
+| `header.png`  | 3840 × 1646 | Product page header (21:9)       |
+| `search.png`  | 3840 × 2560 | Search results (3:2)             |
+
+Both are opaque RGB PNG, well under 5 MB. Neither is a screenshot and Apple
+asks them to carry the app's value and brand rather than its interface, so each
+is the lockup and **one line** on the yellow ground, with two of 2.9's phones —
+the call in front, the camera behind — as the picture, not the subject.
+
+- **Header:** the line is the store subtitle the listing already carries in
+  every language, "Practice with real people". The banner is cropped on
+  narrower screens, so the lockup and the line sit inside the middle 70% across
+  and 76% down; only the phones run past it.
+- **Search:** the line is 2.9's promotional text cut to its first clause, "Call
+  the people you practice with", set large and centred, because the card is
+  seen small.
+
+No prices, no rankings, no other app's name. Arabic mirrors both.
+`../goldie/creative.mjs` draws them.
 
 ## The composition
 

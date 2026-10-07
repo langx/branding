@@ -25,6 +25,13 @@ The Me screen is rendered with its "Badges — coming back soon" row hidden.
 Badges are not in 2.0's first release and a picture is not the place to promise
 one.
 
+`screens/<locale>/` holds 2.9's screens, one set per language: the incoming
+call and its thread, the chat camera's preview and the view-once thread, and a
+thread with a correction. They are not the site's — langx.io has no call or
+camera screen — but drawn from the app's own source and strings by
+`../../goldie/screens/`, which says how. Store shots 9 and 10 and the creative
+assets are cut from them.
+
 ## `social/`
 
 English and Turkish, six posts each:

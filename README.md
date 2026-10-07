@@ -28,7 +28,7 @@ per screen, no card layer.
 | [`brand/tokens.json`](brand/tokens.json), [`brand/tokens.css`](brand/tokens.css) | the palette, type and spacing, machine-readable |
 | [`brand/print.md`](brand/print.md) | ink builds, clear space, minimum sizes, cards and stickers |
 | [`design/`](design/) | the mockups — every screen of the app as a clickable prototype, and the print pieces as export-ready files |
-| [`2.x/`](2.x/) | store artwork — eight shots in eight languages, at every size both stores take an upload for |
+| [`2.x/`](2.x/) | store artwork — ten shots in eight languages, at every size both stores take an upload for, plus the App Store creative assets and the Play feature graphic |
 | [`goldie/`](goldie/) | how that set is made: the goldie config, the slot sizes and the scripts that render them |
 | [`marketing/2.x/`](marketing/2.x/) | app screens, social posts and the preview video |
 | [`archive/`](archive/) | v1. Kept because a press kit is also a record |
