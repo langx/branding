@@ -72,16 +72,38 @@ const fitToTile = (device) => {
 };
 
 const cfg = await loadConfig(join(here, "goldie.config.ts"));
-const shots = cfg.scenes.filter((s) => s.kind === "screenshot");
+// A `behind` scene is only ever drawn behind another one's device, so it is
+// never rendered as a shot and takes no number.
+const shots = cfg.scenes.filter((s) => s.kind === "screenshot" && !s.behind);
 const order = shots.map((s) => s.id);
 
-const groups = new Map();
-for (const scene of shots) {
-  const ground = scene.background ?? cfg.theme.background;
-  if (!COPY[ground]) throw new Error(`No copy colours for ground ${ground} (scene "${scene.id}")`);
-  if (!groups.has(ground)) groups.set(ground, []);
-  groups.get(ground).push(scene);
-}
+// Right-to-left locales. A scene marked `mirrorRtl` has a localized screen,
+// which is itself mirrored there, so its layout is turned round to match.
+const RTL = new Set(["ar"]);
+
+/** The passes for one locale: one per ground, and one more per ground for mirrored scenes. */
+const passesFor = (locale) => {
+  const groups = new Map();
+  for (const scene of shots) {
+    const ground = scene.background ?? cfg.theme.background;
+    if (!COPY[ground]) throw new Error(`No copy colours for ground ${ground} (scene "${scene.id}")`);
+    const mirror = RTL.has(locale) && scene.mirrorRtl === true;
+    const key = `${ground}${mirror ? " rtl" : ""}`;
+    if (!groups.has(key)) groups.set(key, { ground, mirror, scenes: [] });
+    groups.get(key).scenes.push(scene);
+  }
+  return [...groups.values()];
+};
+
+/** Turns every layout left for right, and back. Passes run one at a time, so this is safe. */
+const mirrorLayouts = () => {
+  for (const layout of Object.values(LAYOUTS)) {
+    for (const device of layout.devices) {
+      device.x = 1 - device.x;
+      device.rotate = -device.rotate;
+    }
+  }
+};
 
 const only = (name) => {
   const i = process.argv.indexOf(`--${name}`);
@@ -99,17 +121,23 @@ for (const device of devices) {
     const staging = join(cfg.outDir, ".staging", device, locale);
     await rm(staging, { recursive: true, force: true });
     await mkdir(staging, { recursive: true });
+    await mkdir(outDir, { recursive: true });
 
-    for (const [ground, scenes] of groups) {
-      // A duo layout borrows another scene's capture; it may sit in a
-      // different group, so every scene stays in the pass and only the
-      // ones on this ground are rendered.
+    for (const { ground, mirror, scenes } of passesFor(locale)) {
+      // Only the scenes on this ground are rendered. A duo's second screen
+      // comes from the capture record, not from the pass, so it need not be
+      // in it. The record is the locale's own (manifest.mjs), since some
+      // screens are rendered per language.
       const pass = {
         ...cfg,
+        outDir: join(cfg.outDir, "locales", locale),
         theme: { ...cfg.theme, background: ground, ...COPY[ground] },
         scenes: cfg.scenes.filter((s) => s.kind !== "screenshot" || scenes.includes(s)),
       };
-      const files = await renderScreenshots(pass, device, locale);
+      if (mirror) mirrorLayouts();
+      const files = await renderScreenshots(pass, device, locale).finally(() => {
+        if (mirror) mirrorLayouts();
+      });
       for (const file of files) {
         // goldie numbers by position within the pass; renumber by store order.
         const id = basename(file).replace(/^\d+-/, "").replace(/\.png$/, "");

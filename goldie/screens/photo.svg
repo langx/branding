@@ -1,0 +1,118 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1600" preserveAspectRatio="xMidYMid slice">
+  <!--
+    The picture in the camera preview: a sunset over the sea, drawn rather than
+    photographed, so nothing in the shot is somebody's real photo. 9:16, the
+    shape the chat camera takes it in. Grain and a soft lens blur sell it as a
+    phone picture at the size it is seen.
+  -->
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1b2550" />
+      <stop offset="0.28" stop-color="#3f3a75" />
+      <stop offset="0.5" stop-color="#9a4f7e" />
+      <stop offset="0.68" stop-color="#e2717a" />
+      <stop offset="0.84" stop-color="#f6a25e" />
+      <stop offset="1" stop-color="#ffd58c" />
+    </linearGradient>
+    <linearGradient id="sea" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#e9925f" />
+      <stop offset="0.18" stop-color="#a95a6e" />
+      <stop offset="0.55" stop-color="#4a3766" />
+      <stop offset="1" stop-color="#1c1f3d" />
+    </linearGradient>
+    <linearGradient id="sand" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#5a3d45" />
+      <stop offset="1" stop-color="#2a1d24" />
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#fff2c4" stop-opacity="0.95" />
+      <stop offset="0.25" stop-color="#ffc36f" stop-opacity="0.55" />
+      <stop offset="1" stop-color="#ff8a5c" stop-opacity="0" />
+    </radialGradient>
+    <radialGradient id="sun" cx="0.5" cy="0.45" r="0.55">
+      <stop offset="0" stop-color="#fffbe8" />
+      <stop offset="0.7" stop-color="#ffe7a6" />
+      <stop offset="1" stop-color="#ffc56b" />
+    </radialGradient>
+    <linearGradient id="path" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffe2a0" stop-opacity="0.95" />
+      <stop offset="1" stop-color="#ffb070" stop-opacity="0" />
+    </linearGradient>
+    <radialGradient id="vignette" cx="0.5" cy="0.48" r="0.75">
+      <stop offset="0.6" stop-color="#000" stop-opacity="0" />
+      <stop offset="1" stop-color="#000" stop-opacity="0.45" />
+    </radialGradient>
+    <filter id="soft" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="14" />
+    </filter>
+    <filter id="haze" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" />
+    </filter>
+    <filter id="grain">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="7" />
+      <feColorMatrix type="saturate" values="0" />
+      <feComponentTransfer>
+        <feFuncA type="table" tableValues="0 0.16" />
+      </feComponentTransfer>
+    </filter>
+  </defs>
+
+  <rect width="900" height="940" fill="url(#sky)" />
+
+  <!-- Cloud bands, lit from below. -->
+  <g filter="url(#soft)" opacity="0.8">
+    <ellipse cx="220" cy="420" rx="320" ry="34" fill="#c76383" />
+    <ellipse cx="700" cy="360" rx="280" ry="28" fill="#b65c86" />
+    <ellipse cx="560" cy="560" rx="360" ry="26" fill="#f08a78" />
+    <ellipse cx="160" cy="640" rx="260" ry="20" fill="#f7a273" />
+    <ellipse cx="760" cy="700" rx="220" ry="16" fill="#ffb878" />
+  </g>
+
+  <circle cx="520" cy="860" r="300" fill="url(#glow)" />
+  <circle cx="520" cy="872" r="62" fill="url(#sun)" />
+
+  <!-- The headland on the left of the bay. -->
+  <path
+    d="M0 880 C 60 850, 120 820, 190 826 C 260 832, 330 890, 420 930 C 440 936, 450 938, 470 940 L 0 940 Z"
+    fill="#3a2440"
+    filter="url(#haze)"
+  />
+
+  <rect y="938" width="900" height="420" fill="url(#sea)" />
+  <!-- The sun's path on the water. -->
+  <g filter="url(#haze)">
+    <ellipse cx="520" cy="1040" rx="46" ry="140" fill="url(#path)" opacity="0.6" filter="url(#soft)" />
+    <g fill="#ffe0a0">
+      <ellipse cx="520" cy="955" rx="70" ry="4" opacity="0.9" />
+      <ellipse cx="505" cy="985" rx="58" ry="4" opacity="0.8" />
+      <ellipse cx="535" cy="1015" rx="64" ry="5" opacity="0.7" />
+      <ellipse cx="515" cy="1050" rx="50" ry="5" opacity="0.6" />
+      <ellipse cx="540" cy="1090" rx="56" ry="6" opacity="0.5" />
+      <ellipse cx="505" cy="1135" rx="44" ry="6" opacity="0.4" />
+      <ellipse cx="530" cy="1185" rx="40" ry="6" opacity="0.3" />
+    </g>
+    <g stroke="#f4b48a" stroke-width="3" opacity="0.35">
+      <line x1="40" y1="1000" x2="300" y2="1000" />
+      <line x1="640" y1="1030" x2="880" y2="1030" />
+      <line x1="90" y1="1080" x2="380" y2="1080" />
+      <line x1="620" y1="1130" x2="860" y2="1130" />
+      <line x1="30" y1="1190" x2="300" y2="1190" />
+    </g>
+  </g>
+
+  <!-- Wet sand, and the line the last wave left. -->
+  <path d="M0 1330 C 220 1290, 520 1300, 900 1270 L 900 1600 L 0 1600 Z" fill="url(#sand)" />
+  <path
+    d="M0 1330 C 220 1290, 520 1300, 900 1270"
+    fill="none"
+    stroke="#f7e3d2"
+    stroke-width="9"
+    opacity="0.55"
+    filter="url(#haze)"
+  />
+  <path d="M0 1345 C 260 1312, 560 1322, 900 1290 L 900 1420 C 560 1440, 260 1430, 0 1450 Z" fill="#b8806f" opacity="0.28" filter="url(#haze)" />
+  <ellipse cx="520" cy="1390" rx="120" ry="16" fill="#ffcf96" opacity="0.25" filter="url(#soft)" />
+
+  <rect width="900" height="1600" fill="url(#vignette)" />
+  <rect width="900" height="1600" filter="url(#grain)" />
+</svg>

@@ -1,5 +1,5 @@
 /**
- * goldie config for the 2.x store set: the eight shots of ../2.x/README.md,
+ * goldie config for the 2.x store set: the ten shots of ../2.x/README.md,
  * framed by goldie (https://github.com/kacperkapusciak/goldie) instead of
  * the flat card. The type is goldie's GoldieConfig (`import type
  * { GoldieConfig } from "goldie"` once node_modules is installed); it is not
@@ -313,6 +313,77 @@ const config = {
         "pt-BR": "Volte todo dia e veja a semana somar.",
       },
     },
+    // 2.9's two, after the eight rather than among them, so the set the
+    // stores already hold keeps its order. Their screens are localized
+    // (screens/render.mjs reads the app's own strings), so in Arabic the
+    // screen is right to left and `mirrorRtl` turns the duo round with it:
+    // otherwise the half of the thread that matters would sit behind the
+    // front phone. The Arabic lines end in U+200F: goldie sets copy on a
+    // left-to-right canvas, where a closing full stop is drawn at the wrong
+    // end of a right-to-left line, and the mark puts it back.
+    {
+      kind: "screenshot",
+      id: "calls",
+      flow: "calls",
+      background: WHITE,
+      layout: "duo",
+      secondScene: "calls-chat",
+      mirrorRtl: true,
+      headline: {
+        en: "Call your partner",
+        tr: "Pratik arkadaşını ara",
+        es: "Llama a quien practica contigo",
+        ru: "Позвоните партнёру",
+        ar: "اتصل بشريكك",
+        fr: "Appelle ton partenaire",
+        de: "Ruf deine Übungspartner an",
+        "pt-BR": "Ligue para quem pratica com você",
+      },
+      subhead: {
+        en: "Voice and video, right from the chat. Free for everyone.",
+        tr: "Sesli ve görüntülü, doğrudan sohbetten. Herkese ücretsiz.",
+        es: "Voz y vídeo desde el propio chat. Gratis para todos.",
+        ru: "Аудио и видео прямо из чата. Бесплатно для всех.",
+        ar: "صوت وفيديو من داخل الدردشة مباشرةً. مجانًا للجميع.\u200F",
+        fr: "Voix et vidéo, directement depuis la discussion. Gratuit pour tous.",
+        de: "Sprach- und Videoanrufe direkt aus dem Chat. Kostenlos für alle.",
+        "pt-BR": "Voz e vídeo direto da conversa. Grátis para todo mundo.",
+      },
+    },
+    {
+      kind: "screenshot",
+      id: "camera",
+      flow: "camera",
+      background: YELLOW,
+      layout: "duo",
+      secondScene: "camera-chat",
+      mirrorRtl: true,
+      headline: {
+        en: "Seen once, then gone",
+        tr: "Bir kez görülür, sonra kaybolur",
+        es: "Se ve una vez y desaparece",
+        ru: "Один раз — и всё",
+        ar: "يُشاهَد مرة ثم يختفي",
+        fr: "Vue une fois, puis disparue",
+        de: "Einmal gesehen, dann weg",
+        "pt-BR": "Vista uma vez, depois some",
+      },
+      subhead: {
+        en: "Tap for a photo, hold for a video. Send it as View once.",
+        tr: "Fotoğraf için dokun, video için basılı tut. Bir kez görüntüle olarak gönder.",
+        es: "Toca para foto, mantén para vídeo. Envíalo como Ver una vez.",
+        ru: "Нажмите — фото, удерживайте — видео. Отправьте как «Один просмотр».",
+        ar: "اضغط لصورة، واضغط مطولًا لفيديو، وأرسلها بخيار عرض مرة واحدة.\u200F",
+        fr: "Touche pour une photo, maintiens pour une vidéo. Envoie-la en Voir une fois.",
+        de: "Tippen für Foto, halten für Video. Als „Einmal ansehen“ senden.",
+        "pt-BR": "Toque para foto, segure para vídeo. Envie como Ver uma vez.",
+      },
+    },
+    // The threads drawn behind those two. `behind` makes a scene a capture
+    // only: it is never a shot of its own and takes no store number. goldie
+    // still needs it declared, because a duo may only borrow from a scene.
+    { kind: "screenshot", id: "calls-chat", flow: "calls-chat", behind: true, headline: { en: "" } },
+    { kind: "screenshot", id: "camera-chat", flow: "camera-chat", behind: true, headline: { en: "" } },
   ],
 };
 

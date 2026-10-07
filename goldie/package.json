@@ -8,10 +8,14 @@
     "frame": "node frame.mjs",
     "store": "node publish.mjs",
     "all": "node manifest.mjs && node frame.mjs && node publish.mjs",
+    "screens": "node screens/render.mjs",
+    "creative": "node creative.mjs",
+    "play-feature": "node play-feature.mjs",
     "studio": "goldie studio"
   },
   "devDependencies": {
     "@napi-rs/canvas": "^1.0.8",
-    "goldie": "^0.3.1"
+    "goldie": "^0.3.1",
+    "playwright-core": "^1.63.0"
   }
 }
