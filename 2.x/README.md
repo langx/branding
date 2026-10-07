@@ -276,11 +276,13 @@ store shot, and the face is the same AI-generated Lucía as in shots 1–8.
 left, as the app is in Arabic, so the two duos are turned round there as well —
 otherwise the half of each thread that matters would sit behind the front
 phone. Shot 5's duo is not turned: its screens are the English renders.
-Their Arabic copy ends in an invisible U+200F, because goldie sets type on a
-left-to-right canvas and would otherwise draw a closing full stop at the wrong
-end of the line. Shots 1–8 do not have it, and their Arabic support lines show
-that stray stop; they are left as they are here, and re-running them with the
-mark is the fix.
+goldie sets type on a left-to-right canvas, where a closing full stop (or a
+comma or dash a wrap leaves last on a line) is drawn at the wrong end of an
+Arabic line. `../goldie/rtl.mjs` puts an invisible U+200F after every
+punctuation mark in right-to-left copy before it is drawn, so the stop sits at
+the left end where an Arabic line finishes. It applies to every shot and to the
+per-language feature graphic, so all ten Arabic shots are right; the copy in
+`goldie.config.ts` carries no marks of its own.
 
 The copy:
 
