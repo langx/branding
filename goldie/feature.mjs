@@ -17,6 +17,7 @@ import { dirname, join } from "node:path";
 import { promisify } from "node:util";
 import { fileURLToPath } from "node:url";
 import { createCanvas, GlobalFonts, loadImage } from "@napi-rs/canvas";
+import { anchorRtl, RTL } from "./rtl.mjs";
 
 const run = promisify(execFile);
 
@@ -34,7 +35,6 @@ const YELLOW = "#ffc409";
 const HEADLINE = "#201900";
 const SUBHEAD = "#846604";
 const FAMILY = '"Nunito", "Noto Sans Arabic", sans-serif';
-const RTL = new Set(["ar"]);
 
 /** goldie's iPhone bezel, from its src/frame.ts. */
 const FRAME = {
@@ -105,8 +105,8 @@ for (const locale of config.locales) {
   // The copy column, mirrored for Arabic.
   const headlineFont = `700 ${HEADLINE_SIZE}px ${FAMILY}`;
   const subheadFont = `400 ${SUBHEAD_SIZE}px ${FAMILY}`;
-  const headline = wrap(ctx, shot.headline[locale], headlineFont, COLUMN);
-  const subhead = wrap(ctx, shot.subhead[locale], subheadFont, COLUMN);
+  const headline = wrap(ctx, anchorRtl(shot.headline[locale], locale), headlineFont, COLUMN);
+  const subhead = wrap(ctx, anchorRtl(shot.subhead[locale], locale), subheadFont, COLUMN);
   const height =
     LOCKUP_HEIGHT + 34 + headline.length * HEADLINE_SIZE * 1.08 + 14 + subhead.length * SUBHEAD_SIZE * 1.3;
   let y = (H - height) / 2;

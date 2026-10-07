@@ -318,9 +318,7 @@ const config = {
     // (screens/render.mjs reads the app's own strings), so in Arabic the
     // screen is right to left and `mirrorRtl` turns the duo round with it:
     // otherwise the half of the thread that matters would sit behind the
-    // front phone. The Arabic lines end in U+200F: goldie sets copy on a
-    // left-to-right canvas, where a closing full stop is drawn at the wrong
-    // end of a right-to-left line, and the mark puts it back.
+    // front phone.
     {
       kind: "screenshot",
       id: "calls",
@@ -344,7 +342,7 @@ const config = {
         tr: "Sesli ve görüntülü, doğrudan sohbetten. Herkese ücretsiz.",
         es: "Voz y vídeo desde el propio chat. Gratis para todos.",
         ru: "Аудио и видео прямо из чата. Бесплатно для всех.",
-        ar: "صوت وفيديو من داخل الدردشة مباشرةً. مجانًا للجميع.\u200F",
+        ar: "صوت وفيديو من داخل الدردشة مباشرةً. مجانًا للجميع.",
         fr: "Voix et vidéo, directement depuis la discussion. Gratuit pour tous.",
         de: "Sprach- und Videoanrufe direkt aus dem Chat. Kostenlos für alle.",
         "pt-BR": "Voz e vídeo direto da conversa. Grátis para todo mundo.",
@@ -373,7 +371,7 @@ const config = {
         tr: "Fotoğraf için dokun, video için basılı tut. Bir kez görüntüle olarak gönder.",
         es: "Toca para foto, mantén para vídeo. Envíalo como Ver una vez.",
         ru: "Нажмите — фото, удерживайте — видео. Отправьте как «Один просмотр».",
-        ar: "اضغط لصورة، واضغط مطولًا لفيديو، وأرسلها بخيار عرض مرة واحدة.\u200F",
+        ar: "اضغط لصورة، واضغط مطولًا لفيديو، وأرسلها بخيار عرض مرة واحدة.",
         fr: "Touche pour une photo, maintiens pour une vidéo. Envoie-la en Voir une fois.",
         de: "Tippen für Foto, halten für Video. Als „Einmal ansehen“ senden.",
         "pt-BR": "Toque para foto, segure para vídeo. Envie como Ver uma vez.",

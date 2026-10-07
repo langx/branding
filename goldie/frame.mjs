@@ -15,6 +15,7 @@ import { fileURLToPath } from "node:url";
 import { GlobalFonts } from "@napi-rs/canvas";
 import { DEVICES, LAYOUTS, loadConfig, renderScreenshots, verify } from "goldie";
 import "./devices.mjs";
+import { anchorRtl, RTL } from "./rtl.mjs";
 
 const here = dirname(fileURLToPath(import.meta.url));
 
@@ -77,9 +78,8 @@ const cfg = await loadConfig(join(here, "goldie.config.ts"));
 const shots = cfg.scenes.filter((s) => s.kind === "screenshot" && !s.behind);
 const order = shots.map((s) => s.id);
 
-// Right-to-left locales. A scene marked `mirrorRtl` has a localized screen,
-// which is itself mirrored there, so its layout is turned round to match.
-const RTL = new Set(["ar"]);
+// Right-to-left locales (rtl.mjs). A scene marked `mirrorRtl` has a localized
+// screen, which is itself mirrored there, so its layout is turned round to match.
 
 /** The passes for one locale: one per ground, and one more per ground for mirrored scenes. */
 const passesFor = (locale) => {
@@ -93,6 +93,16 @@ const passesFor = (locale) => {
     groups.get(key).scenes.push(scene);
   }
   return [...groups.values()];
+};
+
+/** A scene's copy for `locale` with its punctuation anchored right to left; see rtl.mjs. */
+const withCopy = (scene, locale) => {
+  if (!RTL.has(locale)) return scene;
+  const out = { ...scene };
+  for (const key of ["headline", "subhead"]) {
+    if (scene[key]?.[locale]) out[key] = { ...scene[key], [locale]: anchorRtl(scene[key][locale], locale) };
+  }
+  return out;
 };
 
 /** Turns every layout left for right, and back. Passes run one at a time, so this is safe. */
@@ -132,7 +142,9 @@ for (const device of devices) {
         ...cfg,
         outDir: join(cfg.outDir, "locales", locale),
         theme: { ...cfg.theme, background: ground, ...COPY[ground] },
-        scenes: cfg.scenes.filter((s) => s.kind !== "screenshot" || scenes.includes(s)),
+        scenes: cfg.scenes
+          .filter((s) => s.kind !== "screenshot" || scenes.includes(s))
+          .map((s) => withCopy(s, locale)),
       };
       if (mirror) mirrorLayouts();
       const files = await renderScreenshots(pass, device, locale).finally(() => {
