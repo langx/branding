@@ -53,7 +53,14 @@ step run here; the bezel follows the platform.
 graphic, a landscape banner with the lockup on it, one per locale.
 `play-feature.mjs` draws its successor, one file with no words for every
 listing, and `creative.mjs` the App Store's two creative assets per locale —
-both described in `../2.x/README.md`.
+both described in `../2.x/README.md`. Those two are not canvas drawings:
+`covers/covers.mjs` writes each cover as HTML and photographs it in headless
+Chromium (the same playwright-core as `screens/`), which is what gives the
+scene its perspective, its shadows and the app's own type; `covers/covers.css`
+is the shared look. The words on the floating cards are read from the app's
+locale files, so the run needs a langx/langx checkout (`LANGX_DIR`, as for
+`screens/`), and the two portraits beside it are the site's AI-generated
+Lucía and Javier.
 
 ## The tile, and the squat slots
 
@@ -133,7 +140,7 @@ npm install
 npx playwright-core install chromium-headless-shell   # once, for screens/
 npm run screens    # the 2.9 screens, from the app's strings (LANGX_DIR)
 npm run all        # manifest.mjs, frame.mjs, then publish.mjs
-npm run creative   # the App Store creative assets (after manifest.mjs)
+npm run creative   # the App Store creative assets (needs LANGX_DIR, like screens/)
 npm run play-feature  # the language-free Play feature graphic
 node feature.mjs   # the per-language Play feature graphic, when its screen changes
 npm run studio     # goldie's studio at http://localhost:4321

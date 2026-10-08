@@ -1,0 +1,97 @@
+/*
+ * The three covers' shared visual language. One warm light from the top-left:
+ * every shadow falls down and to the right in a warm ink mixed from the
+ * yellow shade, never black. One scene: a tilted phone and the app's own
+ * surfaces lifted off it, each on its own depth (--d scales the shadow pair,
+ * so the nearest card throws the longest, softest shadow).
+ *
+ * __FONTS__ is replaced with the fonts folder's file URL by covers.mjs.
+ */
+@font-face { font-family: 'Nunito'; font-weight: 800; src: url('__FONTS__/Nunito-ExtraBold.ttf'); }
+@font-face { font-family: 'Nunito'; font-weight: 400; src: url('__FONTS__/Nunito-Regular.ttf'); }
+@font-face { font-family: 'Noto Sans Arabic'; font-weight: 100 900; src: url('__FONTS__/NotoSansArabic.ttf'); }
+@font-face { font-family: 'Feather'; src: url('__FONTS__/Feather.ttf'); }
+
+:root {
+  --yellow: #ffc409; --shade: #e0ac08; --ink-on-yellow: #201900; --ink-muted: rgba(32, 25, 0, 0.62);
+  --ink: #17191c; --dark: #1c1f24; --white: #fff; --muted: #62676d; --dark-muted: #9aa1a9; --dark-text: #f2f3f5;
+  --blue: #3b6cf6; --green: #009f70; --green-bg: #e2f6ee; --red: #e5484d;
+  --display: 'Nunito', 'Noto Sans Arabic', sans-serif;
+  --body: -apple-system, 'Helvetica Neue', 'Noto Sans Arabic', Arial, sans-serif;
+  --warm: 88, 60, 0;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; overflow: hidden; background: var(--yellow); font-family: var(--display); color: var(--ink-on-yellow); -webkit-font-smoothing: antialiased; }
+html[lang='ar'] { --display: 'Noto Sans Arabic', 'Nunito', sans-serif; }
+body { position: relative; }
+
+/* Ground: brand yellow, a light pool top-left, the brand shade pooling bottom-right. Two brand colours, nothing else. */
+.ground { position: absolute; inset: 0; background:
+  radial-gradient(120% 90% at 12% 0%, rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0) 55%),
+  radial-gradient(90% 80% at 92% 110%, var(--shade), rgba(224, 172, 8, 0) 62%),
+  var(--yellow); }
+html[dir='rtl'] .ground { background:
+  radial-gradient(120% 90% at 88% 0%, rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0) 55%),
+  radial-gradient(90% 80% at 8% 110%, var(--shade), rgba(224, 172, 8, 0) 62%),
+  var(--yellow); }
+/* The mark's two arcs, very large and faint, behind the scene. They stay black and white, as the brand rule says. */
+.arcs { position: absolute; pointer-events: none; }
+.arcs .k { fill: #000; opacity: 0.04; }
+.arcs .w { fill: #fff; opacity: 0.18; }
+
+.stage { position: absolute; inset: 0; perspective: 2600px; perspective-origin: 50% 40%; }
+.plane { position: absolute; transform-style: preserve-3d; }
+
+/* iPhone 17 Pro bezel (606x1252); the cutout is x24 y21 w557 h1210 r82. Scaled with transform so the numbers stay literal. */
+.phone { position: absolute; width: 606px; height: 1252px; transform-origin: 50% 50%;
+  filter: drop-shadow(34px 54px 44px rgba(var(--warm), 0.40)) drop-shadow(6px 10px 12px rgba(var(--warm), 0.16)); }
+.phone .screen { position: absolute; left: 24px; top: 21px; width: 557px; height: 1210px; border-radius: 82px; overflow: hidden; background: #121318; }
+.phone .screen img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.014); display: block; } /* hides the render's 6px drawn edge */
+.phone .bezel { position: absolute; inset: 0; width: 606px; height: 1252px; display: block; }
+
+/* Pixel 10 Pro bezel (1410x2968); cutout x59 y60 w1280 h2856 r178. */
+.pixel { position: absolute; width: 1410px; height: 2968px; transform-origin: 50% 50%;
+  filter: drop-shadow(80px 120px 100px rgba(var(--warm), 0.40)); }
+.pixel .screen { position: absolute; left: 59px; top: 60px; width: 1280px; height: 2856px; border-radius: 178px; overflow: hidden; background: #121318; }
+.pixel .screen img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.014); display: block; }
+.pixel .bezel { position: absolute; inset: 0; width: 1410px; height: 2968px; display: block; }
+
+/* Floating cards: the app's own surfaces. Two shadows, ambient and contact, both scaled by the card's depth. */
+.card { position: absolute; background: var(--white); border-radius: 28px; color: var(--ink); transform-origin: 50% 50%; --d: 1;
+  box-shadow: calc(16px * var(--d)) calc(26px * var(--d)) calc(52px * var(--d)) rgba(var(--warm), 0.26),
+              2px 4px 10px rgba(var(--warm), 0.12), 0 1px 0 rgba(255, 255, 255, 0.7) inset; }
+.icon { font-family: 'Feather'; font-style: normal; line-height: 1; }
+
+/* The correction card, the app's component lifted off the thread. The Spanish inside is content and stays left to right. */
+.correction { background: var(--green-bg); font-family: var(--body); line-height: 1.35; }
+.correction .label { color: var(--green); font-family: var(--display); font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; }
+html[lang='ar'] .correction .label { letter-spacing: 0; }
+.correction .old { color: var(--muted); }
+.correction .old s { color: var(--red); text-decoration-thickness: 0.09em; }
+.correction .new { font-weight: 700; color: var(--ink); }
+.correction .new b { color: var(--green); font-weight: 700; }
+.correction .note { color: var(--muted); border-top: 1px solid rgba(0, 159, 112, 0.22); }
+.correction .es { direction: ltr; text-align: left; unicode-bidi: isolate; }
+
+/* The partner chip: a portrait, a name, the language pair, and the green dot the app puts on people who are online. */
+.chip { display: flex; align-items: center; border-radius: 999px; font-family: var(--body); white-space: nowrap; }
+.chip .who { position: relative; flex: none; }
+.chip .who img { display: block; border-radius: 50%; object-fit: cover; width: 100%; height: 100%; }
+.chip .dot { position: absolute; right: 0; bottom: 0; width: 27%; height: 27%; border-radius: 50%; background: var(--green); border: 0.12em solid var(--white); }
+html[dir='rtl'] .chip .dot { right: auto; left: 0; }
+.chip .name { font-family: var(--display); font-weight: 800; line-height: 1.1; }
+.chip .pair { color: var(--blue); font-weight: 700; line-height: 1.2; }
+
+/* The call controls, pulled off the dark call stage. The discs are the app's. */
+.controls { background: var(--dark); color: var(--dark-text); font-family: var(--body); border-radius: 999px; display: flex; align-items: center; }
+.controls .btn { display: flex; flex-direction: column; align-items: center; gap: 0.45em; white-space: nowrap; }
+.controls .disc { border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Feather'; color: #fff; }
+.controls .danger { background: var(--red); } .controls .success { background: var(--green); }
+.controls .lbl { font-weight: 600; }
+
+.lockup { position: absolute; display: block; }
+h1 { font-family: var(--display); font-weight: 800; margin: 0; line-height: 1.0; letter-spacing: -0.015em; color: var(--ink-on-yellow); white-space: nowrap; }
+html[lang='ar'] h1 { line-height: 1.25; letter-spacing: 0; }
+.sub { font-family: var(--display); font-weight: 400; color: var(--ink-muted); margin: 0; line-height: 1.3; }
+/* One word set in white on an ink pill: the brand's ink used as a fill. */
+.pill { display: inline-block; background: var(--ink-on-yellow); color: var(--white); border-radius: 0.28em; padding: 0 0.16em 0.04em; margin: 0 0.02em; line-height: 0.98; vertical-align: baseline; }
