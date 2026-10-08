@@ -178,7 +178,7 @@ h1 { font-size: 120px; margin-top: 44px; }
 html[lang='ar'] .sub { font-size: 33px; }
 .arcs { left: 900px; top: -360px; width: 1540px; height: 1540px; transform: rotate(180deg); }
 html[dir='rtl'] .arcs { left: auto; right: 900px; transform: rotate(180deg) scaleX(-1); }
-/* The scene. The phone's right edge stops short of the canvas; the share button iPhone draws over the top-right corner (about x 1620-1790, y 190-350) stays clear. */
+/* The scene. The phone's right edge stops short of the canvas, and the chip starts below the share button iPhone draws over the top-right corner (about x 1620-1790, y 190-350). */
 .plane { left: 1000px; top: 0; width: 900px; height: 823px; }
 html[dir='rtl'] .plane { left: 20px; }
 .phone { left: 230px; top: 70px; transform: rotateY(-16deg) rotateX(5deg) rotateZ(-6deg) scale(0.70); }
@@ -187,7 +187,7 @@ html[dir='rtl'] .phone { left: auto; right: 230px; transform: rotateY(16deg) rot
 html[dir='rtl'] .card.correction { left: auto; right: -100px; transform: translateZ(140px) rotateZ(5deg); }
 .correction .label { font-size: 15px; margin-bottom: 8px; }
 .correction .note { margin-top: 12px; padding-top: 12px; font-size: 20px; }
-.card.chip { right: 78px; top: 350px; padding: 9px 24px 9px 9px; gap: 13px; font-size: 21px; --d: 0.7; transform: translateZ(120px) rotateZ(-5deg); }
+.card.chip { right: 78px; top: 372px; padding: 9px 24px 9px 9px; gap: 13px; font-size: 21px; --d: 0.7; transform: translateZ(120px) rotateZ(-5deg); }
 html[dir='rtl'] .card.chip { right: auto; left: 78px; padding: 9px 9px 9px 24px; transform: translateZ(120px) rotateZ(5deg); }
 .chip .who { width: 56px; height: 56px; }
 .chip .pair { font-size: 17px; margin-top: 2px; }`,
