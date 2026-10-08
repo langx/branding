@@ -313,20 +313,33 @@ thing. As with the rest, only the Turkish has been read by a native speaker.
 | `search.png`  | 3840 × 2560 | Search results (3:2)             |
 
 Both are opaque RGB PNG, well under 5 MB. Neither is a screenshot and Apple
-asks them to carry the app's value and brand rather than its interface, so each
-is the lockup and **one line** on the yellow ground, with two of 2.9's phones —
-the call in front, the camera behind — as the picture, not the subject.
+asks them to carry the app's value and brand rather than its interface, so
+each is one scene rather than a strip of shots: a phone taking an incoming
+video call from a real person, tilted into light perspective, with the app's
+own surfaces lifted off it — the green correction card, a partner chip with a
+language pair and the online dot, the call's Decline and Answer — each on its
+own depth, lit once from the top-left so every shadow falls down and to the
+right in the yellow's own shade. The mark's two arcs sit behind the scene,
+very large and faint. The headline is the only marketing sentence; every other
+word is a string the app ships, read from the app's locale files at render
+time, and the Spanish inside the correction is the same demonstration content
+as on the screens.
 
 - **Header:** the line is the store subtitle the listing already carries in
-  every language, "Practice with real people". The banner is cropped on
-  narrower screens, so the lockup and the line sit inside the middle 70% across
-  and 76% down; only the phones run past it.
+  every language, "Practice with real people", with the store one-liner under
+  it. On an iPhone the whole banner shows, with the back and share buttons
+  drawn over its top corners; on an iPad it is cropped top and bottom to about
+  3.2:1 and the App Store's tab bar floats over the top centre. So the lockup,
+  the headline and the line under it sit in the vertical middle and clear of
+  the corners; only the scene runs past.
 - **Search:** the line is 2.9's promotional text cut to its first clause, "Call
-  the people you practice with", set large and centred, because the card is
-  seen small.
+  the people you practice with", set large and centred because the card is
+  seen small, with the verb — the one word that says _call_ — in white on an
+  ink pill.
 
-No prices, no rankings, no other app's name. Arabic mirrors both.
-`../goldie/creative.mjs` draws them.
+No prices, no rankings, no other app's name. Arabic mirrors the layout, not
+the light: words to the right, scene to the left, the phone turned the other
+way. `../goldie/creative.mjs` runs it; `../goldie/covers/` is the picture.
 
 ## In-app event (App Store)
 
@@ -376,10 +389,14 @@ Arabic sets in Noto Sans Arabic at the same weights; Nunito has no Arabic.
 Everything else is Nunito, which covers Latin, Latin Extended and Cyrillic.
 
 The feature graphic is the one asset that is not a screenshot — a landscape
-banner with the lockup on it, which goldie's renderer does not compose — so it
-is drawn by `../goldie/feature.mjs` from the same parts: the yellow ground, the
-lockup, shot 1's copy, and the Discover screen in the same bezel. Arabic
-mirrors the whole banner.
+banner that goldie's renderer does not compose. `android-feature-graphic.png`
+is the same scene as the creative assets, drawn by `../goldie/play-feature.mjs`
+with no words but the lockup, since one file serves every listing: the phone
+in Play's own Pixel bezel, the partner chip reduced to a portrait and `ES → EN`,
+the correction without its label, everything right of centre and out of the
+middle, where Play lays its title and Install button and the promo video's
+play button. `../goldie/feature.mjs` still draws the older per-language banner
+with shot 1's copy, when that is wanted.
 
 ## Uploading the set
 
