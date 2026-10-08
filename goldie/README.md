@@ -52,8 +52,9 @@ step run here; the bezel follows the platform.
 `feature.mjs` draws the one asset goldie cannot: Play's 1024 × 500 feature
 graphic, a landscape banner with the lockup on it, one per locale.
 `play-feature.mjs` draws its successor, one file with no words for every
-listing, and `creative.mjs` the App Store's two creative assets per locale —
-both described in `../2.x/README.md`.
+listing, `creative.mjs` the App Store's two creative assets per locale, and
+`event.mjs` the in-app event's card and details page per locale — all
+described in `../2.x/README.md`.
 
 ## The tile, and the squat slots
 
@@ -134,6 +135,7 @@ npx playwright-core install chromium-headless-shell   # once, for screens/
 npm run screens    # the 2.9 screens, from the app's strings (LANGX_DIR)
 npm run all        # manifest.mjs, frame.mjs, then publish.mjs
 npm run creative   # the App Store creative assets (after manifest.mjs)
+npm run event      # the in-app event's card and details page (after manifest.mjs)
 npm run play-feature  # the language-free Play feature graphic
 node feature.mjs   # the per-language Play feature graphic, when its screen changes
 npm run studio     # goldie's studio at http://localhost:4321
