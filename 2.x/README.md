@@ -341,6 +341,23 @@ No prices, no rankings, no other app's name. Arabic mirrors the layout, not
 the light: words to the right, scene to the left, the phone turned the other
 way. `../goldie/creative.mjs` runs it; `../goldie/covers/` is the picture.
 
+## In-app event (App Store)
+
+`<locale>/ios/event/`, one pair per language, for the 2.9 calls event
+("Voice and video calls", badge *Major update*):
+
+| File          | Size        | App Store Connect slot |
+| ------------- | ----------- | ---------------------- |
+| `card.png`    | 1920 × 1080 | Event card (16:9)      |
+| `details.png` | 1080 × 1920 | Event details page     |
+
+The App Store sets the event's name and short description over the bottom of
+both, so these carry **no words and no lockup**. The two 2.9 call screens — the
+incoming call in front, the chat it came from behind — sit clear of that text:
+on the card to the right, leaving the lower left to the yellow ground; on the
+details page above the bottom fifth. The screens are each language's own cuts.
+Arabic mirrors. `../goldie/event.mjs` draws them.
+
 ## The composition
 
 Every shot is [goldie](https://github.com/kacperkapusciak/goldie)'s: the bezel,

@@ -10,6 +10,7 @@
     "all": "node manifest.mjs && node frame.mjs && node publish.mjs",
     "screens": "node screens/render.mjs",
     "creative": "node creative.mjs",
+    "event": "node event.mjs",
     "play-feature": "node play-feature.mjs",
     "studio": "goldie studio"
   },
