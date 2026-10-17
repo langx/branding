@@ -252,6 +252,90 @@ question (Guideline 3.1.5(b)) rather than a stylistic preference:
 - **Gold has to read as something bought**, not as the product: `frame.gold` is
   sold as a rank.
 
+## The app's v3 tokens (ships with 3.0)
+
+**Not live yet.** Everything above is the look the 2.x app ships. This section
+is the redesign's — named "v3" on 16 October 2026, shipping as app 3.0 — and
+it stays a preview until 3.0 is in the stores. Until then, artwork keeps to the
+sections above. (The heading of this file says "v3 identity" for the 2.x look;
+that name predates the redesign's.)
+
+The values are `theme.v3` in `langx/apps/mobile/src/lib/theme/tokens.ts`, which
+decides them. From 3.0 the app's palette may leave the website's; the website
+and this file follow at that release.
+
+Flat colour blocks, no shadows, big Nunito, flat pill buttons, ink on colour,
+and a colour for every exchange partner. Two anchors do not move: the yellow
+and its label are the same in both schemes and appear once per screen, on the
+committing action — and the blue is held to the same rule.
+
+### Palette
+
+| Token        | Light                   | Dark                 | Where                                              |
+| ------------ | ----------------------- | -------------------- | -------------------------------------------------- |
+| `bg`         | `#ffffff`               | `#0c0d10`            | the ground                                         |
+| `fg`         | `#14161b`               | `#f2f3f5`            | text                                               |
+| `muted`      | `#5a5f69`               | `#a3a8b3`            | secondary text                                     |
+| `surface`    | `#f2f2ee`               | `#1a1c21`            | the grey block: a row group, a field               |
+| `line`       | `#e4e4df`               | `#2a2d33`            | hairlines                                          |
+| `tabOn`      | `#e8e7e1`               | `#2a2d33`            | the selected tab's pill                            |
+| `echoTint`   | `#e3ebfe`               | `#1c2748`            | Echo's tab and surfaces                            |
+| `echoText`   | `#2a54d0`               | `#8aa6ff`            | text on Echo's tint; text that should read as blue |
+| `pill`       | `#14161b`               | `#f2f3f5`            | the ink pill — inverts with the ground             |
+| `pillText`   | `#ffffff`               | `#14161b`            | label on the ink pill                              |
+| `ink`        | `#14161b`               | `#14161b`            | text on a partner hue — the same in both schemes   |
+| `blue`       | `#3b6cf6`               | `#3b6cf6`            | the main action that does not commit; a fill only  |
+| `onBlue`     | `#ffffff`               | `#ffffff`            | label on blue                                      |
+| `yellow`     | `#ffc409`               | `#ffc409`            | **the committing action, once per screen**         |
+| `onYellow`   | `#14161b`               | `#14161b`            | label on yellow                                    |
+| `correction` | `#0b7a3e`               | `#5ee39a`            | a correction's green, as text                      |
+| `scrim`      | `rgba(12, 13, 16, 0.55)` | `rgba(0, 0, 0, 0.7)` | behind a sheet — the only elevation                |
+
+Blue is a fill, never text on the dark ground, where it falls under 4.5:1.
+Every text pair above is measured in both schemes by the app's
+`contrast.test.ts`.
+
+### Partner hues
+
+One per partner, picked from their id and the same everywhere. Always `ink` on
+a hue; a chip turns it round, the hue on `ink`. The order is part of every
+partner's colour — it is not to be reshuffled.
+
+| Hue         | Light     | Dark      |
+| ----------- | --------- | --------- |
+| `lilac`     | `#bba4ff` | `#a68cf5` |
+| `aqua`      | `#48d3d0` | `#2fbfbc` |
+| `mint`      | `#5fdc98` | `#45c883` |
+| `lime`      | `#b8e15c` | `#a2cf45` |
+| `sky`       | `#74b9ff` | `#5aa5f5` |
+| `tangerine` | `#ff9f52` | `#f08a3c` |
+
+### Type
+
+Nunito for display, title, headline and label — now including Black (900) —
+and the platform face for reading text. Every step has its line height.
+
+| Step     | Size / line | Face        |
+| -------- | ----------- | ----------- |
+| Display  | 44 / 46     | Nunito 900  |
+| Title    | 32 / 36     | Nunito 900  |
+| Headline | 22 / 28     | Nunito 800  |
+| Body     | 17 / 24     | platform    |
+| Callout  | 16 / 21     | platform    |
+| Caption  | 14 / 20     | platform    |
+| Label    | 13 / 16     | Nunito 800  |
+
+Display tracks at −0.5.
+
+### Spacing, radius, icons, elevation
+
+- **Spacing:** `2 · 4 · 6 · 8 · 10 · 12 · 14 · 16 · 20 · 24 · 32`. 16 is the
+  screen's side gutter; 10 is the commonest gap.
+- **Radius:** icon square 12 · tile 22 · block 28 · hero 32 · pill.
+- **Icon glyphs:** 16 · 18 · 20 · 22 · 26 (header chrome). The touch target
+  round a glyph is larger.
+- **Elevation:** none. Depth is colour; the only layer is the scrim.
+
 ## Turning this into artwork
 
 Store screenshots, press images and social cards are the one place the app's
