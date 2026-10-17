@@ -289,6 +289,7 @@ committing action — and the blue is held to the same rule.
 | `yellow`     | `#ffc409`               | `#ffc409`            | **the committing action, once per screen**         |
 | `onYellow`   | `#14161b`               | `#14161b`            | label on yellow                                    |
 | `correction` | `#0b7a3e`               | `#5ee39a`            | a correction's green, as text                      |
+| `danger`     | `#c0281b`               | `#ff8a80`            | the destructive action: a red outline and label    |
 | `scrim`      | `rgba(12, 13, 16, 0.55)` | `rgba(0, 0, 0, 0.7)` | behind a sheet — the only elevation                |
 
 Blue is a fill, never text on the dark ground, where it falls under 4.5:1.
@@ -315,17 +316,19 @@ partner's colour — it is not to be reshuffled.
 Nunito for display, title, headline and label — now including Black (900) —
 and the platform face for reading text. Every step has its line height.
 
-| Step     | Size / line | Face        |
-| -------- | ----------- | ----------- |
-| Display  | 44 / 46     | Nunito 900  |
-| Title    | 32 / 36     | Nunito 900  |
-| Headline | 22 / 28     | Nunito 800  |
-| Body     | 17 / 24     | platform    |
-| Callout  | 16 / 21     | platform    |
-| Caption  | 14 / 20     | platform    |
-| Label    | 13 / 16     | Nunito 800  |
+| Step          | Size / line | Face       |
+| ------------- | ----------- | ---------- |
+| Display       | 44 / 46     | Nunito 900 |
+| Title         | 32 / 36     | Nunito 900 |
+| Headline      | 22 / 28     | Nunito 800 |
+| Body          | 17 / 24     | platform   |
+| Callout       | 16 / 21     | platform   |
+| Caption       | 14 / 20     | platform   |
+| Label         | 13 / 16     | Nunito 800 |
+| Button        | 17 / 22     | Nunito 800 |
+| Button, small | 16 / 20     | Nunito 800 |
 
-Display tracks at −0.5.
+Display tracks at −0.5. Button labels are sentence case, never upper-cased.
 
 ### Spacing, radius, icons, elevation
 
@@ -336,6 +339,11 @@ Display tracks at −0.5.
 - **Icon glyphs:** 16 · 18 · 20 · 22 · 24 (tab bar) · 26 (header chrome). The
   touch target round a glyph is larger.
 - **Elevation:** none. Depth is colour; the only layer is the scrim.
+- **Buttons:** flat pills, no shadow, no drop. Faces of 56, 52 and 44pt
+  (48dp on Android); the yellow once per screen on the committing action, the
+  blue for the main action that does not commit, an outline in the text colour
+  for the rest, the ink pill for buy and copy, and a red outline — never a
+  fill, never yellow — for what cannot be undone.
 
 ## Turning this into artwork
 
