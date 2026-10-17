@@ -331,9 +331,10 @@ Display tracks at −0.5.
 
 - **Spacing:** `2 · 4 · 6 · 8 · 10 · 12 · 14 · 16 · 20 · 24 · 32`. 16 is the
   screen's side gutter; 10 is the commonest gap.
-- **Radius:** icon square 12 · tile 22 · block 28 · hero 32 · pill.
-- **Icon glyphs:** 16 · 18 · 20 · 22 · 26 (header chrome). The touch target
-  round a glyph is larger.
+- **Radius:** icon square 12 · row 18 · card 20 · tile 22 · badge 24 ·
+  block 28 · hero 32 · pill. The taller the block, the rounder the corner.
+- **Icon glyphs:** 16 · 18 · 20 · 22 · 24 (tab bar) · 26 (header chrome). The
+  touch target round a glyph is larger.
 - **Elevation:** none. Depth is colour; the only layer is the scrim.
 
 ## Turning this into artwork
