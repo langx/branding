@@ -271,26 +271,27 @@ committing action — and the blue is held to the same rule.
 
 ### Palette
 
-| Token        | Light                   | Dark                 | Where                                              |
-| ------------ | ----------------------- | -------------------- | -------------------------------------------------- |
-| `bg`         | `#ffffff`               | `#0c0d10`            | the ground                                         |
-| `fg`         | `#14161b`               | `#f2f3f5`            | text                                               |
-| `muted`      | `#5a5f69`               | `#a3a8b3`            | secondary text                                     |
-| `surface`    | `#f2f2ee`               | `#1a1c21`            | the grey block: a row group, a field               |
-| `line`       | `#e4e4df`               | `#2a2d33`            | hairlines                                          |
-| `tabOn`      | `#e8e7e1`               | `#2a2d33`            | the selected tab's pill                            |
-| `echoTint`   | `#e3ebfe`               | `#1c2748`            | Echo's tab and surfaces                            |
-| `echoText`   | `#2a54d0`               | `#8aa6ff`            | text on Echo's tint; text that should read as blue |
-| `pill`       | `#14161b`               | `#f2f3f5`            | the ink pill — inverts with the ground             |
-| `pillText`   | `#ffffff`               | `#14161b`            | label on the ink pill                              |
-| `ink`        | `#14161b`               | `#14161b`            | text on a partner hue — the same in both schemes   |
-| `blue`       | `#3b6cf6`               | `#3b6cf6`            | the main action that does not commit; a fill only  |
-| `onBlue`     | `#ffffff`               | `#ffffff`            | label on blue                                      |
-| `yellow`     | `#ffc409`               | `#ffc409`            | **the committing action, once per screen**         |
-| `onYellow`   | `#14161b`               | `#14161b`            | label on yellow                                    |
-| `correction` | `#0b7a3e`               | `#5ee39a`            | a correction's green, as text                      |
-| `danger`     | `#c0281b`               | `#ff8a80`            | the destructive action: a red outline and label    |
-| `scrim`      | `rgba(12, 13, 16, 0.55)` | `rgba(0, 0, 0, 0.7)` | behind a sheet — the only elevation                |
+| Token            | Light                    | Dark                 | Where                                                |
+| ---------------- | ------------------------ | -------------------- | ---------------------------------------------------- |
+| `bg`             | `#ffffff`                | `#0c0d10`            | the ground                                           |
+| `fg`             | `#14161b`                | `#f2f3f5`            | text                                                 |
+| `muted`          | `#5a5f69`                | `#a3a8b3`            | secondary text                                       |
+| `surface`        | `#f2f2ee`                | `#1a1c21`            | the grey block: a row group, a field                 |
+| `line`           | `#e4e4df`                | `#2a2d33`            | hairlines                                            |
+| `tabOn`          | `#e8e7e1`                | `#2a2d33`            | the selected tab's pill                              |
+| `echoTint`       | `#e3ebfe`                | `#1c2748`            | Echo's tab and surfaces                              |
+| `echoText`       | `#2a54d0`                | `#8aa6ff`            | text on Echo's tint; text that should read as blue   |
+| `pill`           | `#14161b`                | `#f2f3f5`            | the ink pill — inverts with the ground               |
+| `pillText`       | `#ffffff`                | `#14161b`            | label on the ink pill                                |
+| `ink`            | `#14161b`                | `#14161b`            | text on a partner hue — the same in both schemes     |
+| `blue`           | `#3b6cf6`                | `#3b6cf6`            | the main action that does not commit; a fill only    |
+| `onBlue`         | `#ffffff`                | `#ffffff`            | label on blue                                        |
+| `yellow`         | `#ffc409`                | `#ffc409`            | **the committing action, once per screen**           |
+| `onYellow`       | `#14161b`                | `#14161b`            | label on yellow                                      |
+| `correction`     | `#0b7a3e`                | `#5ee39a`            | a correction's green, as text                        |
+| `correctionTint` | `#dcf3e5`                | `#14301f`            | the green block, `correction` on it: what stays free |
+| `danger`         | `#c0281b`                | `#ff8a80`            | the destructive action: a red outline and label      |
+| `scrim`          | `rgba(12, 13, 16, 0.55)` | `rgba(0, 0, 0, 0.7)` | behind a sheet — the only elevation                  |
 
 Blue is a fill, never text on the dark ground, where it falls under 4.5:1.
 Every text pair above is measured in both schemes by the app's
