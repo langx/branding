@@ -278,6 +278,7 @@ committing action — and the blue is held to the same rule.
 | `muted`      | `#5a5f69`               | `#a3a8b3`            | secondary text                                     |
 | `surface`    | `#f2f2ee`               | `#1a1c21`            | the grey block: a row group, a field               |
 | `line`       | `#e4e4df`               | `#2a2d33`            | hairlines                                          |
+| `track`      | `#dcdcd5`               | `#2f333b`            | the unfilled part of a progress ring; not for text |
 | `tabOn`      | `#e8e7e1`               | `#2a2d33`            | the selected tab's pill                            |
 | `echoTint`   | `#e3ebfe`               | `#1c2748`            | Echo's tab and surfaces                            |
 | `echoText`   | `#2a54d0`               | `#8aa6ff`            | text on Echo's tint; text that should read as blue |
@@ -313,11 +314,12 @@ partner's colour — it is not to be reshuffled.
 
 ### Type
 
-Nunito for display, title, headline and label — now including Black (900) —
-and the platform face for reading text. Every step has its line height.
+Nunito for numeral, display, title, headline and label — now including Black
+(900) — and the platform face for reading text. Every step has its line height.
 
 | Step          | Size / line | Face       |
 | ------------- | ----------- | ---------- |
+| Numeral       | 76 / 76     | Nunito 900 |
 | Display       | 44 / 46     | Nunito 900 |
 | Title         | 32 / 36     | Nunito 900 |
 | Headline      | 22 / 28     | Nunito 800 |
@@ -328,7 +330,9 @@ and the platform face for reading text. Every step has its line height.
 | Button        | 17 / 22     | Nunito 800 |
 | Button, small | 16 / 20     | Nunito 800 |
 
-Display tracks at −0.5. Button labels are sentence case, never upper-cased.
+Numeral is a figure beside its unit, never words — the streak's count, the
+cards due — and tracks at −2. Display tracks at −0.5. Button labels are
+sentence case, never upper-cased.
 
 ### Spacing, radius, icons, elevation
 
