@@ -37,16 +37,16 @@ drop shadow down and to the right.
 The artwork lives in [`brand/`](brand/), and the icons and badges are
 byte-identical to what the app ships:
 
-| File                       | Size  | Ground             | Used as                                    |
-| -------------------------- | ----- | ------------------ | ------------------------------------------ |
-| `icon/default.png`         | 1024² | `#ffc409`, opaque  | the home-screen icon, both platforms       |
-| `icon/dark.png`            | 1024² | `#121318`, opaque  | alternate, Pro only, native only           |
-| `icon/split.png`           | 1024² | yellow and ink     | alternate, Pro only, native only           |
-| `icon/pro.png`             | 1024² | `#7a5af8`, opaque  | alternate, Pro only, native only           |
-| `icon/new-year.png`        | 1024² | `#ffc409`, opaque  | alternate, Pro only, native only           |
-| `splash/badge.png`         | 512²  | yellow disc        | the launch badge, light                    |
-| `splash/badge-dark.png`    | 512²  | ink disc           | the launch badge, dark                     |
-| `logo/logo-rounded.png`    | 512²  | yellow squircle    | in-app and web use, avatars, README marks  |
+| File                    | Size  | Ground            | Used as                                   |
+| ----------------------- | ----- | ----------------- | ----------------------------------------- |
+| `icon/default.png`      | 1024² | `#ffc409`, opaque | the home-screen icon, both platforms      |
+| `icon/dark.png`         | 1024² | `#121318`, opaque | alternate, Pro only, native only          |
+| `icon/split.png`        | 1024² | yellow and ink    | alternate, Pro only, native only          |
+| `icon/pro.png`          | 1024² | `#7a5af8`, opaque | alternate, Pro only, native only          |
+| `icon/new-year.png`     | 1024² | `#ffc409`, opaque | alternate, Pro only, native only          |
+| `splash/badge.png`      | 512²  | yellow disc       | the launch badge, light                   |
+| `splash/badge-dark.png` | 512²  | ink disc          | the launch badge, dark                    |
+| `logo/logo-rounded.png` | 512²  | yellow squircle   | in-app and web use, avatars, README marks |
 
 The mark is also drawn as vector, from the construction below rather than traced
 from these: `logo/mark.svg` on yellow, `logo/mark-ink.svg` on ink,
@@ -71,7 +71,7 @@ wholly on ink, which is the whole point of that icon. It is not a free choice.
 Two constraints bind any further icon in this set:
 
 - **Everything must fit a circle of radius 341.** Android takes the whole
-  square as the *foreground* layer of an adaptive icon and the launcher keeps
+  square as the _foreground_ layer of an adaptive icon and the launcher keeps
   only the middle of it, so a badge along the bottom edge is simply thrown
   away and the icon becomes indistinguishable from the plain yellow one. That
   is why `new-year.png` sets the year on the ground instead of on a ribbon at
@@ -84,21 +84,21 @@ Two constraints bind any further icon in this set:
 The mark also comes as a lockup with the wordmark, drawn for v3 and not shipped
 by the app:
 
-| File                               | Size      | Wordmark  |
-| ---------------------------------- | --------- | --------- |
-| `logo/lockup-horizontal.png`       | 3190×1024 | `#17191c` |
-| `logo/lockup-horizontal-dark.png`  | 3190×1024 | `#f2f3f5` |
-| `logo/lockup-horizontal.svg`       | 3190×1024 | `#17191c` |
-| `logo/lockup-horizontal-dark.svg`  | 3190×1024 | `#f2f3f5` |
+| File                              | Size      | Wordmark  |
+| --------------------------------- | --------- | --------- |
+| `logo/lockup-horizontal.png`      | 3190×1024 | `#17191c` |
+| `logo/lockup-horizontal-dark.png` | 3190×1024 | `#f2f3f5` |
+| `logo/lockup-horizontal.svg`      | 3190×1024 | `#17191c` |
+| `logo/lockup-horizontal-dark.svg` | 3190×1024 | `#f2f3f5` |
 
 All four are transparent, and the wordmark in the two SVGs is outlined, so they
 need no font installed.
 
-The construction, if it has to be redrawn: the rounded mark at height *H*, a gap
-of 0.24·*H* to the wordmark's pen — not to its first ink — then "LangX" in
-Nunito ExtraBold at 0.64·*H* with `-0.02em` tracking after every letter, sitting
+The construction, if it has to be redrawn: the rounded mark at height _H_, a gap
+of 0.24·_H_ to the wordmark's pen — not to its first ink — then "LangX" in
+Nunito ExtraBold at 0.64·_H_ with `-0.02em` tracking after every letter, sitting
 on the mark's optical centre rather than its geometric one. Measured back off
-the shipped PNG, that baseline lands at 0.681·*H* from the top, which is what
+the shipped PNG, that baseline lands at 0.681·_H_ from the top, which is what
 `brand/logo/build.py` draws to.
 
 Two things about these files are load-bearing rather than stylistic:
@@ -126,7 +126,7 @@ declare their own ground and have no such seam.
 
 - Do not put the mark on a coloured ground of its own. It carries one. The
   alternate home-screen icons above are the exception and the only one: there
-  the ground *is* what the person is choosing between.
+  the ground _is_ what the person is choosing between.
 - Do not recolour the arcs. The black/white pair is the whole idea, and it
   holds across all five icons.
 - Do not use the v1 lockup (`archive/assets/logo-horizontal.png`). Its wordmark
@@ -136,43 +136,43 @@ declare their own ground and have no such seam.
 ## Colour
 
 One blue for everything interactive, yellow exactly once per screen — the
-committing action — and no card layer: the ground *is* the surface, and
+committing action — and no card layer: the ground _is_ the surface, and
 structure comes from dividers and whitespace.
 
 ### Light
 
-| Token             | Hex                          | Where                                              |
-| ----------------- | ---------------------------- | -------------------------------------------------- |
-| `bg`              | `#ffffff`                    | the screen behind everything                       |
-| `feedBg`          | `#ffffff`                    | the feed, same ground as everything else           |
-| `surface`         | `#ffffff`                    | sheets, tab bar, compose bar                       |
-| `fill`            | `#f4f5f7`                    | the one grey allowed to be a box                   |
-| `border`          | `#e8eaec`                    | hairline dividers                                  |
-| `text`            | `#17191c`                    | body                                               |
-| `textMuted`       | `#62676d`                    | secondary text, captions, meta                     |
-| `textFaint`       | `#9aa1a7`                    | placeholder, disabled, tertiary meta               |
-| `textInverse`     | `#fefefe`                    | text on a saturated or ink fill                    |
-| `ink`             | `#17191c`                    | `text` used as a background; its label is `bg`     |
-| `onInkMuted`      | `rgba(128, 128, 128, 0.45)`  | the "off" half of a glyph drawn on `ink`           |
-| `primary`         | `#ffc409`                    | **the committing action, once per screen**         |
-| `primaryShade`    | `#e0ac08`                    | under the yellow button                            |
-| `primaryText`     | `#201900`                    | label on yellow                                    |
-| `primaryTextMuted`| `rgba(32, 25, 0, 0.55)`      | meta on yellow                                     |
-| `secondary`       | `#3b6cf6`                    | the second action — plain blue text in v3          |
-| `accent`          | `#3b6cf6`                    | links, tabs, toggles on, level bars, progress      |
-| `accentBg`        | `#e9f0fe`                    | your own chat bubble, the Copilot panel            |
-| `streak`          | `#f79009`                    | streaks                                            |
-| `pro`             | `#7a5af8`                    | Pro                                                |
-| `proPlus`         | `#5b21b6`                    | Pro+ — same hue, further from the ground           |
-| `success` / `Bg`  | `#009f70` / `#e2f6ee`        | **corrections, always**                            |
-| `info` / `Bg`     | `#3b6cf6` / `#e9f0fe`        | **Copilot, always**                                |
-| `warning` / `Bg`  | `#c87820` / `#fff6b6`        | streak milestones, level chips                     |
-| `danger` / `Bg`   | `#e5484d` / `#fdecec`        | empty states, unread counts, delete, negative rows |
-| `dangerShade`     | `#b83236`                    | under the red button                               |
-| `knob`            | `#ffffff`                    | the toggle knob — white in both schemes            |
-| `scrim`           | `rgba(0, 0, 0, 0.45)`        | behind a sheet                                     |
-| `scrimStrong`     | `rgba(0, 0, 0, 0.94)`        | the photo lightbox                                 |
-| `onScrim`         | `#ffffff`                    | chrome on a scrim                                  |
+| Token              | Hex                         | Where                                              |
+| ------------------ | --------------------------- | -------------------------------------------------- |
+| `bg`               | `#ffffff`                   | the screen behind everything                       |
+| `feedBg`           | `#ffffff`                   | the feed, same ground as everything else           |
+| `surface`          | `#ffffff`                   | sheets, tab bar, compose bar                       |
+| `fill`             | `#f4f5f7`                   | the one grey allowed to be a box                   |
+| `border`           | `#e8eaec`                   | hairline dividers                                  |
+| `text`             | `#17191c`                   | body                                               |
+| `textMuted`        | `#62676d`                   | secondary text, captions, meta                     |
+| `textFaint`        | `#9aa1a7`                   | placeholder, disabled, tertiary meta               |
+| `textInverse`      | `#fefefe`                   | text on a saturated or ink fill                    |
+| `ink`              | `#17191c`                   | `text` used as a background; its label is `bg`     |
+| `onInkMuted`       | `rgba(128, 128, 128, 0.45)` | the "off" half of a glyph drawn on `ink`           |
+| `primary`          | `#ffc409`                   | **the committing action, once per screen**         |
+| `primaryShade`     | `#e0ac08`                   | under the yellow button                            |
+| `primaryText`      | `#201900`                   | label on yellow                                    |
+| `primaryTextMuted` | `rgba(32, 25, 0, 0.55)`     | meta on yellow                                     |
+| `secondary`        | `#3b6cf6`                   | the second action — plain blue text in v3          |
+| `accent`           | `#3b6cf6`                   | links, tabs, toggles on, level bars, progress      |
+| `accentBg`         | `#e9f0fe`                   | your own chat bubble, the Copilot panel            |
+| `streak`           | `#f79009`                   | streaks                                            |
+| `pro`              | `#7a5af8`                   | Pro                                                |
+| `proPlus`          | `#5b21b6`                   | Pro+ — same hue, further from the ground           |
+| `success` / `Bg`   | `#009f70` / `#e2f6ee`       | **corrections, always**                            |
+| `info` / `Bg`      | `#3b6cf6` / `#e9f0fe`       | **Copilot, always**                                |
+| `warning` / `Bg`   | `#c87820` / `#fff6b6`       | streak milestones, level chips                     |
+| `danger` / `Bg`    | `#e5484d` / `#fdecec`       | empty states, unread counts, delete, negative rows |
+| `dangerShade`      | `#b83236`                   | under the red button                               |
+| `knob`             | `#ffffff`                   | the toggle knob — white in both schemes            |
+| `scrim`            | `rgba(0, 0, 0, 0.45)`       | behind a sheet                                     |
+| `scrimStrong`      | `rgba(0, 0, 0, 0.94)`       | the photo lightbox                                 |
+| `onScrim`          | `#ffffff`                   | chrome on a scrim                                  |
 
 ### Dark
 
@@ -271,27 +271,28 @@ committing action — and the blue is held to the same rule.
 
 ### Palette
 
-| Token        | Light                   | Dark                 | Where                                              |
-| ------------ | ----------------------- | -------------------- | -------------------------------------------------- |
-| `bg`         | `#ffffff`               | `#0c0d10`            | the ground                                         |
-| `fg`         | `#14161b`               | `#f2f3f5`            | text                                               |
-| `muted`      | `#5a5f69`               | `#a3a8b3`            | secondary text                                     |
-| `surface`    | `#f2f2ee`               | `#1a1c21`            | the grey block: a row group, a field               |
-| `line`       | `#e4e4df`               | `#2a2d33`            | hairlines                                          |
-| `track`      | `#dcdcd5`               | `#2f333b`            | the unfilled part of a progress ring; not for text |
-| `tabOn`      | `#e8e7e1`               | `#2a2d33`            | the selected tab's pill                            |
-| `echoTint`   | `#e3ebfe`               | `#1c2748`            | Echo's tab and surfaces                            |
-| `echoText`   | `#2a54d0`               | `#8aa6ff`            | text on Echo's tint; text that should read as blue |
-| `pill`       | `#14161b`               | `#f2f3f5`            | the ink pill — inverts with the ground             |
-| `pillText`   | `#ffffff`               | `#14161b`            | label on the ink pill                              |
-| `ink`        | `#14161b`               | `#14161b`            | text on a partner hue — the same in both schemes   |
-| `blue`       | `#3b6cf6`               | `#3b6cf6`            | the main action that does not commit; a fill only  |
-| `onBlue`     | `#ffffff`               | `#ffffff`            | label on blue                                      |
-| `yellow`     | `#ffc409`               | `#ffc409`            | **the committing action, once per screen**         |
-| `onYellow`   | `#14161b`               | `#14161b`            | label on yellow                                    |
-| `correction` | `#0b7a3e`               | `#5ee39a`            | a correction's green, as text                      |
-| `danger`     | `#c0281b`               | `#ff8a80`            | the destructive action: a red outline and label    |
-| `scrim`      | `rgba(12, 13, 16, 0.55)` | `rgba(0, 0, 0, 0.7)` | behind a sheet — the only elevation                |
+| Token            | Light                    | Dark                 | Where                                                |
+| ---------------- | ------------------------ | -------------------- | ---------------------------------------------------- |
+| `bg`             | `#ffffff`                | `#0c0d10`            | the ground                                           |
+| `fg`             | `#14161b`                | `#f2f3f5`            | text                                                 |
+| `muted`          | `#5a5f69`                | `#a3a8b3`            | secondary text                                       |
+| `surface`        | `#f2f2ee`                | `#1a1c21`            | the grey block: a row group, a field                 |
+| `line`           | `#e4e4df`                | `#2a2d33`            | hairlines                                            |
+| `track`          | `#dcdcd5`                | `#2f333b`            | the unfilled part of a progress ring; not for text   |
+| `tabOn`          | `#e8e7e1`                | `#2a2d33`            | the selected tab's pill                              |
+| `echoTint`       | `#e3ebfe`                | `#1c2748`            | Echo's tab and surfaces                              |
+| `echoText`       | `#2a54d0`                | `#8aa6ff`            | text on Echo's tint; text that should read as blue   |
+| `pill`           | `#14161b`                | `#f2f3f5`            | the ink pill — inverts with the ground               |
+| `pillText`       | `#ffffff`                | `#14161b`            | label on the ink pill                                |
+| `ink`            | `#14161b`                | `#14161b`            | text on a partner hue — the same in both schemes     |
+| `blue`           | `#3b6cf6`                | `#3b6cf6`            | the main action that does not commit; a fill only    |
+| `onBlue`         | `#ffffff`                | `#ffffff`            | label on blue                                        |
+| `yellow`         | `#ffc409`                | `#ffc409`            | **the committing action, once per screen**           |
+| `onYellow`       | `#14161b`                | `#14161b`            | label on yellow                                      |
+| `correction`     | `#0b7a3e`                | `#5ee39a`            | a correction's green, as text                        |
+| `correctionTint` | `#dcf3e5`                | `#14301f`            | the green block, `correction` on it: what stays free |
+| `danger`         | `#c0281b`                | `#ff8a80`            | the destructive action: a red outline and label      |
+| `scrim`          | `rgba(12, 13, 16, 0.55)` | `rgba(0, 0, 0, 0.7)` | behind a sheet — the only elevation                  |
 
 Blue is a fill, never text on the dark ground, where it falls under 4.5:1.
 Every text pair above is measured in both schemes by the app's
